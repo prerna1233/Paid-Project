@@ -19,10 +19,7 @@ const Banner = () => {
       <div className="slider" style={{ "--quantity": images.length }}>
         {images.map((img, index) => (
           <div
-            className="item"
-            key={index}
-            style={{ "--position": index + 1 }}
-          >
+            className="item" key={index} style={{ "--position": index + 1 }}>
             <img src={img} alt={`slide-${index}`} />
           </div>
         ))}
