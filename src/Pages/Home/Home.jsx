@@ -2,6 +2,8 @@ import React from 'react'
 import homeVideo from '../../assets/home1.mp4'
 import './Home.style.css'
 import { FaArrowRight } from "react-icons/fa";
+import Footer from '../../Components/Footer/Footer';
+import Banner from '../../Components/Banner/Banner';
 
 export default function Home() {
   const title = "Explore Kishanganj"
