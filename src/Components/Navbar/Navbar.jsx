@@ -44,8 +44,8 @@ export default function Navbar() {
                     <div className={styles.language}>
                         <MdLanguage className={styles.languageIcon} />
                         <select>
-                            <option>En</option>
-                            <option>Hi</option>
+                            <option>English</option>
+                            <option>Hindi</option>
                         </select>
                     </div>
                     {/* ----- Profile Icon ----- */}
