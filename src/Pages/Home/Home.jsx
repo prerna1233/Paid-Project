@@ -40,6 +40,8 @@ export default function Home() {
           <img className="image3" src='src/assets/3pic.png' alt="Kishanganj image 3" />
         </div>
       </div>
+      <Banner />
+      <Footer />
     </div>
   )
 }
