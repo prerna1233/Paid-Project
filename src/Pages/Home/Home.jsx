@@ -4,6 +4,8 @@ import './Home.style.css'
 import { FaArrowRight } from "react-icons/fa";
 import Footer from '../../Components/Footer/Footer';
 import Banner from '../../Components/Banner/Banner';
+import ImageStack from '../../Components/ImageStack/ImageStack';
+import 'animate.css';
 
 export default function Home() {
   const title = "Explore Kishanganj"
@@ -30,21 +32,37 @@ export default function Home() {
           <p className="subtitle">Nature • Culture • Peace</p>
           <button className='btn'>Explore<FaArrowRight /></button>
         </div>
-        <hr />
-        <div className='hero-section-para'>
+        <hr className="top-hr" />
+        <div className='section-para'>
           <div className='para1'>
             <h3>Kishanganj</h3>
             <br />
             <p>Kishanganj is a district and town located in the northeastern part of the Indian state of Bihar. It is known for its greenery, tea gardens, and its location near the borders of Nepal and West Bengal.</p>
           </div>
-          <div className='image-stack'>
-            <img className="image1" src='src/assets/1pic.png' alt="Kishanganj image 1" />
-            <img className="image2" src='src/assets/2pic.png' alt="Kishanganj image 2" />
-            <img className="image3" src='src/assets/3pic.png' alt="Kishanganj image 3" />
+          <ImageStack />
+          <Banner className="Banner" />
+        </div>
+        {/* bottom hr */}
+        <hr className="middle-hr" />
+        <div className="culture-section">
+          <div className="culture-text">
+            <h2>Culture of Kishanganj Bihar</h2>
+            <p>
+              Kishanganj’s culture places great importance on traditional food, such as rice, lentils, fish, and local vegetables.
+              In many households, food is still cooked on traditional clay stoves (chulha), which enhances the taste and aroma.
+              The local art and handicrafts of Kishanganj reflect simplicity, rural life, and a close connection with nature.
+            </p>
+            <button className="btn more">More<FaArrowRight /></button>
+          </div>
+          <div className="culture-images">
+            <img src="src/assets/chulha.jpg" alt="Traditional Food" />
+            <img src="src/assets/tikuli_art.png" alt="Handicrafts" />
+            <img src="src/assets/litti.jpg" alt="Clay Stove" />
           </div>
         </div>
+        <hr className="bottom-hr" />
+        <Footer />
       </div>
-      <Banner className="Banner" />
     </>
   )
-}
+} 
