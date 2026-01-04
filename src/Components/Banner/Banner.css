@@ -7,7 +7,7 @@
 } */
 /* Banner.css */
 .banner {
-  width: 100%;
+  width: 90%;
   height: 300px;
   display: flex;
   justify-content: center;
@@ -20,9 +20,9 @@
 }
 
 .banner .slider {
-  /* position: absolute; */
+  position: absolute;
   width: 200px;
-  height: 250px;
+  height: 200px;
   /* top: 20%; */
   left: calc(50% - 100px);
   transform-style: preserve-3d;
