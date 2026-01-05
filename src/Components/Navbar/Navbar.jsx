@@ -26,10 +26,10 @@ export default function Navbar() {
                 {/* ----- NavLinks ----- */}
                 <nav className={styles.navbar}>
                     <Link to="/">Home</Link>
-                    <Link to="/About">About</Link>
-                    <Link to="/Accomodation">Accomodation</Link>
-                    <Link to="/Culture">Culture</Link>
-                    <Link to="/Blogs">Blogs</Link>
+                    <Link to="About">About</Link>
+                    <Link to="Accomodation">Accomodation</Link>
+                    <Link to="Culture">Culture</Link>
+                    <Link to="Blogs">Blogs</Link>
                 </nav>
 
                 {/* ----- Right Section ----- */}
