@@ -6,6 +6,7 @@ import Footer from '../../Components/Footer/Footer';
 import Banner from '../../Components/Banner/Banner';
 import ImageStack from '../../Components/ImageStack/ImageStack';
 import 'animate.css';
+import 'react-icons/fa6';
 
 export default function Home() {
   const title = "Explore Kishanganj"
@@ -43,7 +44,7 @@ export default function Home() {
           <Banner className="Banner" />
         </div>
         {/* bottom hr */}
-        <hr className="middle-hr" />
+        {/* <hr className="middle-hr" /> */}
         <div className="culture-section">
           <div className="culture-text">
             <h2>Culture of Kishanganj Bihar</h2>
