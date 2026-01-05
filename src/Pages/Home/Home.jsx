@@ -56,9 +56,9 @@ export default function Home() {
             <button className="btn more">More<FaArrowRight /></button>
           </div>
           <div className="culture-images">
-            <img src="src/assets/chulha.jpg" alt="Traditional Food" />
-            <img src="src/assets/tikuli_art.png" alt="Handicrafts" />
-            <img src="src/assets/litti.jpg" alt="Clay Stove" />
+            <img src="src/assets/chulha.jpg" alt="Traditional Food" className='culture-img1'/>
+            <img src="src/assets/tikuli_art.png" alt="Handicrafts" className='culture-img2'/>
+            <img src="src/assets/litti.jpg" alt="Clay Stove" className='culture-img3'/>
           </div>
         </div>
         <hr className="bottom-hr" />

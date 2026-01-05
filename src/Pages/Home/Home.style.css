@@ -167,21 +167,40 @@ h3 {
 }
 
 .more {
-    margin: auto;
+    margin-left: 90%;
     align-self: center;
 }
 
 .culture-images {
     /* flex: 1; */
     display: flex;
-    gap: 20px;
-    justify-content: center;
+    /* gap: 20px; */
+    height: 260px;
+    width: 521px;
+    /* justify-content: center; */
+    /* border: 20px solid rgb(233, 12, 93); */
 }
 
 .culture-images img {
-    width: 180px;
-    height: 180px;
+    position: relative;
     object-fit: cover;
-    border: 5px solid #ffffff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.culture-img1{
+    top: 9%;
+    width: 150px;
+    height: 170px;
+    border: 7px solid #ffffff;
+}
+.culture-img2{
+    top: 5%;
+    width: 150px;
+    height: 190px;
+    border: 8px solid #ffffff;
+}
+.culture-img3{
+    top: 0%;
+    width: 180px;
+    height: 218px;
+    border: 9px solid #ffffff;
 }
