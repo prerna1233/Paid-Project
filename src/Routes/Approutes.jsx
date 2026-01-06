@@ -5,6 +5,7 @@ import Accomodation from '../Pages/Accomodation/Accomodation.jsx'
 import Culture from '../Pages/Culture/Culture.jsx'
 import Blogs from '../Pages/Blogs/Blogs.jsx'
 import Signup  from '../Components/Signup/Signup.jsx'
+import Login from '../Components/Login/Login.jsx'
 import { Routes, Route } from 'react-router-dom'
 
 
@@ -14,6 +15,7 @@ export default function Approutes() {
    
      <Routes>
       
+      <Route path='/login' element={<Login/>} />
         <Route path='/' element={<Home />} />
         <Route path='/Signup' element={<Signup/>}/>
         <Route path='/About' element={<About />} />
