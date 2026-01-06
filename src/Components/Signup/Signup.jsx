@@ -6,7 +6,7 @@ export default function Signup() {
     <div className="signup-container">
       <div className="signup-card">
 
-        {/* LEFT FORM */}
+      
         <div className="form-section">
           <h2>Signup</h2>
 
