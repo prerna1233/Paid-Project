@@ -7,6 +7,8 @@ import Banner from '../../Components/Banner/Banner';
 import ImageStack from '../../Components/ImageStack/ImageStack';
 import 'animate.css';
 import 'react-icons/fa6';
+import { Link } from 'react-router-dom';
+
 
 export default function Home() {
   const title = "Explore Kishanganj"
@@ -31,7 +33,11 @@ export default function Home() {
           </h1>
 
           <p className="subtitle">Nature • Culture • Peace</p>
-          <button className='btn'>Explore<FaArrowRight /></button>
+       <Link to="/travel" style={{ textDecoration: "none" }}>
+       <button className="btn">
+         Explore <FaArrowRight />
+       </button>
+     </Link>
         </div>
         <hr className="top-hr" />
         <div className='section-para'>
@@ -42,6 +48,7 @@ export default function Home() {
           </div>
           <ImageStack />
           <Banner className="Banner" />
+
         </div>
         {/* bottom hr */}
         {/* <hr className="middle-hr" /> */}
@@ -56,10 +63,11 @@ export default function Home() {
             <button className="btn more">More<FaArrowRight /></button>
           </div>
           <div className="culture-images">
-            <img src="src/assets/chulha.jpg" alt="Traditional Food" className='culture-img1'/>
-            <img src="src/assets/tikuli_art.png" alt="Handicrafts" className='culture-img2'/>
-            <img src="src/assets/litti.jpg" alt="Clay Stove" className='culture-img3'/>
+            <img src="src/assets/chulha.jpg" alt="Traditional Food" className='culture-img1' />
+            <img src="src/assets/tikuli_art.png" alt="Handicrafts" className='culture-img2' />
+            <img src="src/assets/litti.jpg" alt="Clay Stove" className='culture-img3' />
           </div>
+
         </div>
         <hr className="bottom-hr" />
         <Footer />

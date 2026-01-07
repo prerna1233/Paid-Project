@@ -1,7 +1,7 @@
 import React from "react";
-import "./Accomodation.style.css";
+import "./Travel.style.css";
 
-function Accomodation() {
+function Travel() {
   return (
     <div className="coming-container">
       <div className="coming-content">
@@ -13,4 +13,4 @@ function Accomodation() {
   );
 }
 
-export default Accomodation;
+export default Travel;
