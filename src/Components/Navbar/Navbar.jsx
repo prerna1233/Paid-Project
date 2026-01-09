@@ -29,7 +29,7 @@ export default function Navbar() {
                     <Link to="About">About</Link>
                     <Link to="Accomodation">Accomodation</Link>
                     <Link to="Culture">Culture</Link>
-                    <Link to="Blogs">Blogs</Link>
+                    <Link to="Travel">Blogs</Link>
                 </nav>
 
                 {/* ----- Right Section ----- */}
