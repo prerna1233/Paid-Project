@@ -1,16 +1,14 @@
 import React from "react";
-import "./Accomodation.style.css";
+import "./Travel.style.css";
 
-function Accomodation() {
+function Travel() {
   return (
     <div className="coming-container">
       <div className="coming-content">
         <h1>Coming Soon</h1>
-       
-       
       </div>
     </div>
   );
 }
 
-export default Accomodation;
+export default Travel;
