@@ -12,7 +12,9 @@ import { MdLanguage } from "react-icons/md";
 import { BsSun, BsMoon } from "react-icons/bs";
 
 export default function Navbar() {
-    const [dark,light]=useState(false);
+    const [dark, light] = useState(false);
+    const [showCulture, setShowCulture] = useState(false);
+
     return (
         <>
             <div className={styles.NavContainer}>
@@ -28,7 +30,24 @@ export default function Navbar() {
                     <Link to="/">Home</Link>
                     <Link to="About">About</Link>
                     <Link to="Accomodation">Accomodation</Link>
-                    <Link to="Culture">Culture</Link>
+                    {/* <Link to="Culture">Culture</Link> */}
+
+                    <div
+                        className={styles.cultureWrapper}
+                        onMouseEnter={() => setShowCulture(true)}
+                        onMouseLeave={() => setShowCulture(false)}
+                    >
+                        <Link to="/Culture">Culture</Link>
+
+                        {showCulture && (
+                            <div className={styles.cultureDropdown}>
+                                <Link to="/Culture/festivals">Festivals & Traditions</Link>
+                                <Link to="/Culture/art">Art & Handicrafts</Link>
+                                <Link to="/Culture/food">Food & Lifestyle</Link>
+                            </div>
+                        )}
+                    </div>
+
                     <Link to="Travel">Blogs</Link>
                 </nav>
 
