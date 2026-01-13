@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    display: block;
+}
+
+/* video */
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* LEFT text container */
+.hero-text.left {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    text-align: left;
+    max-width: 600px;
+    z-index: 10;
+}
+
+/* heading */
+.hero-text h1 {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+/* subtitle */
+.subtitle {
+    font-size: 1.3rem;
+    margin-top: 12px;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1.8s;
+}
+
+/* LETTER animation */
+.fall-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-60px);
+    animation: fall 0.6s ease forwards;
+}
+
+/* keyframes */
+@keyframes fall {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* explore button */
+.btn {
+    margin-top: 30px;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    background-color: #de6142;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ff3b2f;
+}
+
+/* horizontal lines */
+hr {
+    border: 2px solid #908888;
+    margin: 30px auto;
+    width: 95%;
+}
+
+/*section para */
+.section-para {
+    padding: 40px 30px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* fill gaps on smaller screens */
+}
+
+.para1 {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.8;
+    width: 30vw;
+    min-width: 300px;
+}
+
+h3 {
+    color: #9e2d2d;
+    font-weight: bold;
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+/* Banner spacing */
+.Banner {
+    margin: 40px auto;
+    width: 95%;
+}
+
+/* Culture Section */
+.culture-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 60px 40px;
+    background: url('src/assets/clipart_background.png') no-repeat center;
+    background-size: cover;
+    clip-path: polygon(
+        0 0,
+        15% 0,
+        53% 30%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+    gap: 20px;
+    flex-wrap: wrap; /* fill gaps on smaller screens */
+}
+
+.culture-text {
+    color: rgba(255, 255, 255, 0.95);
+    padding-top: 100px;
+    width: 50%;
+    min-width: 280px;
+}
+
+.culture-text h2 {
+    font-size: 2.8rem;
+    font-weight: bolder;
+    margin-bottom: 15px;
+}
+
+.culture-text p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+}
+
+.more {
+    margin-top: 30px;
+}
+
+/* Culture images */
+.culture-images {
+    display: flex;
+    gap: 20px;
+    width: 521px;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.culture-images img {
+    object-fit: cover;
+    border-radius: 10px;
+    border: 5px solid #fff;
+}
+
+/* IMAGE SPECIFIC SIZES */
+.culture-img1 {
+    width: 150px;
+    height: 170px;
+}
+
+.culture-img2 {
+    width: 150px;
+    height: 190px;
+}
+
+.culture-img3 {
+    width: 180px;
+    height: 218px;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 1024px) {
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+
+    .section-para {
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px 20px;
+    }
+
+    .culture-section {
+        flex-direction: column;
+        padding: 40px 20px;
+        gap: 40px;
+    }
+
+    .culture-text, .culture-images {
+        width: 100%;
+        text-align: center;
+        padding-top: 0;
+    }
+
+    .culture-images {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+
+    .para1 h3 {
+        font-size: 2.2rem;
+    }
+
+    .para1 {
+        font-size: 1rem;
+    }
+}
