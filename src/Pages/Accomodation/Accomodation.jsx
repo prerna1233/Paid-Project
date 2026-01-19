@@ -1,15 +1,22 @@
 import React from "react";
 import "./Accomodation.style.css";
+import Cards from "../../Components/Cards/Cards.jsx";
+import Footer from "../../Components/Footer/Footer.jsx";
 
 function Accomodation() {
   return (
-    <div className="coming-container">
-      <div className="coming-content">
-        <h1>Coming Soon</h1>
-       
-       
+    <>
+    <div>
+      <div className="accomodation-page-Hero-Section">
       </div>
-    </div>
+      <p className="texxxxd">Hotels</p>
+      <div>search bar</div>
+      </div>
+      <div className="card-section">
+        <Cards />
+      </div>
+      <Footer />
+    </>
   );
 }
 
