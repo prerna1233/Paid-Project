@@ -1,16 +1,51 @@
-.accomodation-page-Hero-Section {
+.accomodation-page-top-section {
+  padding-top: 65px;
   height: 60vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('https://img.freepik.com/free-photo/small-hotel-room-interior-with-double-bed-bathroom_1262-12489.jpg?semt=ais_hybrid&w=740&q=80');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: blur(4px);
+  background-color: rgb(236, 242, 247);
 }
-.texxxxd{
+.accomodation-page-top-section-content{
+  background-color: white;
+  height: 90%;
+  width: 80%;
+}
+.accomodation-page-top-section-content h2{
+  text-align: center;
+  padding-top: 20px;
+  font-size: 36px;
+  font-weight: bolder;
+}
+.accomodation-page-top-section-content input, .date{
+  width: 75%;
+  height: 40px;
+  text-align: center;
+  margin: 0.4% 15% 0.3% 14%;
+}
+#location{
+  margin-top: 30px;
+}
+.date{
+  display: flex;
+  justify-content: space-between;
+}
+.date input{
+  width: 49%;
+  height: 35px;
+  margin: 0;
+}
+
+.accomodation-page-top-section-content input, .date input{
+  border: 2px solid rgb(175, 171, 171);
+  background-color: navajowhite;
+
+}
+
+
+
+/* .texxxxd{
   position: absolute;
   top: 25%;
   left: 45%;
@@ -18,7 +53,7 @@
   font-size: 48px;
   font-weight: bold;
   z-index: 999;
-}
+} */
 /* .card-section {
   width: 100%;
   min-height: 200vh;
