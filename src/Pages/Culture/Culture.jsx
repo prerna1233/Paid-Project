@@ -2,6 +2,7 @@ import React from 'react'
 import './Culture.style.css'
 import 'animate.css';
 import Footer from '../../Components/Footer/Footer';
+import CircleMenu from '/home/bhawna/Paid-Project/src/Pages/Culture/CircleMenu.jsx';
 
 function Culture() {
   return (
@@ -72,6 +73,7 @@ function Culture() {
         </div>
       </div>
       <hr className='her'></hr>
+      <CircleMenu />
       <Footer />
     </div>
   )
