@@ -38,7 +38,7 @@ export default function Navbar() {
 
                         {showAbout && (
                             <div className={styles.cultureDropdown}>
-                                <Link to="/About/History">History</Link>
+                                <Link to="/About/Historykishanganj">History</Link>
                                 <Link to="/About/Who's Who">Who's Who</Link>
                                 <Link to="/About/Demographic">Demographic</Link>
                             </div>

@@ -1,78 +1,110 @@
 import React from "react";
 import "./Historykishanganj.css";
+import Footer from "../../Components/Footer/Footer";
+// import history from "../../assets/Aboutpage/art1.png";
+ function Historykishanganj() {
+    
 
+    return (
+        <>
+       <div className='hero-history'>
+        <img src="/src/assets/7pic.webp" 
+        alt="Traditional Food"
+         className='culture-img1' />
+      </div>
 
-export default function Historykishanganj() {
-return (
-<div className="history-page">
-<div className="container">
-{/* Header */}
-<h1 className="title">Kishanganj History</h1>
-<p className="subtitle">A Historical District of Bihar</p>
+      <hr></hr>
+          
+      
+         <div className="history-container">
 
+      <h1 className="history-title">History of Kishanganj</h1>
 
-{/* Main Section */}
-<div className="history-layout">
-{/* History Text */}
-<div className="history-text">
-<p>
-Kishanganj is a historically important district located in the
-Seemanchal region of Bihar. Due to its location near West Bengal
-and Nepal, it has remained a center of trade and cultural exchange
-since ancient times.
-</p>
-<p>
-During the medieval period, the region was influenced by local
-rulers and later came under the Mughal administration. In the
-British era, tea plantations were introduced along with railway
-connectivity and administrative development.
-</p>
-<p>
-The people of Kishanganj actively participated in India’s freedom
-struggle. After independence in 1947, the district was formed as a
-separate district in 1990 after being divided from Purnea.
-</p>
-<p>
-Today, Kishanganj is known for its cultural diversity, greenery,
-and historical importance in Bihar.
-</p>
-</div>
+      <h2 className="history-subtitle">Pre-Independence:</h2>
 
+      {/* First Image + Text */}
+      <div className="history-row">
+        <img
+          src="/src/assets/image1.jpg"
+          alt="Old Kishanganj"
+          className="history-img-left"
+        />
 
-{/* Cards */}
-<div className="card-grid">
-<div className="card">
-<img src="src/assets/bdo.jpeg" alt="Tea Gardens" />
-<h3>Tea Gardens of Kishanganj</h3>
-</div>
-<div className="card">
-<img src="src/assets/bdo.jpeg" alt="Freedom Movement" />
-<h3>Freedom Movement</h3>
-</div>
-<div className="card">
-<img src="src/assets/bdo.jpeg" alt="Culture" />
-<h3>Cultural Diversity</h3>
-</div>
-<div className="card">
-<img src="src/assets/bdo.jpeg" alt="Map" />
-<h3>Geographical Importance</h3>
-</div>
-</div>
-</div>
+        <div className="history-text">
+          <p>
+            Kishanganj is a historic town located in the northeastern part of
+            Bihar. Before India’s independence, Kishanganj formed a part of the
+            larger Purnia district. Due to its strategic location near present-day
+            West Bengal, Nepal, and Bangladesh, the region gained importance as
+            a center of settlement, trade, and administration.
+          </p>
 
+          <p>
+            The region has been inhabited since ancient times by agricultural
+            communities who depended on fertile land and river systems such as
+            the Mahananda. Over time, Kishanganj became a transit zone connecting
+            Bengal with North Bihar and Nepal.
+          </p>
 
-{/* Timeline */}
-<div className="timeline">
-<h2>Historical Timeline</h2>
-<ul>
-<li>Ancient Period – Forest region and trade routes</li>
-<li>Medieval Period – Local rulers and Mughal influence</li>
-<li>British Era – Tea plantations and railway development</li>
-<li>1947 – Participation in India’s Independence</li>
-<li>1990 – Formation of Kishanganj District</li>
-</ul>
-</div>
-</div>
-</div>
-);
+          <p>
+            During medieval times, the area was influenced by rulers of Bengal
+            and Mithila. Islamic culture spread through trade and migration,
+            contributing to the diverse cultural identity of Kishanganj.
+          </p>
+        </div>
+      </div>
+
+      {/* Long Paragraph */}
+      <p className="history-text">
+        With the expansion of the Mughal Empire, Kishanganj emerged as an
+        important market area. The word “ganj” refers to a marketplace,
+        highlighting its commercial importance. Mughal administration
+        encouraged agriculture and trade, helping the region grow economically.
+      </p>
+
+      {/* Right Image */}
+      <img
+        src="/src/assets/oldindependent.avif"
+        alt="Old Road"
+        className="history-img-right"
+      />
+
+      <p className="history-text">
+        During British rule, Kishanganj came under the administration of the East
+        India Company as part of the Purnia district. The British focused on
+        revenue collection, infrastructure, and border security due to the
+        region’s proximity to Nepal and Bengal.
+      </p>
+
+      <p className="history-text">
+        Railway connectivity and road networks were developed to serve colonial
+        interests. However, local farmers faced difficulties due to heavy taxes
+        and land revenue policies imposed by the British administration.
+      </p>
+
+      <p className="history-text">
+        After India gained independence in 1947, Kishanganj remained a subdivision
+        of Purnia district. Continuous demands by local leaders and citizens led
+        to the formation of a separate district on 14 January 1990.
+      </p>
+
+      {/* Bullet Points */}
+      <ul className="history-list">
+        <li>
+          Strategic importance due to its border location.
+        </li>
+        <li>
+          Served as an administrative and trade center.
+        </li>
+        <li>
+          Played a role in regional cultural exchange.
+        </li>
+      </ul>
+
+    </div>
+    <Footer/>
+        </>
+    );
 }
+
+export default Historykishanganj;
