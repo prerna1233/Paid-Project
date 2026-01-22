@@ -20,12 +20,23 @@ export default function Navbar() {
                 </div>
 
                 {/* ----- NavLinks ----- */}
+<<<<<<< Updated upstream
                 <nav className='Navbar'>
                     <Link to="/">Home</Link> |
                     <Link to="/About">About</Link> |
                     <Link to="/Accomodation">Accomodation</Link> |
                     <Link to="/Culture">Culture</Link> |
                     <Link to="/Blogs">Blogs</Link>
+=======
+                <nav className={styles.navbar}>
+                    <Link to="/">Home</Link>
+                    <Link to="About">About</Link>
+                    <Link to="/Accomodationpath">Explore</Link>
+
+                    {/* <Link to="Accomodationpath">Explore</Link> */}
+                    <Link to="Culture">Culture</Link>
+                    <Link to="Travel">Blogs</Link>
+>>>>>>> Stashed changes
                 </nav>
                  
                  {/* ----- Profile Icon ----- */}
