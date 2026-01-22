@@ -1,74 +1,101 @@
-.coming-container {
-  height: 100vh;
+.sestion {
+  width: 100%;          
+  height: 100vh;  
+}
+.sestion img {
   width: 100%;
-  background: radial-gradient(circle at top, #2b6cb0, #0a2540);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 85%;
+  object-fit: cover;     
+  object-position: center; 
+}
+/* Section grid */
+.sestion2 {
+margin-top: -50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* ek row me 3 cards */
+}
+
+
+.boxmain h2{
+  color:  rgb(8, 8, 8);
+  padding :20px;
+ text-align: center;
+  font-size: 25px; 
+  font-weight: 900;
+
+} 
+
+
+
+
+
+
+.boxmain p{
+  padding: 10px;
+  margin-top: -25px;
+}
+
+
+
+.icon {
+top: -20px;;
+    width: 45px;
+    height: 45px;
+    
+} 
+
+
+
+
+
+
+.boxmain {
+  gap:20px;
+  /* box-shadow: 2px 2px 2px  2px rgb(52, 51, 51); */
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color:rgb(240, 243, 249)
+}
+
+/* image */
+.boxmain img {
+  margin-top: 25px;
+  margin-left: 34px;
+  width: 85%;
+  height: 320px;
+  object-fit: cover;
+   border-radius: 10px;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* button hidden by default */
+.boxmain button {
+  position: absolute;
+  top: 150px;          
+ left: 50%; 
+  transform: translateX(-50%);
+  background: rgb(205, 32, 47);
   color: white;
-  text-align: center;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  opacity: 0;
+  transition: 0.3s ease;
+}  
+.boxmain button:hover{
+  background-color: rgb(52, 158, 61);
 }
-
-
-
-.coming-content h1 {
-  font-size: 60px;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-
-   animation: wallpaperMove 12s linear infinite;
-}
-
-/* @keyframes typing {
-  0% {
-    width: 0;
-  }
-  50% {
-    width: 11ch;
-  }
-  100% {
-    width: 0;
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-} */
-
-@keyframes wallpaperMove {
+/* show button on image hover */ 
+  .boxmain:hover button {
+  opacity: 1;
  
-  0% {
-    left: -300px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+}  
 
- 
-  25% {
-    left: 100%;
-    top: 50%;
-    transform: translate(-100%, -50%);
-  }
-
- 
-  50% {
-    left: 50%;
-    top: 100%;
-    transform: translate(-50%, -100%);
-  }
-
-   75% {
-    left: -300px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
- 
-  100% {
-    left: 50%;
-    top: -100px;
-    transform: translateX(-50%);
-  }
-}
+ /* optional: image zoom */
+  .boxmain:hover img { 
+   transform: scale(1.1);
+}  
