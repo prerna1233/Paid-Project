@@ -15,6 +15,8 @@ export default function Navbar() {
     const [dark, light] = useState(false);
     const [showCulture, setShowCulture] = useState(false);
     const [showAbout, setShowAbout] = useState(false);
+    const [showAccomodation, setShowAccomodation] = useState(false);
+
 
     return (
         <>
@@ -40,12 +42,24 @@ export default function Navbar() {
                             <div className={styles.cultureDropdown}>
                                 <Link to="/About/Historykishanganj">History</Link>
                                 <Link to="/About/Who's Who">Who's Who</Link>
-                                <Link to="/About/Demographic">Demographic</Link>
+                                <Link to="/About/Economy">Economy</Link>
                             </div>
                         )}
                     </div>
-                    <Link to="Accomodation">Accomodation</Link>
-                    {/* <Link to="Culture">Culture</Link> */}
+
+                    <div
+                        className={styles.cultureWrapper}
+                        onMouseEnter={() => setShowAccomodation(true)}
+                        onMouseLeave={() => setShowAccomodation(false)} >
+                        <Link to="Accomodation">Accomodation</Link>
+
+                        {showAccomodation && (
+                            <div className={styles.cultureDropdown}>
+                                <Link to="/Accomodation/Hotel_Homepage">Hotel</Link>
+                            </div>
+                        )}
+                    </div>
+
 
                     <div
                         className={styles.cultureWrapper}
