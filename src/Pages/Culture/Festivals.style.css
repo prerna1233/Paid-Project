@@ -1,0 +1,155 @@
+/* Page Wrapper */
+.festival-page {
+  width: 100%;
+  overflow-x: hidden;
+  background: #fafafa;
+}
+
+/* Hero Section */
+.festival-hero {
+  position: relative;
+  height: 45vh;
+}
+
+.festival-hero img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border: 6px solid #ffffff;
+  
+}
+
+
+.festival-hero h1 {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  color: #fffdfd;
+  font-weight: bold;
+  font-size: 4rem;
+}
+
+/* Zig-Zag Section */
+.festival-section {
+  display: flex;
+  align-items: center;   /* ✅ ONLY CENTER */
+  gap: 60px;
+  padding: 90px 10%;
+}
+
+.festival-section.right {
+  flex-direction: row-reverse;
+}
+
+/* Image Wrapper */
+.festival-image-wrapper {
+  width: 45%;            /* ✅ FIXED IMAGE AREA */
+}
+
+/* SAME SIZE IMAGE */
+.festival-img {
+  width: 500%;
+  height: 500px;         /* ✅ SAME HEIGHT */
+  object-fit: cover;    /* ✅ CROP, NO STRETCH */
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Text */
+.festival-text {
+  width: 55%;
+}
+
+.festival-text h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.festival-text p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* Button */
+.festival-text button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.festival-text button:hover {
+  background: #333;
+}
+
+/* Blur Background */
+.blur-bg {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+/* Modal */
+.festival-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 70%;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 22px;
+  z-index: 100;
+}
+
+/* Modal Image */
+.festival-modal img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 16px;
+  margin-bottom: 25px;
+}
+
+/* Close Button */
+.festival-modal button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 28px;
+  border-radius: 25px;
+  border: none;
+  background: #b31616;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .festival-section {
+    flex-direction: column;
+  }
+
+  .festival-image-wrapper,
+  .festival-text {
+    width: 100%;
+  }
+
+  .festival-img {
+    height: 220px;
+  }
+
+  .festival-modal {
+    width: 90%;
+  }
+}
