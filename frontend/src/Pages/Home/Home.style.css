@@ -21,12 +21,13 @@
 /* LEFT text container */
 .hero-text.left {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 8%;
     transform: translateY(-50%);
     color: #ffffff;
     text-align: left;
     max-width: 600px;
+    z-index: 10;
 }
 
 /* heading */
@@ -69,7 +70,7 @@
 /* explore button */
 .btn {
     margin-top: 30px;
-    padding: 15px;
+    padding: 15px 25px;
     font-size: 1.2rem;
     background-color: #de6142;
     color: #ffffff;
@@ -89,75 +90,72 @@
 /* horizontal lines */
 hr {
     border: 2px solid #908888;
-    margin: 20px;
-    width: 98%;
+    margin: 30px auto;
+    width: 95%;
 }
 
 /*section para */
 .section-para {
-    padding: 30px;
+    padding: 40px 30px;
     display: flex;
-    height: 130vh;
     width: 100%;
     justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* fill gaps on smaller screens */
 }
 
 .para1 {
-    margin: 30px;
-    height: 28vh;
-    width: 30vw;
+    margin: 0;
     font-size: 1.5rem;
-    /* border: 1px solid #908888; */
+    line-height: 1.8;
+    width: 30vw;
+    min-width: 300px;
 }
 
 h3 {
     color: #9e2d2d;
     font-weight: bold;
     font-size: 3rem;
+    margin-bottom: 15px;
 }
 
-.hero-section-para {
-    display: flex;
-    align-items: center;
-    gap: 40%;
-    padding: 20px;
+/* Banner spacing */
+.Banner {
+    margin: 40px auto;
+    width: 95%;
 }
 
 /* Culture Section */
 .culture-section {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    padding: 40px;
+    padding: 60px 40px;
     background: url('src/assets/clipart_background.png') no-repeat center;
     background-size: cover;
-    /* opacity: 1; */
-    /* filter: brightness(0.5) contrast(1.2); */
     clip-path: polygon(
-    0 0,
-    15% 0,
-    53% 30%,
-    100% 0,
-    100% 100%,
-    0 100%
-  );
-    position: relative;
+        0 0,
+        15% 0,
+        53% 30%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
     gap: 20px;
+    flex-wrap: wrap; /* fill gaps on smaller screens */
 }
 
 .culture-text {
-    /* flex: 1; */
-  color: rgba(255, 255, 255, 0.9); /* Dark white text */
-    /* text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.9); */
-    padding-top: 130px;
-    height: 50vh;
+    color: rgba(255, 255, 255, 0.95);
+    padding-top: 100px;
     width: 50%;
-    /* border: 5px solid red; */
+    min-width: 280px;
 }
 
 .culture-text h2 {
     font-size: 2.8rem;
     font-weight: bolder;
+    margin-bottom: 15px;
 }
 
 .culture-text p {
@@ -166,40 +164,85 @@ h3 {
 }
 
 .more {
-    margin-left: 90%;
-    align-self: center;
+    margin-top: 30px;
 }
 
+/* Culture images */
 .culture-images {
-    /* flex: 1; */
     display: flex;
-    /* gap: 20px; */
-    height: 260px;
+    gap: 20px;
     width: 521px;
-    /* justify-content: center; */
-    /* border: 20px solid rgb(233, 12, 93); */
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .culture-images img {
-    position: relative;
     object-fit: cover;
+    border-radius: 10px;
+    border: 5px solid #fff;
 }
 
-.culture-img1{
-    top: 9%;
+/* IMAGE SPECIFIC SIZES */
+.culture-img1 {
     width: 150px;
     height: 170px;
-    border: 7px solid #ffffff;
 }
-.culture-img2{
-    top: 5%;
+
+.culture-img2 {
     width: 150px;
     height: 190px;
-    border: 8px solid #ffffff;
 }
-.culture-img3{
-    top: 0%;
+
+.culture-img3 {
     width: 180px;
     height: 218px;
-    border: 9px solid #ffffff;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 1024px) {
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+
+    .section-para {
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px 20px;
+    }
+
+    .culture-section {
+        flex-direction: column;
+        padding: 40px 20px;
+        gap: 40px;
+    }
+
+    .culture-text, .culture-images {
+        width: 100%;
+        text-align: center;
+        padding-top: 0;
+    }
+
+    .culture-images {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+
+    .para1 h3 {
+        font-size: 2.2rem;
+    }
+
+    .para1 {
+        font-size: 1rem;
+    }
 }

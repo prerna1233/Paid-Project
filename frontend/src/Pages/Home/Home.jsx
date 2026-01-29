@@ -45,8 +45,9 @@ export default function Home() {
             <p>Kishanganj is a district and town located in the northeastern part of the Indian state of Bihar. It is known for its greenery, tea gardens, and its location near the borders of Nepal and West Bengal.</p>
           </div>
           <ImageStack />
-          <Banner className="Banner" />
+          
         </div>
+          <Banner className="Banner" />
         {/* bottom hr */}
         {/* <hr className="middle-hr" /> */}
         <div className="culture-section">
@@ -59,6 +60,7 @@ export default function Home() {
             </p>
             <button className="btn more">More<FaArrowRight /></button>
           </div>
+        
           <div className="culture-images">
             <img src="src/assets/chulha.jpg" alt="Traditional Food" className='culture-img1' />
             <img src="src/assets/tikuli_art.png" alt="Handicrafts" className='culture-img2' />
