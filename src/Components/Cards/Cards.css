@@ -1,6 +1,6 @@
 .card-container {
   display: grid;
-  grid-template-columns: repeat(3, 10fr);
+  grid-template-columns: repeat(4, 10fr);
   /* grid-auto-rows: minmax(2px, auto); */
   gap: 20px;
   /* padding: 20px; */
@@ -19,6 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
 
 /* .card-content{

@@ -1,6 +1,7 @@
 import React from 'react'
 import './About.style.css'
 import Footer from '../../Components/Footer/Footer';
+import WhoIsWho from "./WhoIsWho/WhoIsWho.jsx";
 
 export default function About() {
   return (
@@ -61,6 +62,7 @@ export default function About() {
           </p>
       </div>
     </div>
+    
     <Footer/>
     </>
 

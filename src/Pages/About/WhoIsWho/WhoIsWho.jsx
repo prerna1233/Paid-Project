@@ -19,11 +19,11 @@ function WhoIsWho() {
   );
 
   const sdo = filteredData.filter(
-    (item) => item.section === "Sub Divisional Officers"
+    (item) => item.section === "Departmental Heads"
   );
 
   const bdo = filteredData.filter(
-    (item) => item.section === "Block Development Officers"
+    (item) => item.section === "Block"
   );
 
   return (
@@ -35,8 +35,8 @@ function WhoIsWho() {
         <WhoSearch search={search} setSearch={setSearch} />
 
         <WhoTable title="District Administration" data={district} />
-        <WhoTable title="Sub Divisional Officers" data={sdo} />
-        <WhoTable title="Block Development Officers" data={bdo} />
+        <WhoTable title="Departmental Heads" data={sdo} />
+        <WhoTable title="Block" data={bdo} />
       </div>
 
       <Footer />

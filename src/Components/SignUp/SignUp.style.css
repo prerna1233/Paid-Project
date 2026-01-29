@@ -1,0 +1,78 @@
+/* Full screen center */
+.sign_container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eef2f7;
+  font-family: Arial, sans-serif;
+}
+
+/* Signup box */
+.signup {
+  width: 700px;          /* ✅ width */
+  height: 700px;         /* ✅ height */
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+box-shadow: 0px 15px 20px rgba(224, 221, 221, 0.12);
+
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Heading inside box */
+.signup h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+/* Form layout */
+.signup form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.signup label {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+  
+  
+}
+
+/* Inputs */
+.signup input {
+  padding: 16px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.signup input:focus {
+  border-color: #4a90e2;
+}
+
+/* Submit button */
+.signup button {
+  padding: 16px;
+  font-size: 20px;
+  border-radius: 6px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.signup button:hover {
+  background-color: #357abd;
+}

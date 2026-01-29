@@ -18,12 +18,12 @@ const cardData = [
     image: "/src/assets/aloo_bhujiya.png",
     title: "Card 4",
     description: "This is the description for Card 4.",
-  }
-//   {
-//     image: "/src/assets/aloo_bhujiya.png",
-//     title: "Card 1",
-//     description: "This is the description for Card 1.",
-//   },
+  },
+  {
+    image: "/src/assets/aloo_bhujiya.png",
+    title: "Card 1",
+    description: "This is the description for Card 1.",
+  },
 //   {
 //     image: "/src/assets/aloo_bhujiya.png",
 //     title: "Card 1",

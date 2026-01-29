@@ -2,7 +2,7 @@ import React from 'react'
 import './Culture.style.css'
 import 'animate.css';
 import Footer from '../../Components/Footer/Footer';
-import CircleMenu from '/home/bhawna/Paid-Project/src/Pages/Culture/CircleMenu.jsx';
+import CircleMenu from '../../Pages/Culture/CircleMenu.jsx';
 
 function Culture() {
   return (

@@ -6,10 +6,11 @@ import Home from '../../Pages/Home/Home.jsx'
 import About from '../../Pages/About/About.jsx'
 import Accomodation from '../../Pages/Accomodation/Accomodation.jsx'
 import Culture from '../../Pages/Culture/Culture.jsx'
-import Blogs from '../../Pages/Blogs/Blogs.jsx'
+import BlogList from '../../Pages/Blogs/BlogList.jsx'
 import logo from '../../assets/logo.png'
 import { MdLanguage } from "react-icons/md";
 import { BsSun, BsMoon } from "react-icons/bs";
+
 
 export default function Navbar() {
     const [dark, light] = useState(false);
@@ -29,6 +30,10 @@ export default function Navbar() {
                 {/* ----- NavLinks ----- */}
                 <nav className={styles.navbar}>
                     <Link to="/">Home</Link>
+                    <Link to="BlogList">Blogs</Link>
+                    <Link to='/signup'>SigUp</Link>
+                   
+                    
                     {/* <Link to="About">About</Link> */}
                     <div
                         className={styles.cultureWrapper}
@@ -39,7 +44,7 @@ export default function Navbar() {
                         {showAbout && (
                             <div className={styles.cultureDropdown}>
                                 <Link to="/About/History">History</Link>
-                                <Link to="/About/Who's Who">Who's Who</Link>
+                                <Link to="/About/WhoISWho">Who's Who</Link>
                                 <Link to="/About/Demographic">Demographic</Link>
                             </div>
                         )}
