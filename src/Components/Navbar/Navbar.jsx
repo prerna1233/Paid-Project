@@ -2,11 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import styles from './Navbar.module.css'
-import Home from '../../Pages/Home/Home.jsx'
-import About from '../../Pages/About/About.jsx'
-import Accomodation from '../../Pages/Accomodation/Accomodation.jsx'
-import Culture from '../../Pages/Culture/Culture.jsx'
-import Blogs from '../../Pages/Blogs/Blogs.jsx'
 import logo from '../../assets/logo.png'
 import { MdLanguage } from "react-icons/md";
 import { BsSun, BsMoon } from "react-icons/bs";

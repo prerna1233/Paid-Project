@@ -2,10 +2,10 @@ const placesData = [
   {
     id: 1,
     title: "Kishanganj",
-    img: "src/assets/1pic.png",
+    img: "src/assets/kne.jpeg",
     desc: "Kishanganj is a district in northeastern Bihar, known for its lush greenery, tea gardens, and diverse culture. Located near West Bengal and Nepal, it is one of the most scenic regions of Bihar with rich history, harmony, and agricultural importance.",
     subtitle: [
-      { img: "https://www.kishanganj.net/images/k2.jpg", desc: "Kishanganj place 1" },
+      { img: "https://www.kishanganj.net/images/k2.jpg", desc: "A calm and green view of Kishanganj, known for its natural beauty." },
       { img: "https://www.kishanganj.net/images/k2.jpg", desc: "Kishanganj place 2" },
       { img: "https://www.kishanganj.net/images/k2.jpg", desc: "Kishanganj place 3" },
       { img: "https://www.kishanganj.net/images/k2.jpg", desc: "Kishanganj place 4" },

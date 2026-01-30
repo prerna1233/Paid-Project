@@ -1,7 +1,7 @@
 import React from 'react'
 import './Culture.style.css'
 import 'animate.css';
-import Footer from '../../Components/Footer/Footer';
+import Footer from '../../../Components/Footer/Footer';
 
 function Culture() {
   return (

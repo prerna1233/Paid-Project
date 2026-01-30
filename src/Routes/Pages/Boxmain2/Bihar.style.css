@@ -1,0 +1,139 @@
+/* .big-card img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.small-cards {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.small-card {
+  min-width: 200px;
+}
+
+.small-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+} */
+
+
+
+/* Main Container */
+.kishanganj-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+/* Page Title */
+.kishanganj-title {
+  text-align: center;
+  font-size: 32px;
+  color: #2c2c2c;
+  margin-bottom: 25px;
+}
+
+/* Main Card */
+.kishanganj-main-card {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+/* Main Image */
+.kishanganj-main-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+/* Main Content */
+.kishanganj-content {
+  padding: 25px;
+}
+
+.kishanganj-content h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.kishanganj-content p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.kishanganj-location {
+  font-weight: bold;
+  color: #007b5e;
+}
+
+/* Section Title */
+.kishanganj-section-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Grid Section */
+.kishanganj-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Small Cards */
+.kishanganj-card {
+  width: 260px;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kishanganj-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Thumbnail Image */
+.kishanganj-thumb-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* Card Text */
+.kishanganj-card p {
+  padding: 12px;
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .kishanganj-main-image {
+    height: 280px;
+  }
+
+  .kishanganj-grid {
+    justify-content: center;
+  }
+
+  .kishanganj-card {
+    width: 100%;
+    max-width: 320px;
+  }
+}

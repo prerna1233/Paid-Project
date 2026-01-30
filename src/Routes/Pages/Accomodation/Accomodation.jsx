@@ -1,10 +1,8 @@
 import React from "react";
-import Footer from "../../Components/Footer/Footer";
+import Footer from "../../../Components/Footer/Footer";
 import placesData from "./Accomodation.js";
 import "./Accomodation.style.css";
-
 import { Link } from 'react-router-dom';
-
 
 function Accomodation() {
   return (
@@ -12,7 +10,7 @@ function Accomodation() {
       <div className="sestion">
         <img src="src/assets/explorebg.jpg" alt="background" />
         <hr />
-       </div>
+      </div>
 
       <div className="sestion2">
         {placesData.map((place) => (

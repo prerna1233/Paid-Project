@@ -1,0 +1,262 @@
+/* /* .bihar-container {
+  padding: 20px;
+  background: #f5f6fa;
+  min-height: 100vh;
+}
+
+.place-header {
+  text-align: center;
+font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.place-header h1 {
+  font-size: 20em;
+  color: #0c4783;
+  margin-bottom: 10px;
+}
+
+.place-description {
+  font-size: 1.2em;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.main-image-container {
+  display: flex;
+  justify-content: center;
+  margin-top:300px;
+  
+}
+
+.main-image {
+  width: 100%;
+  max-width: 900px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-title {
+  text-align: center;
+  font-size: 2em;
+  color: #2e577e;
+  margin: 40px 0 20px;
+}
+
+.small-images-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.small-image-item {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.small-image-item:hover {
+  transform: scale(1.05);
+}
+
+.small-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.small-image-item:hover .small-image {
+  transform: scale(1.1);
+}
+
+
+@media (max-width: 768px) {
+  .bihar-container {
+    padding: 10px;
+    padding-top: 80px;
+  }
+  
+  .place-header h1 {
+    font-size: 2em;
+  }
+  
+  .place-description {
+    font-size: 1em;
+    padding: 0 10px;
+  }
+  
+  .main-image {
+    height: 300px;
+  }
+  
+  .small-images-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .small-image {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .small-images-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .main-image {
+    height: 250px;
+  }
+  
+  .small-image {
+    height: 120px;
+  }
+} */
+
+@import "tailwindcss";
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: sans-serif;
+    background-color: #f8f9fa;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* The Hero Section */
+.main-card {
+    /* display: flex; */
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.card-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 30px;
+}
+
+/* The Grid Section */
+.thumbnail-grid {
+    display: flex;
+    /* grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); */
+    gap: 20px;
+}
+
+.thumb-item {
+    width: 340px;
+    cursor: pointer;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.thumb-item:hover {
+    transform: translateY(-5px);
+}
+
+.thumb-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.thumb-info {
+    padding: 10px;
+}
+
+.thumb-info h4 {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.thumb-info p {
+    margin: 5px 0 0;
+    font-size: 0.75rem;
+    color: gray;
+}
+
+/* Back button styling */
+.back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Main place information styling */
+.main-place-info {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.place-image {
+  flex: 1;
+}
+
+.place-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.place-content {
+  flex: 1;
+}
+
+.place-content h2 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.place-content p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-place-info {
+    flex-direction: column;
+  }
+} */
