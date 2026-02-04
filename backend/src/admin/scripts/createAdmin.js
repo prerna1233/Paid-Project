@@ -1,13 +1,19 @@
 /**
  * Script to create an admin user in MongoDB
- * Run: node createAdmin.js
+ * Run: node src/admin/scripts/createAdmin.js
  */
 
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env from backend root (3 levels up: scripts -> admin -> src -> backend)
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
 // User Schema
 const userSchema = new mongoose.Schema({

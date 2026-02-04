@@ -44,3 +44,55 @@ export const adminLogin = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Get User Profile
+ * GET /auth/profile
+ */
+export const getUserProfile = async (req, res, next) => {
+  try {
+    const result = await authService.getUserProfile(req.user.id);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Update User Profile
+ * PUT /auth/profile
+ */
+export const updateUserProfile = async (req, res, next) => {
+  try {
+    const result = await authService.updateUserProfile(req.user.id, req.body);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Change Password
+ * PUT /auth/change-password
+ */
+export const changePassword = async (req, res, next) => {
+  try {
+    const result = await authService.changePassword(req.user.id, req.body);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Delete User Account
+ * DELETE /auth/account
+ */
+export const deleteUserAccount = async (req, res, next) => {
+  try {
+    const result = await authService.deleteUserAccount(req.user.id);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};

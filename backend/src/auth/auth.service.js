@@ -118,6 +118,124 @@ export class AuthService {
       },
     };
   }
+
+  /**
+   * Get user profile
+   */
+  async getUserProfile(userId) {
+    const user = await User.findById(userId).select("-password");
+    
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt
+    };
+  }
+
+  /**
+   * Update user profile (name and email)
+   */
+  async updateUserProfile(userId, updateData) {
+    const { name, email } = updateData;
+
+    // Find user
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // If email is being changed, check if new email already exists
+    if (email && email !== user.email) {
+      const emailExists = await User.findOne({ email });
+      if (emailExists) {
+        throw new Error("Email already in use by another account");
+      }
+      user.email = email;
+    }
+
+    // Update name if provided
+    if (name) {
+      user.name = name;
+    }
+
+    await user.save();
+
+    return {
+      message: "Profile updated successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    };
+  }
+
+  /**
+   * Change user password
+   */
+  async changePassword(userId, passwordData) {
+    const { currentPassword, newPassword } = passwordData;
+
+    // Validate input
+    if (!currentPassword || !newPassword) {
+      throw new Error("Current password and new password are required");
+    }
+
+    if (newPassword.length < 6) {
+      throw new Error("New password must be at least 6 characters long");
+    }
+
+    // Find user
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Verify current password
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      throw new Error("Current password is incorrect");
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    return {
+      message: "Password changed successfully"
+    };
+  }
+
+  /**
+   * Delete user account
+   */
+  async deleteUserAccount(userId) {
+    const user = await User.findById(userId);
+    
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Prevent admin deletion through this endpoint
+    if (user.role === "admin") {
+      throw new Error("Admin accounts cannot be deleted through this endpoint");
+    }
+
+    await User.findByIdAndDelete(userId);
+
+    return {
+      message: "Account deleted successfully"
+    };
+  }
 }
 
 export default new AuthService();
