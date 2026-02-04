@@ -162,15 +162,16 @@ export class BlogService {
     blog.comments.push(comment);
     await blog.save();
 
-    // Populate the newly added comment
-    await blog.populate('comments.user', 'name email');
+    // Re-fetch the blog with populated user data
+    const populatedBlog = await Blog.findById(blogId)
+      .populate('comments.user', 'name email');
 
-    const addedComment = blog.comments[blog.comments.length - 1];
+    const addedComment = populatedBlog.comments[populatedBlog.comments.length - 1];
 
     return {
       message: "Comment added successfully",
       comment: addedComment,
-      commentCount: blog.comments.length
+      commentCount: populatedBlog.comments.length
     };
   }
 
