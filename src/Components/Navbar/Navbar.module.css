@@ -42,3 +42,29 @@ img{
   font-size: 25px;
   font-weight: bolder;
 }
+.cultureWrapper {
+  position: relative;
+}
+
+.cultureDropdown {
+  position: absolute;
+  top: 170%;
+  left: 0;
+  background: white;
+  border-radius: 6px;
+  padding: 8px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 999;
+}
+
+.cultureDropdown a {
+  display: block;
+  padding: 8px 16px;
+  color: #000;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cultureDropdown a:hover {
+  background-color: #f2f2f2;
+}

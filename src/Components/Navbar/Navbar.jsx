@@ -12,7 +12,10 @@ import { MdLanguage } from "react-icons/md";
 import { BsSun, BsMoon } from "react-icons/bs";
 
 export default function Navbar() {
-    const [dark,light]=useState(false);
+    const [dark, light] = useState(false);
+    const [showCulture, setShowCulture] = useState(false);
+    const [showAbout, setShowAbout] = useState(false);
+
     return (
         <>
             <div className={styles.NavContainer}>
@@ -26,9 +29,40 @@ export default function Navbar() {
                 {/* ----- NavLinks ----- */}
                 <nav className={styles.navbar}>
                     <Link to="/">Home</Link>
-                    <Link to="About">About</Link>
+                    {/* <Link to="About">About</Link> */}
+                    <div
+                        className={styles.cultureWrapper}
+                        onMouseEnter={() => setShowAbout(true)}
+                        onMouseLeave={() => setShowAbout(false)}>
+                        <Link to="About">About</Link>
+
+                        {showAbout && (
+                            <div className={styles.cultureDropdown}>
+                                <Link to="/About/History">History</Link>
+                                <Link to="/About/Who's Who">Who's Who</Link>
+                                <Link to="/About/Demographic">Demographic</Link>
+                            </div>
+                        )}
+                    </div>
                     <Link to="Accomodation">Accomodation</Link>
-                    <Link to="Culture">Culture</Link>
+                    {/* <Link to="Culture">Culture</Link> */}
+
+                    <div
+                        className={styles.cultureWrapper}
+                        onMouseEnter={() => setShowCulture(true)}
+                        onMouseLeave={() => setShowCulture(false)}>
+                        <Link to="Culture">Culture</Link>
+
+                        {showCulture && (
+                            <div className={styles.cultureDropdown}>
+                                <Link to="/Culture/festivals">Festivals & Traditions</Link>
+                                <Link to="/Culture/art">Art & Handicrafts</Link>
+                                <Link to="/Culture/food">Food & Lifestyle</Link>
+                            </div>
+                        )}
+                    </div>
+
+
                     <Link to="Travel">Blogs</Link>
                 </nav>
 
