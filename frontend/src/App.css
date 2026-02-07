@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* Comprehensive CSS Reset */
+html, body, #root {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Global styles to accommodate fixed navbar */
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 79px; /* Account for navbar height + 1px overlap */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}

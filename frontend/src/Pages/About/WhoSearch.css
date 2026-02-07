@@ -1,0 +1,100 @@
+/* Main wrapper */
+.who_search-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #eae9f1;
+  padding: 15px;
+  justify-content: space-between;
+  /* margin: 20px 0; */
+  /* gap: 300px; */
+}
+
+/* Left red label */
+.who_search-label {
+  background-color: #d32f2f;
+  color: #fff;
+  padding: 15px 20px;
+  font-weight: 600;
+  position: relative;
+  white-space: nowrap;
+}
+
+
+/* Arrow shape */
+.who_search-label::after {
+  content: "";
+  position: absolute;
+  right: -20px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 27px solid transparent;
+  border-bottom: 27px solid transparent;
+  border-left: 20px solid #d32f2f;
+}
+
+/* Right side search box */ 
+.who_search-box {
+  display: flex;
+  align-items: center;
+  width: 500px;
+  justify-content: flex-end;
+  margin-left: 50px;
+  gap: 10px;
+}
+/* /*  */
+
+/* Input field */
+.who_search-box input {
+  width: 350px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: white;
+  border: 2px solid rgb(199, 16, 25);
+  outline: none;
+}
+
+/* Filter button */
+.filter-btn {
+  background-color: #e25716;
+  color: #fff;
+  border: none;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Hover effect */
+.filter-btn:hover {
+  background-color: #b71c1c;
+}
+
+/* Responsive (mobile) */
+@media (max-width: 768px) {
+  .search-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-label {
+    margin-bottom: 10px;
+  }
+
+  .search-label::after {
+    display: none;
+  }
+
+  .search-box {
+    margin-left: 0;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+}

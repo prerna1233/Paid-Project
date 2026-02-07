@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    display: block;
+}
+
+/* video */
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* LEFT text container */
+.home-hero-text {
+    position: absolute;
+    top: 45%;
+    left: 8%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    text-align: left;
+    max-width: 900px;
+    width: auto;
+}
+
+/* heading */
+.home-hero-text h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    white-space: nowrap;
+    line-height: 1.1;
+}
+
+/* subtitle */
+.subtitle {
+    font-size: 1.3rem;
+    margin-top: 12px;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1.8s;
+}
+
+/* LETTER animation */
+.fall-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-60px);
+    animation: fall 0.6s ease forwards;
+}
+
+/* keyframes */
+@keyframes fall {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* explore button */
+.btn {
+    margin-top: 30px;
+    padding: 15px;
+    font-size: 1.2rem;
+    background-color: #de6142;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ff3b2f;
+}
+
+/* horizontal lines */
+hr {
+    border: 1px solid #d0d0d0;
+    margin: 10px 20px;
+    width: 96%;
+    opacity: 0.6;
+}
+
+/*section para */
+.section-para {
+    padding: 15px 30px;
+    display: flex;
+    min-height: 60vh;
+    height: auto;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.para1 {
+    margin: 15px 40px 15px 60px;
+    min-height: 35vh;
+    height: auto;
+    width: 50vw;
+    max-width: 650px;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h3 {
+    color: #9e2d2d;
+    font-weight: bold;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.para1 p {
+    line-height: 1.6;
+    text-align: justify;
+    margin-top: 1rem;
+}
+
+.hero-section-para {
+    display: flex;
+    align-items: center;
+    gap: 40%;
+    padding: 20px;
+}
+
+/* Culture Section */
+.culture-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 40px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('src/assets/clipart_background.png') no-repeat center;
+    background-size: cover;
+    position: relative;
+    gap: 20px;
+    min-height: 50vh;
+}
+
+.culture-text {
+    color: rgba(255, 255, 255, 0.95);
+    padding-top: 15px;
+    height: auto;
+    width: 50%;
+    flex: 1;
+}
+
+.culture-text h2 {
+    font-size: 2.8rem;
+    font-weight: bolder;
+}
+
+.culture-text p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+}
+
+.more {
+    margin-left: 90%;
+    align-self: center;
+}
+
+.culture-images {
+    /* flex: 1; */
+    display: flex;
+    /* gap: 20px; */
+    height: 260px;
+    width: 521px;
+    /* justify-content: center; */
+    /* border: 20px solid rgb(233, 12, 93); */
+}
+
+.culture-images img {
+    position: relative;
+    object-fit: cover;
+}
+
+.culture-img1{
+    top: 9%;
+    width: 150px;
+    height: 170px;
+    border: 7px solid #ffffff;
+}
+.culture-img2{
+    top: 5%;
+    width: 150px;
+    height: 190px;
+    border: 8px solid #ffffff;
+}
+.culture-img3{
+    top: 0%;
+    width: 180px;
+    height: 218px;
+    border: 9px solid #ffffff;
+}
+
+/* How to Reach Here Section */
+.reach-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 80px 0;
+    position: relative;
+}
+
+.reach-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.reach-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.reach-title-bar {
+    width: 60px;
+    height: 4px;
+    background: #ff6b6b;
+    margin: 0 auto 20px;
+    border-radius: 2px;
+}
+
+.reach-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    position: relative;
+}
+
+.reach-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    align-items: start;
+}
+
+.reach-option {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.reach-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+    transition: left 0.3s ease;
+}
+
+.reach-option:hover::before {
+    left: 0;
+}
+
+.reach-option:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(255, 107, 107, 0.2);
+}
+
+.reach-icon {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #fff5f5 0%, #fef2f2 100%);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    transition: all 0.3s ease;
+}
+
+.reach-option:hover .reach-icon {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+}
+
+.reach-option:hover .reach-icon svg path {
+    fill: white;
+}
+
+.reach-option h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.reach-option:hover h3 {
+    color: #ff6b6b;
+}
+
+.reach-option p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .reach-section {
+        padding: 60px 0;
+    }
+    
+    .reach-header h2 {
+        font-size: 2rem;
+    }
+    
+    .reach-options {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .reach-option {
+        padding: 30px 20px;
+    }
+}

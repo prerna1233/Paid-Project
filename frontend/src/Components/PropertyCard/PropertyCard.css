@@ -1,0 +1,47 @@
+.property-card {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 16px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.property-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.property-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.property-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.property-rating,
+.property-distance,
+.property-price {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.view-deal-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.view-deal-button:hover {
+  background-color: #0056b3;
+}

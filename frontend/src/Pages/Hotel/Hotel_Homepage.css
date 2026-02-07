@@ -1,0 +1,347 @@
+
+.hero {
+  background: linear-gradient(135deg, #4a7c59 0%, #5d8a6a 50%, #629f4fff 100%);
+  padding: 80px 10%;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* .search-box {
+  background-color: white;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  border-radius: 8px;
+  flex-wrap: wrap;
+} */
+
+
+
+.search-box {
+  width: 100%;
+  max-width: 1000px; 
+  background: rgba(255, 255, 255, 0.98);
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  gap: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(74, 124, 89, 0.2);
+  padding: 8px;
+  border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+.search-input-group,
+.location-filter-group,
+.price-filter-group {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  padding: 0 16px;
+  border-right: 1px solid rgba(74, 124, 89, 0.15);
+}
+
+.search-box input,
+.search-box select {
+  color: black;
+  padding: 15px 0;
+  border: none;
+  border-radius: 0;
+  flex: 1;
+  font-size: 14px;
+  outline: none;
+  background: transparent;
+  width: 100%;
+}
+
+.search-box input::placeholder {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.search-box input:focus,
+.search-box select:focus {
+  outline: none;
+  background-color: rgba(74, 124, 89, 0.05);
+}
+
+.search-box select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNiIgdmlld0JveD0iMCAwIDEwIDYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xIDFMNSA1TDkgMSIgc3Ryb2tlPSIjODg4IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==');
+  background-repeat: no-repeat;
+  background-position: right 0px center;
+  padding-right: 20px;
+}
+
+
+.Search_btn {
+  background: linear-gradient(135deg, #4a7c59 0%, #5d8a6a 50%, #629f4fff 100%);
+  color: white;
+  border: none;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  margin-left: 8px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(74, 124, 89, 0.2);
+}
+
+.Search_btn:hover {
+  background: linear-gradient(135deg, #3a6249 0%, #4d7a5a 50%, #528f3fff 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(74, 124, 89, 0.3);
+} 
+
+
+
+.hotel-section {
+  padding: 60px 5%;
+  background-color: #f8faf9;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-header h2 {
+  font-size: 36px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.section-header p {
+  font-size: 18px;
+  color: #7f8c8d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.Hotel_page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hotel-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #e8ecef;
+}
+
+.hotel-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.hotel-image {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.hotel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.hotel-card:hover .hotel-image img {
+  transform: scale(1.05);
+}
+
+.hotel-content {
+  padding: 24px;
+}
+
+.hotel-header {
+  margin-bottom: 16px;
+}
+
+.hotel-name {
+  font-size: 22px;
+  color: #2c3e50;
+  margin-bottom: 6px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.hotel-location {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin: 0;
+}
+
+.hotel-description {
+  margin-bottom: 20px;
+}
+
+.hotel-description p {
+  color: #5a6c7d;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.hotel-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.amenity-tag {
+  background: #e8f5f0;
+  color: #1cb685;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid #d0f0e0;
+}
+
+.hotel-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border-top: 1px solid #f1f3f4;
+  padding-top: 20px;
+}
+
+.hotel-pricing {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1cb685;
+}
+
+.price-period {
+  color: #7f8c8d;
+  font-size: 12px;
+  margin-top: -4px;
+}
+
+.book-btn {
+  background: linear-gradient(135deg, #1cb685, #16a085);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.book-btn:hover {
+  background: linear-gradient(135deg, #16a085, #138d75);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(28, 182, 133, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hotel-section {
+    padding: 40px 4%;
+  }
+  
+  .section-header h2 {
+    font-size: 28px;
+  }
+  
+  .section-header p {
+    font-size: 16px;
+  }
+  
+  .Hotel_page {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .hotel-content {
+    padding: 20px;
+  }
+  
+  .hotel-footer {
+    justify-content: flex-start;
+  }
+  
+  .hotel-pricing {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 40px 20px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .search-box {
+    flex-direction: column;
+    width: 100%;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .search-input-group,
+  .location-filter-group,
+  .price-filter-group {
+    border-right: none;
+    border-bottom: 1px solid rgba(74, 124, 89, 0.15);
+    padding: 12px 0;
+    width: 100%;
+  }
+
+  .price-filter-group {
+    border-bottom: none;
+  }
+
+  .Search_btn {
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
+  }
+}

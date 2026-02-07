@@ -1,0 +1,162 @@
+/* Page Wrapper */
+.art-page {
+  width: 100%;
+  overflow-x: hidden;
+  background: #fafafa;
+}.art-hero {
+  height: 35vh;   /* 👈 smaller hero */
+  position: relative;
+  overflow: hidden;
+}
+
+.art-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.art-hero h1 {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  color: #fff;
+  font-weight: bold;
+  font-size: 3.1rem;
+}
+
+
+
+/* Zig-Zag Section */
+.art-section {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 90px 10%;
+}
+
+.art-section.right {
+  flex-direction: row-reverse;
+}
+.art-section img {
+  width: 80%;
+  height: auto;
+  max-height: 500px;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+  object-fit: cover;
+}
+
+.art-section {
+  display: flex;
+  align-items: flex-start; 
+  gap: 60px;
+  padding: 90px 10%;
+}
+
+
+.art-text {
+  width: 55%;
+}
+
+.art-text h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.art-text p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* Button */
+.art-text button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.art-text button:hover {
+  background: #333;
+}
+
+/* Blur Background */
+.blur-bg {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.5);
+  z-index: 99;
+}
+
+/* Modal */
+.art-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 70%;              /* wider for better display */
+  max-width: 900px;        /* caps width */
+  max-height: 85vh;        /* lets modal scroll if content is tall */
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 22px;
+  z-index: 100;
+  animation: zoomIn 0.35s ease;
+}
+
+/* Modal Image */
+.art-modal img {
+  width: 100%;             /* full width of modal */
+  height: auto;            /* maintain aspect ratio */
+  max-height: 400px;       /* limits height but keeps proportions */
+  display: block;
+  margin: 0 auto 25px;     /* centers and adds space below */
+  border-radius: 16px;
+  object-fit: contain;     /* fits entire image inside modal */
+}
+
+/* Modal Text */
+.art-modal h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.art-modal p {
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* Close Button */
+.art-modal button {
+  margin-top: 10px;
+  padding: 10px 28px;
+  border-radius: 25px;
+  border: none;
+  background: #111;
+  color: white;
+  cursor: pointer;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 900px) {
+  .art-modal {
+    width: 90%;
+    max-height: 90vh;
+    padding: 20px;
+  }
+
+  .art-modal img {
+    max-height: 300px;
+  }
+}

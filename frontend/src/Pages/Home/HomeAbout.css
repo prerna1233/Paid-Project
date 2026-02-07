@@ -1,0 +1,423 @@
+/* HomeAbout Container */
+.homeabout-container {
+    min-height: 75vh;
+    background: linear-gradient(135deg, #f0f9f0 0%, #e8f5e8 50%, #d1e7dd 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    font-family: sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+/* Background Decorative Lines */
+.homeabout-bg-decorative {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Content Wrapper */
+.homeabout-content-wrapper {
+    max-width: 1280px;
+    width: 100%;
+    z-index: 0;
+    position: relative;
+}
+
+/* Horizontal Center Line */
+.homeabout-center-line {
+    position: absolute;
+    top: 48%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #629f4fff;
+    opacity: 0.3;
+    transform: translateY(-50%);
+    z-index: 0;
+    display: none;
+}
+
+/* Main Flex Container */
+.homeabout-main-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+    /* align-items: flex-start;
+    position: relative;
+} */
+
+/* District Magistrate Card (Left) */
+.homeabout-about-card {
+    width: 480px;
+    height: 580px;
+    background: linear-gradient(135deg, #4a7c59 0%, #5d8a6a 50%, #629f4fff 100%);
+    border-radius: 45px;
+    padding: 3rem;
+    /* margin-left: -20px; */
+    text-align: center;
+    color: white;
+    box-shadow: 0 20px 40px rgba(98, 159, 79, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(-190px);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.homeabout-about-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.7s;
+}
+
+.homeabout-about-card:hover::before {
+    left: 100%;
+}
+
+.homeabout-about-card:hover {
+    transform: translateX(-190px) translateY(-10px);
+    box-shadow: 0 25px 50px rgba(98, 159, 79, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.homeabout-profile-img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.homeabout-profile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.homeabout-profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.homeabout-about-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.1em;
+}
+
+.homeabout-about-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    padding: 0 0.5rem;
+    font-weight: 400;
+}
+
+/* Right Section */
+.homeabout-right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.homeabout-main-heading {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #4a7c59;
+    margin-bottom: 3rem;
+    text-align: center;
+    letter-spacing: -0.025em;
+    width: 100%;
+}
+
+/* Travel Cards Grid */
+.homeabout-cards-grid {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+}
+
+/* Individual Travel Item */
+.homeabout-travel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 25px rgba(98, 159, 79, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(98, 159, 79, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+    width: 420px;
+    flex-shrink: 0;
+}
+
+.homeabout-travel-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(98, 159, 79, 0.05), rgba(116, 175, 95, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.homeabout-travel-item:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(98, 159, 79, 0.15);
+    border: 2px solid rgba(98, 159, 79, 0.3);
+}
+
+.homeabout-travel-item:hover::before {
+    opacity: 1;
+}
+
+/* Image Wrapper */
+.homeabout-img-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* Professional Border Frame */
+.homeabout-border-frame {
+    position: absolute;
+    top: -10px;
+    left: 1rem;
+    width: 280px;
+    height: 200px;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #629f4fff, #5d8a6a, #4a7c59) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: subtract;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: subtract;
+    opacity: 0.6;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.homeabout-travel-item:hover .homeabout-border-frame {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+/* Professional Image Card Container */
+.homeabout-img-card {
+    background: linear-gradient(145deg, #ffffff, #f8faf9);
+    padding: 0.3rem;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    width: 280px;
+    height: 200px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(98, 159, 79, 0.15);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.homeabout-img-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 3px;
+    background: linear-gradient(45deg, #629f4fff, #5d8a6a, #4a7c59);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.homeabout-img-card:hover {
+    transform: scale(1.05) rotateY(5deg);
+    box-shadow: 0 20px 45px rgba(98, 159, 79, 0.25);
+}
+
+.homeabout-img-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+/* Card Content */
+.homeabout-card-content {
+    text-align: center;
+    padding: 0 0.8rem;
+    max-width: 280px;
+}
+
+.homeabout-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4a7c59;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.homeabout-card-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(45deg, #629f4fff, #5d8a6a);
+    border-radius: 2px;
+}
+
+.homeabout-card-text {
+    font-size: 0.85rem;
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    font-weight: 400;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease;
+}
+
+/* Bigger Professional Read More Button */
+.homeabout-btn {
+    background: linear-gradient(135deg, #629f4fff 0%, #5d8a6a 100%);
+    color: white;
+    padding: 0.7rem 2rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(98, 159, 79, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+    min-width: 120px;
+}
+
+.homeabout-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.homeabout-btn:hover::before {
+    left: 100%;
+}
+
+.homeabout-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(98, 159, 79, 0.4);
+    background: linear-gradient(135deg, #5d8a6a, #4a7c59);
+}
+
+.homeabout-btn:active {
+    transform: translateY(-1px);
+}
+
+   
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .homeabout-main-flex {
+        flex-direction: column !important;
+        gap: 2rem !important;
+        align-items: center;
+    }
+    
+    .homeabout-cards-grid {
+        flex-direction: column !important;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .homeabout-travel-item {
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    .homeabout-about-card {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+@media (min-width: 769px) {
+    .homeabout-container {
+        padding: 2rem;
+    }
+
+    .homeabout-center-line {
+        display: none;
+    }
+
+    .homeabout-main-flex {
+        flex-direction: row;
+        gap: 2rem;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .homeabout-main-heading {
+        font-size: 2rem;
+        text-align: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .homeabout-main-flex {
+        gap: 3rem;
+    }
+    
+    .homeabout-container {
+        padding: 3rem;
+    }
+}

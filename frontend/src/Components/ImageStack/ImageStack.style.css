@@ -1,0 +1,49 @@
+.img {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+
+  width: 15vw;
+  height: 25vh;
+
+  object-fit: cover;
+  border: 10px solid #fff;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+
+  transition: top 0.8s ease, left 0.8s ease, transform 0.8s ease;
+  animation-fill-mode: both;
+}
+
+.image-stack {
+  position: relative;
+  width: 40vw;
+  height: 40vh;
+  margin-left: 90px;
+  margin-top: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image1 {
+  top: 0;
+  left: 0;
+  width: 17vw;
+  height: 28vh;
+}
+
+.image2 {
+  top: 46px;
+  left: 192px;
+  width: 13vw;
+  height: 25vh;
+  transform: rotate(16deg);
+}
+
+.image3 {
+  top: 115px;
+  left: 316px;
+  width: 12vw;
+  height: 23vh;
+  transform: rotate(30deg);
+}
