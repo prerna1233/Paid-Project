@@ -1,7 +1,7 @@
 import "./Blogs.style.css";
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 
-const BlogCard = ({ post, onLike, onDelete, onEdit}) => {
+const BlogCard = memo(({ post, onLike, onDelete, onEdit }) => {
   const [showComment, setShowComment] = useState(false);
 
   return (
@@ -18,7 +18,14 @@ const BlogCard = ({ post, onLike, onDelete, onEdit}) => {
         {/* Display Video if available */}
         {post.videoUrl && (
           <div className="post-video-container">
-            <video src={post.videoUrl} controls className="post-video" />
+            <video 
+              src={post.videoUrl} 
+              controls 
+              preload="metadata"
+              poster={post.videoPoster || '/assets/video-placeholder.jpg'}
+              className="post-video"
+              aria-label={`Video for ${post.title}`}
+            />
           </div>
         )}
 
@@ -45,6 +52,17 @@ const BlogCard = ({ post, onLike, onDelete, onEdit}) => {
       )}
     </article>
   );
-};
+}, (prevProps, nextProps) => {
+  // Custom comparison - only re-render if these specific props change
+  return (
+    prevProps.post.id === nextProps.post.id &&
+    prevProps.post.likes === nextProps.post.likes &&
+    prevProps.post.comments === nextProps.post.comments &&
+    prevProps.post.videoUrl === nextProps.post.videoUrl &&
+    prevProps.post.isLiked === nextProps.post.isLiked
+  );
+});
+
+BlogCard.displayName = 'BlogCard';
 
 export default BlogCard;

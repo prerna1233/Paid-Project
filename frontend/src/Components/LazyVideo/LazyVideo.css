@@ -1,0 +1,30 @@
+/* LazyVideo Component Styles */
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #2d4a38;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  contain: strict;
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.video-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(58, 95, 74, 0.3) 0%, rgba(45, 74, 56, 0.5) 100%);
+}
+
+/* Performance optimizations for video elements */
+video[data-lazy-loaded="true"] {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
+}

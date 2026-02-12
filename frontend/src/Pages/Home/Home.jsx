@@ -1,8 +1,9 @@
-import React from 'react'
-import homeVideo from '../../assets/home1.mp4'
+import React, { Suspense } from 'react'
+import LazyVideo from '../../Components/LazyVideo/LazyVideo'
 import chulhaImg from '../../assets/chulha.jpg'
 import tikuliArt from '../../assets/tikuli_art.png'
 import littiImg from '../../assets/litti.jpg'
+import teaImg from '../../assets/tea.jpeg'
 import './Home.style.css'
 import { FaArrowRight } from "react-icons/fa";
 import Footer from '../../Components/Footer/Footer';
@@ -19,7 +20,17 @@ export default function Home() {
   return (
     <>
       <div className="hero-section">
-        <video src={homeVideo} autoPlay muted loop playsInline className="hero-video" />
+        <LazyVideo 
+          src="/videos/home-hero-original.mp4"
+          poster="/assets/home-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          className="hero-video"
+          aria-label="Kishanganj tourism hero background video"
+        />
 
         {/* LEFT SIDE TEXT */}
         <div className="home-hero-text">
@@ -36,12 +47,15 @@ export default function Home() {
           </h1>
 
           <p className="subtitle">Nature • Culture • Peace</p>
-          <Link to="Travel" style={{ textDecoration: "none" }}>
+          <Link to="/Destination" style={{ textDecoration: "none" }}>
             <button className='btn'>Explore<FaArrowRight />
             </button>
           </Link>
         </div>
-        <hr className="top-hr" />
+      </div>
+
+      {/* All other sections outside hero-section */}
+      <hr className="top-hr" />
         <div className='section-para'>
           <div className='para1'>
             <h3>Kishanganj</h3>
@@ -63,6 +77,7 @@ export default function Home() {
               <h2>How to Reach Here?</h2>
             </div>
             
+
             <div className="reach-options">
               <div className="reach-option">
                 <div className="reach-icon">
@@ -100,15 +115,20 @@ export default function Home() {
 
         {/* bottom hr */}
         <hr className="middle-hr" />
-        <div className="culture-section">
+        <div className="culture-section" style={{ 
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${teaImg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}>
           <div className="culture-text">
             <h2>Culture of Kishanganj Bihar</h2>
             <p>
               Kishanganj’s culture places great importance on traditional food, such as rice, lentils, fish, and local vegetables.
               In many households, food is still cooked on traditional clay stoves (chulha), which enhances the taste and aroma.
               The local art and handicrafts of Kishanganj reflect simplicity, rural life, and a close connection with nature.
-            </p>
-            <button className="btn more">More<FaArrowRight /></button>
+            </p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum ipsa fugit accusamus alias aspernatur eaque obcaecati id, perspiciatis totam asperiores, impedit necessitatibus enim adipisci? Ipsa nemo reprehenderit laborum odio illo.
+            {/* <button className="btn more">More<FaArrowRight /></button> */}
           </div>
           <div className="culture-images">
             <img src={chulhaImg} alt="Traditional Food" className='culture-img1' />
@@ -116,9 +136,11 @@ export default function Home() {
             <img src={littiImg} alt="Clay Stove" className='culture-img3' />
           </div>
         </div>
-        <hr className="bottom-hr" />
-        <Footer />
-      </div>
+        
+      <hr className="bottom-hr" />
+      <Footer />
     </>
   )
 } 
+
+

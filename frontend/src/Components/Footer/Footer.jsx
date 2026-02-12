@@ -1,99 +1,172 @@
 import React from 'react';
 import "./Footer.style.css";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-  FaEnvelope,
-  FaSearch
+import { 
+  FaFacebookF, FaTwitter, FaInstagram, FaYoutube,
+  FaEnvelope, FaMapMarkerAlt, FaPhone, FaClock,
+  FaExclamationTriangle, FaExternalLinkAlt
 } from 'react-icons/fa';  
-import {
-  FaLocationDot,
-  FaPhone
-} from 'react-icons/fa6';
-
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  
   return (
-    <footer className="footer">
-      <div className="footer-background">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1600 900"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="bg" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#629f4fff" />
-              {/* <stop offset="100%" stopColor="rgba(38,89,190,0.06)" /> */}
-            </linearGradient>
+    <footer className="gov-footer">
+      {/* Main Footer Content */}
+      <div className="footer-main">
+        <div className="footer-container">
+          {/* Header */}
+          <div className="footer-header">
+            <h3 className="footer-title">Tourism Department</h3>
+            <p className="footer-subtitle">Government of Bihar</p>
+          </div>
 
-            <path
-              id="wave"
-              fill="url(#bg)"
-              d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
-              s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859
-              s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z"
-            />
-          </defs>
+          {/* Footer Grid - 4 Columns */}
+          <div className="footer-grid">
+            {/* Column 1: About */}
+            <div className="footer-column">
+              <h4 className="column-title">About Us</h4>
+              <p className="footer-description">
+                The Tourism Department of Bihar is dedicated to showcasing the state's glorious past, 
+                vibrant culture, and natural beauty. From the ancient ruins of Nalanda to the sacred 
+                sites of Bodh Gaya, Bihar offers a unique journey through India's spiritual and 
+                historical heritage. We aim to provide world-class tourism infrastructure while 
+                preserving our rich cultural legacy.
+              </p>
+              <div className="info-box" style={{marginTop: '10px'}}>
+                <h5 className="info-box-title">Why Visit Bihar?</h5>
+                <ul className="info-list compact">
+                  <li>UNESCO World Heritage Sites</li>
+                  <li>Buddhist Pilgrimage Circuit</li>
+                  <li>Ancient Universities & Monuments</li>
+                  <li>Rich Cultural Festivals</li>
+                </ul>
+              </div>
+            </div>
 
-          <g>
-            <use href="#wave" opacity=".9">
-              <animateTransform
-                attributeName="transform"
-                type="translate"
-                dur="8s"
-                values="270 165; -334 190; 270 165"
-                repeatCount="indefinite"
-              />
-            </use>
+            {/* Column 2: Quick Links */}
+            <div className="footer-column">
+              <h4 className="column-title">Quick Links</h4>
+              <ul className="footer-links">
+                <li><a href="/About">About Bihar</a></li>
+                <li><a href="/Destination">Destinations</a></li>
+                <li><a href="/Culture/festivals">Festivals</a></li>
+                <li><a href="/Culture/food">Local Cuisine</a></li>
+                <li><a href="/Destination/Hotel_Homepage">Accommodation</a></li>
+                <li><a href="/Travel">How to Reach</a></li>
+                <li><a href="/Blogs">Travel Blog</a></li>
+                <li><a href="/Culture/art">Photo Gallery</a></li>
+              </ul>
+            </div>
 
-          </g>
-        </svg>
+            {/* Column 3: Resources */}
+            <div className="footer-column">
+              <h4 className="column-title">Explore Bihar</h4>
+              <ul className="footer-links">
+                <li>
+                  <a href="https://www.bihar.gov.in" target="_blank" rel="noopener noreferrer">
+                    Bihar Government <FaExternalLinkAlt className="ext-icon" />
+                  </a>
+                </li>
+                <li>
+                  <a href="https://tourism.bihar.gov.in" target="_blank" rel="noopener noreferrer">
+                    Bihar Tourism <FaExternalLinkAlt className="ext-icon" />
+                  </a>
+                </li>
+                <li>
+                  <a href="https://state.bihar.gov.in/culture" target="_blank" rel="noopener noreferrer">
+                    Art & Culture <FaExternalLinkAlt className="ext-icon" />
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.bstdc.bih.nic.in" target="_blank" rel="noopener noreferrer">
+                    BSTDC <FaExternalLinkAlt className="ext-icon" />
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.incredibleindia.org" target="_blank" rel="noopener noreferrer">
+                    Incredible India <FaExternalLinkAlt className="ext-icon" />
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.indianrail.gov.in" target="_blank" rel="noopener noreferrer">
+                    Indian Railways <FaExternalLinkAlt className="ext-icon" />
+                  </a>
+                </li>
+                <li><a href="/Travel">Travel Guide</a></li>
+                <li><a href="/About/WhoIsWho">Tourist Permits</a></li>
+              </ul>
+            </div>
+
+            {/* Column 4: Contact */}
+            <div className="footer-column">
+              <h4 className="column-title">Contact</h4>
+              <div className="contact-details compact">
+                <div className="contact-item">
+                  <FaMapMarkerAlt className="contact-icon" />
+                  <span className="contact-value">Patna, Bihar</span>
+                </div>
+                <div className="contact-item">
+                  <FaPhone className="contact-icon" />
+                  <span className="contact-value">+91-612-XXX-XXXX</span>
+                </div>
+                <div className="contact-item">
+                  <FaEnvelope className="contact-icon" />
+                  <span className="contact-value">tourism@bihar.gov.in</span>
+                </div>
+              </div>
+              
+              {/* Social Media */}
+              <div className="social-section compact">
+                <h5 className="social-title">Follow Us</h5>
+                <div className="social-links">
+                  <a href="https://facebook.com" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <FaFacebookF />
+                  </a>
+                  <a href="https://twitter.com" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                    <FaTwitter />
+                  </a>
+                  <a href="https://instagram.com" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <FaInstagram />
+                  </a>
+                  <a href="https://youtube.com" className="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <FaYoutube />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Notice */}
+          <div className="footer-notice-single">
+            <FaExclamationTriangle className="notice-icon" />
+            <p className="notice-content">
+              <strong>Notice:</strong> Official government website. Verify authenticity before sharing sensitive information.
+            </p>
+          </div>
+        </div>
       </div>
 
-      <section className="footer-content">
-        <ul className="footer-socials">
-          <li><FaFacebookF /></li>
-          <li><FaTwitter /></li>
-          <li><FaLinkedinIn /></li>
-          <li><FaInstagram /></li>
-        </ul>
-        <div className='footer-title'>
-
-          <p>Dedicated to preserving culture, supporting people, and building a stronger Kishanganj.</p>
-
+      {/* Footer Bottom Bar */}
+      <div className="footer-bottom">
+        <div className="footer-container">
+          <div className="footer-bottom-content">
+            <p className="copyright">
+              © {currentYear} Tourism Department, Government of Bihar. All Rights Reserved.
+            </p>
+            <div className="policy-links">
+              <a href="/privacy">Privacy Policy</a>
+              <span className="separator">|</span>
+              <a href="/terms">Terms of Use</a>
+              <span className="separator">|</span>
+              <a href="/accessibility">Accessibility</a>
+              <span className="separator">|</span>
+              <a href="/disclaimer">Disclaimer</a>
+              <span className="separator">|</span>
+              <a href="/sitemap">Sitemap</a>
+            </div>
+          </div>
         </div>
-        <div className='footer-grid'>
-          <div className='box1'>
-            <h4>Contact Us :-</h4>
-            <p className='info phone'><FaPhone/>Call - 563 895 2180</p>
-            <p className='info email'><FaEnvelope/>kishan123@gmail.com</p>
-            <p className='info location'><FaLocationDot/>Kishanganj, Bihar</p>
-          </div>
-          <div className="footer-links box2">
-            <ul className="footer-links">
-            <li><a href='/'>Home</a></li>
-            <li><a href='About'>About</a></li>
-            <li><a href='Accomodation'>Accomodation</a></li>
-            <li><a href='Culture'>Culture</a></li>
-            <li><a href='Blogs'>Blogs</a></li>
-          </ul>
-      
-          </div>
-          <div className='box3'>
-            <input type="text" className='input' placeholder='Search .....'/> <div className='search-icon'><FaSearch/></div>
-          </div>
-
-        </div>
-          <p className="footer-legal">© 2026 All rights reserved</p>
-
-      </section>
-
-
-
-
+      </div>
     </footer>
   );
 }

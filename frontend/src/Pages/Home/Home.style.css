@@ -4,24 +4,55 @@
     box-sizing: border-box;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 .hero-section {
     position: relative;
     width: 100%;
-    height: 70vh;
+    height: 65vh;
+    max-height: 65vh;
     display: block;
+    overflow: hidden;
 }
 
 /* video */
 .hero-video {
     width: 100%;
     height: 100%;
+    max-height: 65vh;
     object-fit: cover;
+    display: block;
+    
+    /* Performance optimizations */
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    contain: layout style paint;
+    aspect-ratio: 16 / 9;
+    
+    /* Prevent accidental interactions */
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Video placeholder for loading state */
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    max-height: 65vh;
+    background: linear-gradient(135deg, #3a5f4a 0%, #2d4a38 100%);
+    background-size: cover;
+    background-position: center;
+    contain: strict;
+    aspect-ratio: 16 / 9;
 }
 
 /* LEFT text container */
 .home-hero-text {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 8%;
     transform: translateY(-50%);
     color: #ffffff;
@@ -32,7 +63,7 @@
 
 /* heading */
 .home-hero-text h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 700;
     white-space: nowrap;
     line-height: 1.1;
@@ -40,8 +71,8 @@
 
 /* subtitle */
 .subtitle {
-    font-size: 1.3rem;
-    margin-top: 12px;
+    font-size: 1rem;
+    margin-top: 8px;
     opacity: 0;
     animation: fadeIn 1s ease forwards;
     animation-delay: 1.8s;
@@ -71,9 +102,9 @@
 
 /* explore button */
 .btn {
-    margin-top: 30px;
-    padding: 15px;
-    font-size: 1.2rem;
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 1rem;
     background-color: #de6142;
     color: #ffffff;
     border: none;

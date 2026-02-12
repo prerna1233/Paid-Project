@@ -48,7 +48,7 @@ const HomeAbout = () => {
             {/* Travel Cards Grid */}
             <div className="homeabout-cards-grid">
               
-              {/* Card 1 */}
+              {/* Card 1: Kundan Kumar Singh */}
               <div className="homeabout-travel-item">
                 <div className="homeabout-img-wrapper">
                   {/* Hollow Border Frame */}
@@ -58,16 +58,16 @@ const HomeAbout = () => {
                   <div className="homeabout-img-card">
                     <img 
                       src="/src/assets/5pic.jpg" 
-                      alt="Mountains" 
+                      alt="District Planning Officer" 
                     />
                   </div>
                 </div>
                 
                 <div className="homeabout-card-content">
                   <p className="homeabout-card-text">
-                    {expandedCard1 
-                      ? "Lorem ipsum dolor sit amet, consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."
-                      : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet."
+                    {expandedCard1
+                      ? "Kundan Kumar Singh remains a key administrative figure in the Kishanganj district of Bihar, India. He currently serves in a dual capacity, holding two significant positions that are vital for the district's governance and public outreach.\n\nCurrent Roles and Designations\nDistrict Planning Officer (DPO): In this primary role, he is responsible for the systematic planning and development of the district. His work involves coordinating between various departments to ensure that state and central government development projects are executed effectively at the local level."
+                      : "Kundan Kumar Singh remains a key administrative figure in the Kishanganj district of Bihar, India."
                     }
                   </p>
                   <button 
@@ -79,7 +79,7 @@ const HomeAbout = () => {
                 </div>
               </div>
 
-              {/* Card 2 */}
+              {/* Card 2: Anil Kumar Mandal */}
               <div className="homeabout-travel-item">
                 <div className="homeabout-img-wrapper">
                   {/* Hollow Border Frame */}
@@ -88,17 +88,17 @@ const HomeAbout = () => {
                   {/* Image Card Container */}
                   <div className="homeabout-img-card">
                     <img 
-                      src="/src/assets/9pic.jpg" 
-                      alt="Lake" 
+                      src="/src/assets/post.png" 
+                      alt="General Manager DIC" 
                     />
                   </div>
                 </div>
                 
                 <div className="homeabout-card-content">
                   <p className="homeabout-card-text">
-                    {expandedCard2 
-                      ? "Lorem ipsum dolor sit amet, consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."
-                      : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet."
+                    {expandedCard2
+                      ? "Anil Kumar Mandal, an officer of the Bihar Industries Service currently serving as the General Manager of the District Industries Center (DIC) in Kishanganj, Bihar. Role and Administrative Significance As the General Manager, Anil Kumar Mandal is the administrative head of the DIC in Kishanganj."
+                      : "Anil Kumar Mandal, General Manager, DIC, Kishanganj."
                     }
                   </p>
                   <button 

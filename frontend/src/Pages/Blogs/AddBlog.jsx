@@ -65,8 +65,25 @@ const AddBlog = ({ formData, onChange, onFileChange, onRemoveFile, onSubmit, onC
           </label>
           {formData.videoPreview && (
             <div className="preview-container">
-              <video src={formData.videoPreview} controls className="preview-video" />
-              <button type="button" className="remove-btn" onClick={() => onRemoveFile("video")}>
+              <video 
+                src={formData.videoPreview} 
+                controls 
+                preload="metadata"
+                poster="/assets/video-upload-placeholder.jpg"
+                className="preview-video"
+                style={{ maxHeight: '300px', maxWidth: '100%', objectFit: 'contain' }}
+              />
+              <button 
+                type="button" 
+                className="remove-btn" 
+                onClick={() => {
+                  // Clean up blob URL to prevent memory leak
+                  if (formData.videoPreview?.startsWith('blob:')) {
+                    URL.revokeObjectURL(formData.videoPreview);
+                  }
+                  onRemoveFile("video");
+                }}
+              >
                 ✕
               </button>
             </div>

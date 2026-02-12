@@ -1,117 +1,114 @@
 const HOTELS_DATABASE = [
   {
     id: 1,
-    name: "Daftari Palace",
+    name: "Hotel Royal Palace",
     type: "Hotel",
-    rating: 8.5,
-    reviews: 124,
-    location: "Kishanganj",
+    rating: 8.2,
+    reviews: 145,
+    location: "Kishanganj Town",
     coords: { left: 45, top: 35 },
-    distance: "1.2 km from center",
-    price: 2940,
+    distance: "0.5 km from Railway Station",
+    price: 1800,
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-    amenities: ["Free Breakfast", "Free Cancellation"]
+    amenities: ["Free WiFi", "AC Rooms", "Parking", "Room Service"],
+    description: "Comfortable stay near Kishanganj Railway Station with modern amenities and 24/7 room service."
   },
-
-  
   {
     id: 2,
-    name: "Hotel Atithi Madhepura",
+    name: "Hotel Raj Darbar",
     type: "Hotel",
     rating: 7.8,
-    reviews: 89,
-    location: "London",
+    reviews: 98,
+    location: "Station Road",
     coords: { left: 55, top: 50 },
-    distance: "2.5 km from center",
-    price: 1701,
+    distance: "0.8 km from Railway Station",
+    price: 1500,
     image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
-    amenities: ["Free Cancellation"]
+    amenities: ["AC Rooms", "Free Breakfast", "WiFi", "Hot Water"],
+    description: "Budget-friendly hotel with clean rooms and complimentary breakfast near the main market area."
   },
   {
     id: 3,
-    name: "Aparthotel Stare Miasto",
-    type: "Apartment",
-    rating: 9.2,
-    reviews: 3253,
-    location: "London",
+    name: "Hotel Shubham International",
+    type: "Hotel",
+    rating: 8.5,
+    reviews: 167,
+    location: "NH-27 Highway",
     coords: { left: 30, top: 60 },
-    distance: "0.5 km from center",
-    price: 13982,
+    distance: "3 km from city center",
+    price: 2200,
     image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
-    amenities: ["Kitchen", "WiFi"]
+    amenities: ["Restaurant", "Conference Hall", "Free Parking", "AC Rooms", "WiFi"],
+    description: "Premium hotel on the highway with restaurant, conference facilities, and ample parking space."
   },
   {
     id: 4,
-    name: "The Grand Resort",
-    type: "Resort",
-    rating: 8.9,
-    reviews: 450,
-    location: "Kishanganj",
+    name: "Hotel Sagar",
+    type: "Hotel",
+    rating: 7.5,
+    reviews: 89,
+    location: "Main Market",
     coords: { left: 40, top: 45 },
-    distance: "5.0 km from center",
-    price: 4500,
+    distance: "1.5 km from city center",
+    price: 1200,
     image: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800",
-    amenities: ["Pool", "Spa"]
+    amenities: ["AC Rooms", "Room Service", "Hot Water", "WiFi"],
+    description: "Affordable hotel in the heart of the market with easy access to shopping and local attractions."
   },
   {
     id: 5,
-    name: "Daftari Palace",
+    name: "Hotel Purnima",
     type: "Hotel",
-    rating: 8.5,
-    reviews: 124,
-    location: "Kishanganj",
+    rating: 8.0,
+    reviews: 112,
+    location: "Bahadurganj Road",
     coords: { left: 45, top: 35 },
-    distance: "1.2 km from center",
-    price: 2940,
+    distance: "2.5 km from Railway Station",
+    price: 1650,
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-    amenities: ["Free Breakfast", "Free Cancellation"]
+    amenities: ["Free WiFi", "AC Rooms", "TV", "Breakfast"],
+    description: "Clean and comfortable lodging with friendly staff and complimentary breakfast service."
   },
   {
     id: 6,
-    name: "Daftari Palace",
+    name: "Hotel New Plaza",
     type: "Hotel",
-    rating: 8.5,
-    reviews: 124,
-    location: "Kishanganj",
+    rating: 7.9,
+    reviews: 134,
+    location: "Station Road",
     coords: { left: 45, top: 35 },
-    distance: "1.2 km from center",
-    price: 2940,
+    distance: "0.6 km from Railway Station",
+    price: 1900,
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-    amenities: ["Free Breakfast", "Free Cancellation"]
+    amenities: ["Restaurant", "AC Rooms", "Parking", "Room Service"],
+    description: "Conveniently located near the railway station with in-house restaurant and ample parking."
   },
   {
     id: 7,
-    name: "Daftari Palace",
+    name: "Hotel City Centre",
     type: "Hotel",
-    rating: 8.5,
-    reviews: 124,
-    location: "Kishanganj",
+    rating: 8.3,
+    reviews: 156,
+    location: "Kishanganj Town",
     coords: { left: 45, top: 35 },
-    distance: "1.2 km from center",
-    price: 2940,
+    distance: "0.3 km from Bus Stand",
+    price: 2500,
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-    amenities: ["Free Breakfast", "Free Cancellation"]
+    amenities: ["Conference Hall", "Restaurant", "Free WiFi", "AC Rooms", "Gym"],
+    description: "Modern hotel with business facilities, gym, and excellent location near bus stand."
   },
-  // {
-  //   id: 8,
-  //   name: "Daftari Palace",
-  //   type: "Hotel",
-  //   rating: 8.5,
-  //   reviews: 124,
-  //   location: "Kishanganj",
-  //   coords: { left: 45, top: 35 },
-  //   distance: "1.2 km from center",
-  //   price: 2940,
-  //   image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-  //   amenities: ["Free Breakfast", "Free Cancellation"]
-  // }
-];
-
-// const PROPERTY_TYPES = [
-//   { name: 'Hotels', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400' },
-//   { name: 'Apartments', image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400' },
-//   { name: 'Resorts', image: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=400' },
-//   { name: 'Villas', image: 'https://images.unsplash.com/photo-1580587767377-38556c459f13?w=400' },
-// ];
-
-export default HOTELS_DATABASE;
+  {
+    id: 8,
+    name: "Hotel Green View",
+    type: "Hotel",
+    rating: 7.6,
+    reviews: 87,
+    location: "Thakurganj Road",
+    coords: { left: 45, top: 35 },
+    distance: "4 km from city center",
+    price: 1400,
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+    amenities: ["Garden", "Free Parking", "AC Rooms", "Hot Water"],
+    description: "Peaceful hotel surrounded by greenery, perfect for a quiet and relaxing stay."
+  }
+];export default HOTELS_DATABASE;

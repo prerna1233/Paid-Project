@@ -1,124 +1,171 @@
 import React, { useState } from "react";
 import "./Hotel_Homepage.css";
 import HOTELS_DATABASE from "./Hotel";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaStar, FaWifi, FaCar, FaUtensils, FaConciergeBell, FaMapMarkerAlt } from "react-icons/fa";
 import Footer from "../../Components/Footer/Footer";
-
 
 export default function Hotel_Homepage() {
   const [search, setSearch] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [priceRange, setPriceRange] = useState("");
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 5000 });
+  const [selectedRating, setSelectedRating] = useState([]);
+  const [sortBy, setSortBy] = useState("popularity");
 
-  // Get unique locations from database
-  const locations = [...new Set(HOTELS_DATABASE.map(hotel => hotel.location))];
-
-  // Filter hotels based on search, location, and price
   const filteredHotels = HOTELS_DATABASE.filter((hotel) => {
     const matchesSearch = hotel.name.toLowerCase().includes(search.toLowerCase());
-    const matchesLocation = selectedLocation === "" || hotel.location === selectedLocation;
-    
-    let matchesPrice = true;
-    if (priceRange === "budget") {
-      matchesPrice = hotel.price <= 2000;
-    } else if (priceRange === "mid-range") {
-      matchesPrice = hotel.price > 2000 && hotel.price <= 4000;
-    } else if (priceRange === "luxury") {
-      matchesPrice = hotel.price > 4000;
-    }
-    
-    return matchesSearch && matchesLocation && matchesPrice;
+    const matchesPrice = hotel.price >= priceRange.min && hotel.price <= priceRange.max;
+    const matchesRating = selectedRating.length === 0 || selectedRating.includes(Math.floor(hotel.rating));
+    return matchesSearch && matchesPrice && matchesRating;
   });
+
+  const sortedHotels = [...filteredHotels].sort((a, b) => {
+    if (sortBy === "price-low") return a.price - b.price;
+    if (sortBy === "price-high") return b.price - a.price;
+    if (sortBy === "rating") return b.rating - a.rating;
+    return 0;
+  });
+
+  const toggleRating = (rating) => {
+    setSelectedRating(prev => 
+      prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]
+    );
+  };
 
   return (
     <>
-      {/* HERO SECTION */}
-      <div className="hero">
-        <h1>Find your next stay</h1>
-        <p>Search deals on hotels, homes, and much more...</p>
-
-        {/* SEARCH BAR */}
-        <div className="search-box">
-          <div className="search-input-group">
-            <input
-              type="text"
-              placeholder="Search hotels by name..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-
-          <div className="location-filter-group">
-            <select
-              value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-            >
-              <option value="">All Locations</option>
-              {locations.map((location, index) => (
-                <option key={index} value={location}>{location}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="price-filter-group">
-            <select
-              value={priceRange}
-              onChange={(e) => setPriceRange(e.target.value)}
-            >
-              <option value="">All Prices</option>
-              <option value="budget">Budget (Under Rs 2,000)</option>
-              <option value="mid-range">Mid-range (Rs 2,000-Rs 4,000)</option>
-              <option value="luxury">Luxury (Above Rs 4,000)</option>
-            </select>
-          </div>
-
-          <button className="Search_btn">
-            <FaSearch/>
-            Search
-          </button>
-        </div>
-      </div>
-
-      {/* HOTEL LIST */}
-      <div className="hotel-section">
-        <div className="section-header">
-          <h2>Featured Hotels</h2>
-          <p>Discover the best accommodation options in Kishanganj</p>
-        </div>
-        
-        <div className="Hotel_page">
-          {filteredHotels.map((item) => (
-            <div key={item.id} className="hotel-card">
-              <div className="hotel-image">
-                <img src={item.image} alt={item.name} />
-              </div>
-              
-              <div className="hotel-content">
-                <div className="hotel-header">
-                  <h3 className="hotel-name">{item.name}</h3>
-                  <p className="hotel-location">{item.location} • {item.distance}</p>
-                </div>
-                
-                <div className="hotel-description">
-                  <p>Experience luxury and comfort at its finest. Modern amenities, exceptional service, and prime location make this the perfect choice for your stay.</p>
-                </div>
-                
-                <div className="hotel-amenities">
-                  {item.amenities.map((amenity, index) => (
-                    <span key={index} className="amenity-tag">{amenity}</span>
-                  ))}
-                </div>
-                
-                <div className="hotel-footer">
-                  <div className="hotel-pricing">
-                    <span className="price">₹{item.price.toLocaleString()}</span>
-                    <span className="price-period">per night</span>
-                    <button className="book-btn">Book Now</button>
-                  </div>
-                </div>
+      <div className="hotel-page-container">
+        {/* HERO SEARCH SECTION */}
+        <div className="hero-search-section">
+          <div className="hero-overlay">
+            <h1 className="hero-title">Find Your Perfect Place.</h1>
+            <div className="search-bar-wrapper">
+              <div className="search-inputs-group">
+                <input
+                  type="text"
+                  placeholder="Search by City/Hotel Name..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="hero-search-input"
+                />
+                <button className="hero-search-button">
+                  <FaSearch /> Search
+                </button>
               </div>
             </div>
-          ))}
+          </div>
+        </div>
+
+        {/* STATS SECTION */}
+        <div className="stats-section">
+          <div className="stat-card">
+            <h2>{HOTELS_DATABASE.length}+</h2>
+            <p>Available Hotels</p>
+          </div>
+          <div className="stat-card">
+            <h2>7400+</h2>
+            <p>Happy Customers</p>
+          </div>
+          <div className="stat-card">
+            <h2>12300+</h2>
+            <p>Rooms Booked</p>
+          </div>
+          <div className="stat-card">
+            <h2>95%</h2>
+            <p>Satisfaction Rate</p>
+          </div>
+        </div>
+
+        {/* MAIN CONTENT */}
+        <div className="hotel-main-content">
+          {/* LEFT SIDEBAR */}
+          <aside className="filter-sidebar">
+            <div className="filter-header">
+              <h3>Advanced Filter</h3>
+            </div>
+
+            <div className="filter-section">
+              <h4>Price Range</h4>
+              <div className="price-range-display">
+                ₹{priceRange.min} - ₹{priceRange.max}
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="5000"
+                value={priceRange.max}
+                onChange={(e) => setPriceRange({ ...priceRange, max: parseInt(e.target.value) })}
+                className="price-slider"
+              />
+            </div>
+
+            <div className="filter-section">
+              <h4>Rating</h4>
+              <div className="checkbox-group">
+                {[5, 4, 3, 2, 1].map(rating => (
+                  <label key={rating} className="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      checked={selectedRating.includes(rating)}
+                      onChange={() => toggleRating(rating)}
+                    />
+                    <span className="rating-number">Rating {rating}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </aside>
+
+          {/* RIGHT SIDE - RESULTS */}
+          <main className="hotel-results">
+            <div className="results-header">
+              <h2>Recent Property For Rent</h2>
+              <div className="sort-by">
+                <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                  <option value="popularity">Default Order</option>
+                  <option value="price-low">Price (Low to High)</option>
+                  <option value="price-high">Price (High to Low)</option>
+                  <option value="rating">Rating</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="hotel-cards-grid">
+              {sortedHotels.map((hotel) => (
+                <div key={hotel.id} className="hotel-property-card">
+                  <div className="property-image">
+                    <img src={hotel.image} alt={hotel.name} />
+                  </div>
+                  
+                  <div className="property-content">
+                    <h3 className="property-title">{hotel.name}</h3>
+                    <div className="property-rating">
+                      <span className="rating-badge">Rating: {hotel.rating.toFixed(1)}/5</span>
+                      <span className="reviews-count">({hotel.reviews} reviews)</span>
+                    </div>
+                    
+                    <div className="property-location">
+                      <FaMapMarkerAlt /> {hotel.location}, Kishanganj
+                    </div>
+                    
+                    <div className="property-features">
+                      <span><FaUtensils /> Restaurant</span>
+                      <span><FaWifi /> WiFi</span>
+                      <span><FaCar /> Parking</span>
+                    </div>
+                    
+                    <div className="property-footer">
+                      <div className="property-price">
+                        <span className="price-label">₹{hotel.price}</span>
+                        <span className="price-period">/Night</span>
+                      </div>
+                      <button className="view-details-btn">
+                        <FaConciergeBell /> Book Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </main>
         </div>
       </div>
       <Footer />
