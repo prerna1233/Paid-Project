@@ -48,19 +48,21 @@ const HotelCardWithDetails = ({ hotel }) => {
         <div className="hotel-content">
           <div className="hotel-header">
             <h3 className="hotel-name">{hotel.name}</h3>
-            <div className="hotel-price">₹{hotel.price}</div>
           </div>
-          
+
+          <p className="property-description">
+            {hotel.description && (hotel.description.length > 140 ? hotel.description.substring(0, 137) + '...' : hotel.description)}
+          </p>
+
           <div className="hotel-type-location">
-            <span className="hotel-type">{hotel.type}</span>
             <span className="hotel-location">{hotel.location}</span>
           </div>
-          
-          <div className="hotel-distance">{hotel.distance}</div>
-          
-          <div className="hotel-rating">
-            <span className="rating-score">{hotel.rating}</span>
-            <span className="rating-text">({hotel.reviews} reviews)</span>
+
+          <div className="hotel-footer-row">
+            <div className="hotel-price">₹{hotel.price}</div>
+            <div className="hotel-rating">
+              <span className="rating-score">{Math.round(hotel.rating / 2)}</span>
+            </div>
           </div>
           
           {hotel.amenities && hotel.amenities.length > 0 && (
@@ -194,7 +196,9 @@ const HotelCardWithDetails = ({ hotel }) => {
           </div>
 
           <div className="book-section">
-            <button className="book-now-btn">Book Now</button>
+            <div className="hotel-short-description">
+              <p>{hotel.description}</p>
+            </div>
           </div>
         </div>
       )}

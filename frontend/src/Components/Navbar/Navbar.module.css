@@ -77,7 +77,8 @@ img{
   color: #e0e0e0;
 }
 
-.navbar .cultureWrapper > a {
+.navbar .cultureWrapper > a,
+.navbar .cultureWrapper > span[role="button"] {
   display: flex;
   align-items: center;
   height: 100%;
@@ -85,10 +86,14 @@ img{
   color: white;
   font-weight: 500;
   transition: color 0.2s ease;
+  cursor: pointer;
 }
 
-.navbar .cultureWrapper > a:hover {
+.navbar .cultureWrapper > a:hover,
+.navbar .cultureWrapper > span[role="button"]:hover,
+.navbar .cultureWrapper > span[role="button"]:focus {
   color: #e0e0e0;
+  outline: none;
 }
 
 .language {

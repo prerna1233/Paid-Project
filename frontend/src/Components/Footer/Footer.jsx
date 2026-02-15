@@ -63,23 +63,8 @@ export default function Footer() {
               <h4 className="column-title">Explore Bihar</h4>
               <ul className="footer-links">
                 <li>
-                  <a href="https://www.bihar.gov.in" target="_blank" rel="noopener noreferrer">
-                    Bihar Government <FaExternalLinkAlt className="ext-icon" />
-                  </a>
-                </li>
-                <li>
                   <a href="https://tourism.bihar.gov.in" target="_blank" rel="noopener noreferrer">
                     Bihar Tourism <FaExternalLinkAlt className="ext-icon" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://state.bihar.gov.in/culture" target="_blank" rel="noopener noreferrer">
-                    Art & Culture <FaExternalLinkAlt className="ext-icon" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.bstdc.bih.nic.in" target="_blank" rel="noopener noreferrer">
-                    BSTDC <FaExternalLinkAlt className="ext-icon" />
                   </a>
                 </li>
                 <li>
@@ -92,8 +77,16 @@ export default function Footer() {
                     Indian Railways <FaExternalLinkAlt className="ext-icon" />
                   </a>
                 </li>
-                <li><a href="/Travel">Travel Guide</a></li>
-                <li><a href="/About/WhoIsWho">Tourist Permits</a></li>
+                <li>
+                  <a href="https://tourism.bihar.gov.in" target="_blank" rel="noopener noreferrer">
+                    Travel Guide <FaExternalLinkAlt className="ext-icon" />
+                  </a>
+                </li>
+                <li>
+                  <a href="https://state.bihar.gov.in" target="_blank" rel="noopener noreferrer">
+                    Tourist Permits <FaExternalLinkAlt className="ext-icon" />
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -153,17 +146,7 @@ export default function Footer() {
             <p className="copyright">
               © {currentYear} Tourism Department, Government of Bihar. All Rights Reserved.
             </p>
-            <div className="policy-links">
-              <a href="/privacy">Privacy Policy</a>
-              <span className="separator">|</span>
-              <a href="/terms">Terms of Use</a>
-              <span className="separator">|</span>
-              <a href="/accessibility">Accessibility</a>
-              <span className="separator">|</span>
-              <a href="/disclaimer">Disclaimer</a>
-              <span className="separator">|</span>
-              <a href="/sitemap">Sitemap</a>
-            </div>
+            {/* Policy links removed because corresponding routes are not present in the app. */}
           </div>
         </div>
       </div>

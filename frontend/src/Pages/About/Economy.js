@@ -18,12 +18,12 @@ rivers:[
     produce: [
   {
     name: "Kishanganj Tea",
-    image: "/src/assets/images.jpeg",
+    image: "/src/assets/economy/tea.png",
     desc: "Kishanganj is known as the “Darjeeling of Bihar” and is the only major tea-producing district in the state, famous for its high-quality tea grown in a Darjeeling-like climate."
   },
   {
     name: "Rice",
-    image: "/src/assets/Rice seeds.jpeg",
+    image: "/src/assets/economy/rice.png",
     desc: "Kishanganj is an important rice-producing district in Bihar, known for good quality paddy and a strong local rice market."
   },
   {
@@ -39,7 +39,7 @@ rivers:[
 
    {
     name: "Pineapple",
-    image: "/src/assets/pineapple.webp",
+      image: "/src/assets/economy/pineapple.png",
     desc: "Kishanganj is famous for its sweet and juicy pineapples, which are an important part of the local economy."
   }
 ]

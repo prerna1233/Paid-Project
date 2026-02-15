@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Food.style.css";
 import foodData from "./foodData";
 import Footer from "../../Components/Footer/Footer";
+import foodTop from "../../assets/food-top.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -42,7 +43,7 @@ export default function Food() {
 
             {/* Hero Section */}
             <div className="food-lifestyle-hero">
-                <img src="/src/assets/Screenshot from 2026-01-30 11-15-54.png" alt="Food & Lifestyle of Bihar" />
+                <img src={foodTop} alt="Traditional food and lifestyle of Bihar" />
                 <h1>Food & Lifestyle of Bihar</h1>
             </div>
 

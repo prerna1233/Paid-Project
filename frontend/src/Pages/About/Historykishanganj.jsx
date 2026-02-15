@@ -1,15 +1,26 @@
 import React from "react";
 
 import Footer from "../../Components/Footer/Footer";
+import kishanFallback from "../../assets/kishan.jpg";
 function Historykishanganj() {
   return (
-    <div style={{ background: '#f5f5f5', minHeight: '100vh', paddingBottom: 32 }}>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: 32, maxWidth: 1200, margin: '0 auto', paddingTop: 32 }}>
-        {/* Left Column: Map and Cards */}
-        <div style={{ flex: '0 0 420px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          {/* Map Image - Always Visible at Top, above all cards */}
-          <div style={{ width: '100%', marginBottom: 24 }}>
-            <img src="/assets/map.png" alt="Kishanganj District Map" style={{ width: '100%', maxHeight: 260, objectFit: 'contain', borderRadius: 8, boxShadow: '0 2px 8px #1976d2', border: '2px solid #1976d2', background: '#fff', display: 'block' }} />
+  <div style={{ background: '#f5f5f5', minHeight: '100vh', paddingBottom: 240, paddingTop: 96 }}>
+      {/* (Map moved below into left column as a small card) */}
+      <div style={{ display: 'grid', gridTemplateColumns: '420px 1fr', gap: 32, maxWidth: 1200, margin: '0 auto', paddingTop: 32, alignItems: 'start' }}>
+        {/* Left Column: Cards */}
+        <div style={{ gridColumn: '1 / 2', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          {/* Map Card (small) */}
+          <div style={{ width: '100%', marginBottom: 16 }}>
+            <div style={{ borderRadius: 8, overflow: 'hidden', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', border: '1px solid #e0e0e0', background: '#fff' }}>
+              <img
+                className="district-map-img"
+                src="/assets/map.png"
+                alt="Kishanganj District Map (public asset)"
+                loading="lazy"
+                onError={(e) => { e.target.onerror = null; e.target.src = kishanFallback; }}
+                style={{ width: '100%', height: 'auto', maxHeight: 260, objectFit: 'contain', objectPosition: 'center', display: 'block' }}
+              />
+            </div>
           </div>
           {/* Cards Under Map */}
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>

@@ -1,77 +1,86 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { FaTimes, FaHeart, FaComment, FaCalendarAlt } from "react-icons/fa";
 import Footer from "../../Components/Footer/Footer";
 import './Blogs.style.css';
 
 const Blogs = () => {
-  // Common button style for all buttons
-  const buttonStyle = { cursor: 'pointer' };
   const [showAddBlog, setShowAddBlog] = useState(false);
-  const [showEditBlog, setShowEditBlog] = useState(false);
-  const [editingBlog, setEditingBlog] = useState(null);
-  const [blogs, setBlogs] = useState([
-    {
-      id: 1,
-      title: 'Kishanganj Heritage Walk',
-      description: 'Join us for a walk through the historic sites of Kishanganj. Discover the stories behind the monuments and meet local historians.',
-      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
-      likes: 5,
-      comments: [{ text: 'Amazing experience!' }],
-      author: 'Admin',
-      date: '2026-02-10'
-    },
-    {
-      id: 2,
-      title: 'Bihar Food Festival',
-      description: 'A celebration of Bihar’s rich culinary heritage. Taste traditional dishes and learn recipes from local chefs.',
-      image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
-      likes: 3,
-      comments: [{ text: 'Loved the food!' }, { text: 'Great event!' }],
-      author: 'User',
-      date: '2026-02-09'
-    },
-    {
-      id: 3,
-      title: 'River Picnic',
-      description: 'Spend a relaxing day by the river with family and friends. Activities include boating, fishing, and games for all ages.',
-      image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429',
-      likes: 7,
-      comments: [],
-      author: 'Guest',
-      date: '2026-02-08'
-    },
-    {
-      id: 4,
-      title: 'Cultural Night',
-      description: 'An evening of music, dance, and drama showcasing the vibrant culture of Bihar. Open to all residents and visitors.',
-      image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b',
-      likes: 2,
-      comments: [{ text: 'So much fun!' }],
-      author: 'Admin',
-      date: '2026-02-07'
-    },
-    {
-      id: 5,
-      title: 'Wildlife Safari',
-      description: 'Explore the natural beauty of Kishanganj with a guided wildlife safari. Spot rare birds and animals in their natural habitat.',
-      image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9',
-      likes: 4,
-      comments: [],
-      author: 'User',
-      date: '2026-02-06'
-    }
-  ]);
+  const [_showEditBlog, setShowEditBlog] = useState(false);
+  const [_editingBlog, setEditingBlog] = useState(null);
+  // blogs will come from backend
+  const [blogs, setBlogs] = useState([]);
+  // API base (Vite env override)
+  const API_BASE = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE)
+    ? import.meta.env.VITE_API_BASE
+    : 'https://paid-project.onrender.com';
+
+  const getToken = () => localStorage.getItem('token');
+
+  const getLocalImagesMap = () => {
+    try { return JSON.parse(localStorage.getItem('myBlogImages') || '{}'); } catch { return {}; }
+  };
+
+  const saveLocalImage = (blogId, image) => {
+    try {
+      const map = getLocalImagesMap();
+      map[String(blogId)] = image;
+      localStorage.setItem('myBlogImages', JSON.stringify(map));
+    } catch (e) { console.error('saveLocalImage error', e); }
+  };
+
+  const removeLocalImage = (blogId) => {
+    try {
+      const map = getLocalImagesMap();
+      delete map[String(blogId)];
+      localStorage.setItem('myBlogImages', JSON.stringify(map));
+    } catch (e) { console.error('removeLocalImage error', e); }
+  };
+
+  const mapBlogFromApi = (b) => ({
+    id: b._id,
+    title: b.title,
+    description: b.content || b.description || '',
+    image: b.image || '',
+    likes: Array.isArray(b.likes) ? b.likes.length : (b.likeCount || 0),
+    comments: Array.isArray(b.comments)
+      ? b.comments.map(c => ({ author: (c.user && (c.user.name || c.user.email)) || 'Anonymous', text: c.text }))
+      : [],
+    author: (b.author && (b.author.name || b.author.email)) || 'Anonymous',
+    date: b.createdAt ? new Date(b.createdAt).toISOString().split('T')[0] : ''
+  });
+
+  // fetch published blogs from backend on mount
+  React.useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/blogs`);
+        if (!res.ok) throw new Error(`Failed to fetch blogs: ${res.status}`);
+        const data = await res.json();
+        const localImages = getLocalImagesMap();
+        setBlogs((data || []).map(b => {
+          const mapped = mapBlogFromApi(b);
+          mapped.image = localImages[String(b._id)] || mapped.image || '';
+          return mapped;
+        }));
+      } catch (err) {
+        console.error('Error loading blogs', err);
+      }
+    };
+    fetchBlogs();
+  }, [API_BASE]);
   const [showBlogDetail, setShowBlogDetail] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [likedBlogs, setLikedBlogs] = useState([]); // Track liked blogs by id
-  const [commentInput, setCommentInput] = useState("");
-  const [showCommentBox, setShowCommentBox] = useState(false);
+  // kept commentInputs below; remove unused commentInput/showCommentBox
   const [newBlog, setNewBlog] = useState({ title: '', description: '', image: '', imageFile: null });
   const [showMyBlogs, setShowMyBlogs] = useState(false);
-  const [currentUser, setCurrentUser] = useState('Admin'); // Dummy current user
+  const [_currentUser] = useState('Admin'); // Dummy current user (not currently read)
   const [showCommentsDropdown, setShowCommentsDropdown] = useState({}); // main page
   const [showModalCommentsDropdown, setShowModalCommentsDropdown] = useState(false); // modal
-  const [myBlogIds, setMyBlogIds] = useState([]); // Track blogs added from this device
+  const [myBlogIds, setMyBlogIds] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('myBlogIds') || '[]'); } catch { return []; }
+  }); // Track blogs added from this device (initialized from localStorage)
 
   // Remove any CSS that sets 'overflow: hidden' or 'height: 100vh' on body, html, or .blogs-page-root
   // Optionally, force scroll for debugging:
@@ -80,16 +89,9 @@ const Blogs = () => {
     document.documentElement.style.overflow = 'auto';
   }, []);
 
-  useEffect(() => {
-    const myBlogIds = JSON.parse(localStorage.getItem('myBlogIds') || '[]');
-    setMyBlogIds(myBlogIds);
-  }, []);
+  // myBlogIds initialized from localStorage above; avoid setting state in an effect
 
-  const openBlogDetail = (blog) => {
-    setSelectedBlog(blog);
-    setShowBlogDetail(true);
-    document.body.classList.add('modal-open');
-  };
+  // openBlogDetail removed in favor of handleOpenBlogDetail below
 
   const closeBlogDetail = () => {
     setShowBlogDetail(false);
@@ -97,71 +99,144 @@ const Blogs = () => {
     document.body.classList.remove('modal-open');
   };
 
-  const handleLike = (blogId) => {
-    const updatedLikes = new Set(likedBlogs);
-    if (updatedLikes.has(blogId)) {
-      updatedLikes.delete(blogId);
-    } else {
-      updatedLikes.add(blogId);
-    }
-    setLikedBlogs(updatedLikes);
+  // legacy handleLike removed — using handleLikeBlog instead
 
-    // Update blog likes in the blogs state
-    setBlogs(blogs.map(blog => 
-      blog.id === blogId ? { ...blog, likes: updatedLikes.has(blogId) ? blog.likes + 1 : blog.likes - 1 } : blog
-    ));
-  };
-
-  const handleAddBlog = () => {
+  const handleAddBlog = async () => {
     if (!newBlog.title.trim() || !newBlog.description.trim()) return;
+    const token = getToken();
+    if (!token) {
+      alert('Please log in to publish a blog');
+      return;
+    }
 
-    const blogToAdd = {
-      id: blogs.length + 1, // Simple ID assignment, replace with your logic
-      title: newBlog.title,
-      description: newBlog.description,
-      likes: 0,
-      comments: [],
-      author: 'Admin', // Replace with actual author
-      date: new Date().toISOString().split('T')[0], // Current date
-      image: newBlog.image // Assuming image is a URL or base64 string
-    };
+    try {
+      const body = { title: newBlog.title, content: newBlog.description };
+      const res = await fetch(`${API_BASE}/blogs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(body)
+      });
 
-    setBlogs([...blogs, blogToAdd]);
-    const myBlogIds = JSON.parse(localStorage.getItem('myBlogIds') || '[]');
-    myBlogIds.push(blogToAdd.id);
-    localStorage.setItem('myBlogIds', JSON.stringify(myBlogIds));
-    setMyBlogIds(myBlogIds);
-    setNewBlog({ title: '', description: '', image: '', imageFile: null });
-    setShowAddBlog(false);
-    document.body.classList.remove('modal-open');
+      if (!res.ok) {
+        const txt = await res.text();
+        const parsed = (() => { try { return JSON.parse(txt); } catch { return txt; } })();
+        alert((parsed && parsed.message) || parsed || `Publish failed (HTTP ${res.status})`);
+        return;
+      }
+
+      const created = await res.json();
+      const mapped = mapBlogFromApi(created);
+      // If the frontend had an image selected, prefer that (backend may not store it)
+      if (newBlog.image) {
+        mapped.image = newBlog.image;
+        // persist mapping so image remains visible across reloads
+        saveLocalImage(created._id || mapped.id, newBlog.image);
+      }
+      setBlogs(prev => [mapped, ...prev]);
+
+      // remember this blog locally
+      const myIds = JSON.parse(localStorage.getItem('myBlogIds') || '[]');
+      myIds.push(String(mapped.id));
+      localStorage.setItem('myBlogIds', JSON.stringify(myIds));
+      setMyBlogIds(myIds);
+
+      setNewBlog({ title: '', description: '', image: '', imageFile: null });
+      setShowAddBlog(false);
+      document.body.classList.remove('modal-open');
+    } catch (err) {
+      console.error('Publish error', err);
+      alert('Failed to publish blog');
+    }
   };
 
-  const handleEditBlog = (blog) => {
+  // edit/update handlers left intact but they reference _editingBlog below if used
+  const _handleEditBlog = (blog) => {
     setEditingBlog(blog);
     setShowEditBlog(true);
     document.body.classList.add('modal-open');
   };
 
-  const handleUpdateBlog = () => {
-    if (!editingBlog.title.trim() || !editingBlog.description.trim()) return;
+  const _handleUpdateBlog = () => {
+    if (!_editingBlog || !_editingBlog.title.trim() || !_editingBlog.description.trim()) return;
 
     setBlogs(blogs.map(blog => 
-      blog.id === editingBlog.id ? { ...editingBlog, date: new Date().toISOString().split('T')[0] } : blog
+      blog.id === _editingBlog.id ? { ..._editingBlog, date: new Date().toISOString().split('T')[0] } : blog
     ));
     setShowEditBlog(false);
     setEditingBlog(null);
     document.body.classList.remove('modal-open');
   };
 
-  const handleDeleteBlog = (blogId) => {
-    setBlogs(prev => prev.filter(blog => blog.id !== blogId));
-    setMyBlogIds(prev => {
-      const updated = prev.filter(id => id !== blogId);
-      localStorage.setItem('myBlogIds', JSON.stringify(updated));
-      return updated;
-    });
-    if (showBlogDetail && selectedBlog?.id === blogId) {
-      closeBlogDetail();
+  const navigate = useNavigate();
+
+  const handleDeleteBlog = async (blogId) => {
+    const token = getToken();
+
+    if (!token) {
+      const proceed = window.confirm('You must be logged in to delete a blog from the database. Click OK to delete locally only, or Cancel to go to Login.');
+      if (!proceed) {
+        navigate('/login');
+        return;
+      }
+
+      // User opted to delete locally only
+      setBlogs(prev => prev.filter(blog => blog.id !== blogId));
+      setMyBlogIds(prev => {
+        const updated = prev.filter(id => id !== blogId);
+        localStorage.setItem('myBlogIds', JSON.stringify(updated));
+        return updated;
+      });
+      // remove any local image mapping for this blog
+      removeLocalImage(blogId);
+      if (showBlogDetail && selectedBlog?.id === blogId) closeBlogDetail();
+      return;
+    }
+
+    // We have a token - try to delete from database
+    try {
+      const res = await fetch(`${API_BASE}/blogs/${blogId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (!res.ok) {
+        // If unauthorized, let user know and offer to re-login
+        if (res.status === 401 || res.status === 403) {
+          const goLogin = window.confirm('Not authorized to delete this blog. Would you like to login as the blog owner or admin?');
+          if (goLogin) navigate('/login');
+          return;
+        }
+
+        const txt = await res.text();
+        const parsed = (() => { try { return JSON.parse(txt); } catch { return txt; } })();
+        // If 404, the blog is already gone from DB; still remove locally
+        if (res.status === 404) {
+          setBlogs(prev => prev.filter(blog => blog.id !== blogId));
+          setMyBlogIds(prev => {
+            const updated = prev.filter(id => id !== blogId);
+            localStorage.setItem('myBlogIds', JSON.stringify(updated));
+            return updated;
+          });
+          if (showBlogDetail && selectedBlog?.id === blogId) closeBlogDetail();
+          alert('Blog not found on server; removed locally.');
+          return;
+        }
+
+        alert((parsed && parsed.message) || parsed || `Failed to delete (HTTP ${res.status})`);
+        return;
+      }
+
+      // success - remove locally as well
+      setBlogs(prev => prev.filter(blog => blog.id !== blogId));
+      setMyBlogIds(prev => {
+        const updated = prev.filter(id => id !== blogId);
+        localStorage.setItem('myBlogIds', JSON.stringify(updated));
+        return updated;
+      });
+      if (showBlogDetail && selectedBlog?.id === blogId) closeBlogDetail();
+    } catch (err) {
+      console.error('Delete error', err);
+      alert('Failed to delete blog (network error)');
     }
   };
 
@@ -171,10 +246,7 @@ const Blogs = () => {
   // ...
   // ))}
 
-  // Dummy getUserBlogs function
-  function getUserBlogs() {
-    return blogs.filter(blog => blog.author === currentUser);
-  }
+  // getUserBlogs removed — not used
 
   function handleOpenBlogDetail(blog) {
     setSelectedBlog(blog);
@@ -188,84 +260,100 @@ const Blogs = () => {
   // Only one handleLikeBlog function should exist in this file
 
   // Like/unlike and comment logic for modal
-  const [modalLiked, setModalLiked] = useState(false);
-  const [modalLikes, setModalLikes] = useState(0);
   const [modalComment, setModalComment] = useState("");
-  const [modalComments, setModalComments] = useState([]);
-
-  useEffect(() => {
-    if (selectedBlog) {
-      setModalLiked(likedBlogs.includes(selectedBlog.id));
-      setModalLikes(0); // Always start with 0 likes
-      setModalComments(selectedBlog.comments || []);
-    }
-  }, [selectedBlog, likedBlogs]);
 
   // Ensure modal always uses latest blog data from main state
   const getModalBlog = () => blogs.find(blog => blog.id === selectedBlog?.id) || selectedBlog;
   const modalBlog = getModalBlog();
 
-  const handleModalLike = () => {
-    setBlogs(prev => prev.map(blog => {
-      if (blog.id === modalBlog.id) {
-        const liked = likedBlogs.includes(blog.id);
-        if (!liked) {
-          setLikedBlogs([...likedBlogs, blog.id]);
-          return { ...blog, likes: (blog.likes || 0) + 1 };
-        } else {
-          setLikedBlogs(likedBlogs.filter(id => id !== blog.id));
-          return { ...blog, likes: (blog.likes || 0) - 1 };
-        }
-      }
-      return blog;
-    }));
+  const handleModalLike = async () => {
+    const blogId = modalBlog.id;
+    const token = getToken();
+    if (!token) { alert('Please log in to like'); return; }
+    try {
+      const res = await fetch(`${API_BASE}/blogs/${blogId}/like`, { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
+      if (!res.ok) throw new Error(`Like failed ${res.status}`);
+      const data = await res.json();
+      setBlogs(prev => prev.map(b => b.id === blogId ? { ...b, likes: data.likeCount } : b));
+      setLikedBlogs(prev => data.liked ? Array.from(new Set([...prev, blogId])) : prev.filter(id => id !== blogId));
+    } catch (err) {
+      console.error('Like error', err);
+      alert('Failed to update like');
+    }
   };
 
-  const handleModalComment = () => {
-    if (modalComment.trim()) {
-      setBlogs(prev => prev.map(blog => {
-        if (blog.id === modalBlog.id) {
-          const newComment = { author: 'Anonymous', text: modalComment };
-          return { ...blog, comments: [...(blog.comments || []), newComment] };
-        }
-        return blog;
-      }));
-      setModalComment("");
+  const handleModalComment = async () => {
+    const blogId = modalBlog.id;
+    const token = getToken();
+    if (!token) { alert('Please log in to comment'); return; }
+    if (!modalComment.trim()) return;
+    try {
+      const res = await fetch(`${API_BASE}/blogs/${blogId}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ text: modalComment })
+      });
+      if (!res.ok) {
+        const txt = await res.text();
+        const parsed = (() => { try { return JSON.parse(txt); } catch { return txt; } })();
+        alert((parsed && parsed.message) || parsed || `Comment failed (HTTP ${res.status})`);
+        return;
+      }
+      const data = await res.json();
+      // data.comment contains the added comment (populated user)
+      const added = { author: data.comment.user ? (data.comment.user.name || data.comment.user.email) : 'Anonymous', text: data.comment.text };
+      setBlogs(prev => prev.map(b => b.id === blogId ? { ...b, comments: [...(b.comments || []), added] } : b));
+      setModalComment('');
+    } catch (err) {
+      console.error('Comment error', err);
+      alert('Failed to post comment');
     }
   };
 
   // Like/unlike and comment logic for main blog card
-  const handleLikeBlog = (blogId) => {
-    setBlogs(prev => prev.map(blog => {
-      if (blog.id === blogId) {
-        const liked = likedBlogs.includes(blogId);
-        if (!liked) {
-          setLikedBlogs([...likedBlogs, blogId]);
-          return { ...blog, likes: (blog.likes || 0) + 1 };
-        } else {
-          setLikedBlogs(likedBlogs.filter(id => id !== blogId));
-          return { ...blog, likes: (blog.likes || 0) - 1 };
-        }
-      }
-      return blog;
-    }));
+  const handleLikeBlog = async (blogId) => {
+    const token = getToken();
+    if (!token) { alert('Please log in to like'); return; }
+    try {
+      const res = await fetch(`${API_BASE}/blogs/${blogId}/like`, { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
+      if (!res.ok) throw new Error(`Like failed ${res.status}`);
+      const data = await res.json();
+      setBlogs(prev => prev.map(b => b.id === blogId ? { ...b, likes: data.likeCount } : b));
+      setLikedBlogs(prev => data.liked ? Array.from(new Set([...prev, blogId])) : prev.filter(id => id !== blogId));
+    } catch (err) {
+      console.error('Like error', err);
+      alert('Failed to update like');
+    }
   };
 
   const [commentInputs, setCommentInputs] = useState({});
   const handleCommentInputChange = (blogId, value) => {
     setCommentInputs(prev => ({ ...prev, [blogId]: value }));
   };
-  const handleAddComment = (blogId) => {
+  const handleAddComment = async (blogId) => {
+    const token = getToken();
+    if (!token) { alert('Please log in to comment'); return; }
     const comment = commentInputs[blogId];
-    if (comment && comment.trim()) {
-      setBlogs(prev => prev.map(blog => {
-        if (blog.id === blogId) {
-          const newComment = { author: 'Anonymous', text: comment };
-          return { ...blog, comments: [...(blog.comments || []), newComment] };
-        }
-        return blog;
-      }));
+    if (!comment || !comment.trim()) return;
+    try {
+      const res = await fetch(`${API_BASE}/blogs/${blogId}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ text: comment })
+      });
+      if (!res.ok) {
+        const txt = await res.text();
+        const parsed = (() => { try { return JSON.parse(txt); } catch { return txt; } })();
+        alert((parsed && parsed.message) || parsed || `Comment failed (HTTP ${res.status})`);
+        return;
+      }
+      const data = await res.json();
+      const added = { author: data.comment.user ? (data.comment.user.name || data.comment.user.email) : 'Anonymous', text: data.comment.text };
+      setBlogs(prev => prev.map(b => b.id === blogId ? { ...b, comments: [...(b.comments || []), added] } : b));
       setCommentInputs(prev => ({ ...prev, [blogId]: '' }));
+    } catch (err) {
+      console.error('Comment error', err);
+      alert('Failed to post comment');
     }
   };
 
@@ -299,38 +387,41 @@ const Blogs = () => {
         </div>
       </header>
 
-      {/* Blog List - One Blog Per Row, Professional Card Layout */}
-      <div className="blogs-list" style={{ maxWidth: 1200, margin: '48px auto', display: 'flex', flexDirection: 'column', gap: 40 }}>
+  {/* Blog List - One Blog Per Row (stacked) */}
+  <div className="blogs-list" style={{ maxWidth: 1200, margin: '48px auto', display: 'flex', flexDirection: 'column', gap: 40 }}>
         {blogs.map((blog, idx) => {
           const liked = likedBlogs.includes(blog.id);
           const dropdownOpen = showCommentsDropdown[blog.id];
           return (
-            <div key={blog.id + '-' + idx} className="blog-card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', background: '#fff', borderRadius: 16, boxShadow: '0 4px 24px rgba(34,51,107,0.10)', border: '1.5px solid #e0e7ef', padding: 0, overflow: 'hidden', minHeight: 220 }}>
-              <div className="blog-card-content" style={{ flex: 1, padding: '36px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                  <h3 className="blog-title" style={{ fontSize: '1.7rem', margin: 0, color: '#22336b', fontWeight: 700, cursor: 'pointer', textAlign: 'left' }} onClick={() => handleOpenBlogDetail(blog)}>
+            <div key={blog.id + '-' + idx} className="blog-card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch', padding: 22, gap: 20, background: '#fff', borderRadius: 14, boxShadow: '0 10px 40px rgba(34,51,107,0.08)', border: '1px solid #e6eef0', overflow: 'hidden' }}>
+              <div className="blog-content" style={{ flex: 1, padding: '6px 12px', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
+                  <h3 className="blog-title" onClick={() => handleOpenBlogDetail(blog)} style={{ fontSize: '1.4rem', margin: 0, cursor: 'pointer', color: '#22336b', lineHeight: 1.2 }}>
                     {blog.title}
                   </h3>
-                  <span className="blog-date" style={{ color: '#6b7069', fontSize: '1.1rem', fontWeight: 600 }}><FaCalendarAlt /> {blog.date}</span>
+                  <div style={{ textAlign: 'right', minWidth: 110 }}>
+                    <div style={{ fontSize: '0.9rem', color: '#6b7069', marginBottom: 6 }}><FaCalendarAlt /> {blog.date}</div>
+                  </div>
                 </div>
-                <div className="blog-author" style={{ margin: '8px 0 12px 0', color: '#2e7d32', fontWeight: 600, fontSize: 16 }}>
-                  By {blog.author}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 8, marginBottom: 10 }}>
+                  <div style={{ width: 40, height: 40, borderRadius: 6, background: '#f1f4f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2e7d32', fontWeight: 700 }}>{(blog.author || 'A').charAt(0)}</div>
+                  <div style={{ color: '#2e7d32', fontWeight: 700, fontSize: 15 }}>By {blog.author}</div>
                 </div>
-                <p className="blog-description" style={{ fontSize: '1.15rem', color: '#444', marginBottom: 18, textAlign: 'left' }}>{blog.description}</p>
-                <div className="blog-actions" style={{ display: 'flex', gap: 18, marginTop: 8 }}>
-                  <button className={`action-btn like-btn`} style={{ ...buttonStyle, background: liked ? '#e57373' : '#f4f6fa', color: liked ? '#fff' : '#e57373', fontWeight: 600, borderRadius: 6, border: 'none', padding: '8px 18px', fontSize: 16 }} onClick={() => handleLikeBlog(blog.id)}>
-                    <FaHeart /> {blog.likes || 0} {blog.likes === 1 ? 'Like' : 'Likes'}
+                <p className="blog-description" style={{ margin: '6px 0 14px 0', color: '#444', fontSize: '1rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.6 }}>{blog.description}</p>
+                <div style={{ marginTop: 'auto', display: 'flex', gap: 14, alignItems: 'center' }}>
+                  <button className={`action-btn like-btn ${liked ? 'liked' : ''}`} onClick={() => handleLikeBlog(blog.id)} style={{ padding: '8px 12px', fontSize: 14 }}>
+                    <FaHeart /> <span style={{ marginLeft: 8 }}>{blog.likes || 0}</span>
                   </button>
-                  <button className="action-btn comment-btn" style={{ ...buttonStyle, background: '#f4f6fa', color: '#388e3c', fontWeight: 600, borderRadius: 6, border: 'none', padding: '8px 18px', fontSize: 16 }} onClick={() => setShowCommentsDropdown(prev => ({ ...prev, [blog.id]: !dropdownOpen }))}>
-                    <FaComment /> {Array.isArray(blog.comments) ? blog.comments.length : 0} {Array.isArray(blog.comments) && blog.comments.length === 1 ? 'Comment' : 'Comments'}
+                  <button className="action-btn comment-btn" onClick={() => setShowCommentsDropdown(prev => ({ ...prev, [blog.id]: !dropdownOpen }))} style={{ padding: '8px 12px', fontSize: 14 }}>
+                    <FaComment /> <span style={{ marginLeft: 8 }}>{Array.isArray(blog.comments) ? blog.comments.length : 0}</span>
                   </button>
-                  <button className="read-more-btn" style={{ ...buttonStyle, background: '#4a7c59', color: '#fff', fontWeight: 600, borderRadius: 6, border: 'none', padding: '8px 18px', fontSize: 16 }} onClick={() => handleOpenBlogDetail(blog)}>
+                  <button className="read-more-btn" onClick={() => handleOpenBlogDetail(blog)} style={{ padding: '8px 14px', fontSize: 14 }}>
                     READ MORE
                   </button>
                 </div>
                 {/* Comments dropdown for main page only */}
                 {dropdownOpen && (
-                  <div className="blog-comments-dropdown" style={{ marginTop: 16, background: '#fff', border: '1px solid #e0e7ef', borderRadius: 8, boxShadow: '0 2px 8px rgba(34,51,107,0.08)', padding: '12px 16px', maxHeight: 220, overflowY: 'auto' }}>
+                  <div className="blog-comments-dropdown">
                     <div style={{ fontWeight: 700, color: '#22336b', marginBottom: 8 }}>Comments</div>
                     {Array.isArray(blog.comments) && blog.comments.length > 0 ? (
                       blog.comments.map((comment, cidx) => (
@@ -358,14 +449,14 @@ const Blogs = () => {
                 )}
               </div>
               {blog.image && (
-                <div className="blog-image-preview" style={{ minWidth: 320, maxWidth: 320, height: 220, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f4f6fa', borderRadius: '0 16px 16px 0' }}>
-                  <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 0 }} />
+                <div className="blog-image-preview" style={{ minWidth: 180, maxWidth: 180, height: 120, overflow: 'hidden', borderRadius: 8, flexShrink: 0, background: '#f4f6fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
               )}
             </div>
           );
         })}
-      </div>
+  </div>
 
       {/* Add Blog Modal (conditionally rendered) */}
       {showAddBlog && (
@@ -500,18 +591,24 @@ const Blogs = () => {
             ) : (
               <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 18 }}>
                 {myBlogs.map((blog, idx) => (
-                  <div key={blog.id + '-my-' + idx} style={{ background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px rgba(34,51,107,0.08)', padding: '14px 12px', display: 'flex', flexDirection: 'row', gap: 16, alignItems: 'center', minHeight: 110 }}>
-                    {blog.image && (
-                      <div style={{ minWidth: 80, maxWidth: 80, height: 80, overflow: 'hidden', borderRadius: 8, background: '#f4f6fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 8 }} />
+                  <div key={blog.id + '-my-' + idx} style={{ display: 'flex', gap: 14, alignItems: 'stretch', background: '#f7faf7', padding: 12, borderRadius: 10, border: '1px solid #e6eef0' }}>
+                    <div style={{ width: 110, height: 82, borderRadius: 8, overflow: 'hidden', background: '#fff', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      {blog.image ? (
+                        <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ) : (
+                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9aa8a1', fontWeight: 700 }}>{(blog.title || 'B').charAt(0)}</div>
+                      )}
+                    </div>
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div>
+                        <div style={{ fontWeight: 800, color: '#22336b', fontSize: 16 }}>{blog.title}</div>
+                        <div style={{ color: '#2e7d32', fontWeight: 600, fontSize: 13, marginTop: 6 }}>By {blog.author} • {blog.date}</div>
+                        <div style={{ marginTop: 8, color: '#444', fontSize: 14, maxHeight: 44, overflow: 'hidden', textOverflow: 'ellipsis' }}>{blog.description}</div>
                       </div>
-                    )}
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                      <div style={{ fontWeight: 700, color: '#22336b', fontSize: 17 }}>{blog.title}</div>
-                      <div style={{ color: '#2e7d32', fontWeight: 600, fontSize: 14 }}>By {blog.author}</div>
-                      <div style={{ color: '#444', fontSize: 14, wordBreak: 'break-word' }}>{blog.description}</div>
-                      <div style={{ display: 'flex', gap: 10, marginTop: 6 }}>
-                        <button style={{ background: '#e57373', color: '#fff', borderRadius: 6, border: 'none', padding: '6px 16px', fontWeight: 600, fontSize: 14 }} onClick={() => handleDeleteBlog(blog.id)}>Delete</button>
+                      <div style={{ display: 'flex', gap: 10, marginTop: 10 }}>
+                        <button onClick={() => { _handleEditBlog(blog); }} style={{ background: '#fff', border: '1px solid #d1e0d7', color: '#22336b', padding: '8px 12px', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>Edit</button>
+                        <button onClick={() => { if (window.confirm('Delete this blog?')) handleDeleteBlog(blog.id); }} style={{ background: '#e74c3c', border: 'none', color: '#fff', padding: '8px 12px', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>Delete</button>
+                        <button onClick={() => { setShowMyBlogs(false); setTimeout(() => handleOpenBlogDetail(blog), 50); }} style={{ marginLeft: 'auto', background: '#4a7c59', border: 'none', color: '#fff', padding: '8px 12px', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>View</button>
                       </div>
                     </div>
                   </div>

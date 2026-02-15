@@ -29,6 +29,21 @@
   padding: 15px;
 }
 
+/* Match property description style used on the homepage */
+.property-description {
+  font-size: 13px;
+  color: #4a4a4a;
+  margin-bottom: 10px;
+  max-height: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  display: block;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 .hotel-header {
   display: flex;
   justify-content: space-between;
@@ -53,6 +68,23 @@
   font-size: 1.4rem;
   font-weight: bold;
   color: #28a745;
+}
+
+.hotel-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.rating-score {
+  background: #2563eb;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
 }
 
 .hotel-type-location {

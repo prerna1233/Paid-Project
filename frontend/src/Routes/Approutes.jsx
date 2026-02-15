@@ -18,6 +18,7 @@ import Hotel_list from '../Pages/Hotel/Hotel_list.jsx'
 import Hotel_list_new from '../Pages/Hotel/Hotel_list_new.jsx'
 import WhoIsWho from '../Pages/About/WhoIsWho.jsx'
 import WriteBlog from '../Pages/Blogs/WriteBlog.jsx'
+import AdminPage from '../Pages/Admin/AdminPage.jsx'
 
 
 
@@ -46,6 +47,7 @@ export default function Approutes() {
         <Route path='/Culture/food' element={<Food />} />
         <Route path='/Blogs' element={<Blogs />} />
         <Route path='/Blogs/Write' element={<WriteBlog />} />
+  <Route path='/admin' element={<AdminPage />} />
         <Route path='/Travel' element={<Travel />} />
        
       </Routes>

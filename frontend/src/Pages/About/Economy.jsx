@@ -1,12 +1,9 @@
 import React from "react";
 import "./Economy.css";
-import heroImage from "/src/assets/kishan.jpg";
-import teaImg from "/src/assets/tea.jpeg";
-import pineappleImg from "/src/assets/pineapple.webp";
-import dragonFruitImg from "/src/assets/5pic.jpg";
-import riceImg from "/src/assets/Bihar-cultivating-rice.jpg";
-import juteImg from "/src/assets/JUTE.png";
-import maizeImg from "/src/assets/sirimart_maize.jpg";
+import heroImage from "/src/assets/economy/economy-top.png";
+import teaImg from "/src/assets/economy/tea.png";
+import pineappleImg from "/src/assets/economy/pineapple.png";
+import dragonFruitImg from "/src/assets/economy/dragon.png";
 import Footer from "../../Components/Footer/Footer";
 
 export default function Economy() {
@@ -85,46 +82,48 @@ export default function Economy() {
                         </div>
                     </div>
 
+                    {/* Replaced the generic Agriculture / Industry / Trade sections with a professional Economic Profile */}
                     <div className="section-with-img">
-                        <img src={riceImg} alt="Agriculture" />
-                        <div className="section-text">
-                            <h2>Agriculture</h2>
+                        <div className="section-text" style={{ width: '100%' }}>
+                            <h2>Economic Profile — Kishanganj District</h2>
                             <p>
-                                Agriculture is the mainstay of Kishanganj's rural economy. The primary crops include rice, 
-                                wheat, maize, and jute. Rice cultivation covers approximately 65% of the total cultivated 
-                                area, making it the principal crop. Wheat and maize are grown during the rabi season, while 
-                                jute cultivation has been a traditional occupation. Farmers sell their produce in weekly 
-                                haats (local markets) and mandis (agricultural marketing centers) across the district.
+                                Kishanganj, situated in Bihar's strategically sensitive "Chicken Neck" region, has an
+                                economy that remains deeply rooted in agriculture with tea cultivation as its most
+                                distinctive activity. Although the district has significant agricultural output, it
+                                faces structural development challenges and is classified among the relatively under-
+                                developed districts of Bihar.
                             </p>
-                        </div>
-                    </div>
 
-                    <div className="section-with-img">
-                        <img src={juteImg} alt="Jute Processing" />
-                        <div className="section-text">
-                            <h2>Industrial Activities</h2>
-                            <p>
-                                Beyond tea factories, Kishanganj has developed small-scale industries and agricultural 
-                                marketing centers. The district hosts approximately 50-60 small and medium enterprises 
-                                engaged in rice milling, jute processing, food processing, and handicraft production. 
-                                These industries provide employment to around 5,000-7,000 people. Recent initiatives focus 
-                                on traditional industries like fishing, with several fish farming cooperatives established 
-                                in rural areas.
-                            </p>
-                        </div>
-                    </div>
+                            <h3>Key aspects</h3>
+                            <ul style={{ lineHeight: 1.9 }}>
+                                <li><strong>Agriculture & Tea Production:</strong> Kishanganj is the only district in Bihar
+                                    with commercial tea production. Tea picking and primary processing provide direct
+                                    employment to thousands, and tea has been identified as a flagship product under
+                                    the One District One Product (ODOP) initiative.</li>
+                                <li><strong>Rural-Based Economy:</strong> Around 90% of the district's population lives in
+                                    rural areas, making the economy heavily dependent on smallholder and subsistence
+                                    farming.</li>
+                                <li><strong>Fisheries:</strong> Fish farming is an important livelihood in parts of the
+                                    district, with numerous local cooperatives and community-level aquaculture projects
+                                    supporting income diversification.</li>
+                                <li><strong>Logistics & Strategic Connectivity:</strong> Located on National Highway 31 and
+                                    served by the Northeast Frontier Railway, Kishanganj functions as a regional trade
+                                    node within the Purnia division; this connectivity underpins local markets and
+                                    cross-border movements toward West Bengal and Nepal.</li>
+                                <li><strong>Socio-economic Challenges:</strong> Despite agricultural strengths, the district
+                                    remains economically vulnerable — limited industrialization, constrained access to
+                                    high-value processing, low per-capita income, and gaps in infrastructure and human
+                                    development indicators contribute to persistent poverty.</li>
+                            </ul>
 
-                    <div className="section-with-img">
-                        <img src={maizeImg} alt="Trade and Commerce" />
-                        <div className="section-text">
-                            <h2>Trade and Commerce</h2>
+                            <h3>Policy & Development Opportunities</h3>
                             <p>
-                                Due to its strategic location near West Bengal and Nepal, Kishanganj serves as a hub for 
-                                trade and commerce. The district is well-connected by the Northeast Frontier Railway, with 
-                                Kishanganj Junction as a major railhead on the Katihar-Siliguri route. National Highway 31 
-                                passes through the district, facilitating movement of goods. The proximity to Nepal enables 
-                                cross-border trade opportunities. The district has 3 major wholesale markets and approximately 
-                                200 retail outlets.
+                                Targeted interventions that can strengthen the local economy include expanding
+                                value-added processing for tea and horticultural crops, improving cold-chain and
+                                market access for high-value fruits (pineapple, dragon fruit), scaling sustainable
+                                aquaculture, and leveraging transport corridors to integrate producers with larger
+                                regional markets. Investments in skills, extension services, and cooperative models
+                                will be central to inclusive growth.
                             </p>
                         </div>
                     </div>

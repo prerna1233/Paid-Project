@@ -13,16 +13,20 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* show the top of the image when cropped */
+  object-position: top center;
   display: block;
 }
 
 .art-hero h1 {
   position: absolute;
-  bottom: 20%;
-  left: 10%;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   color: #fff;
   font-weight: bold;
   font-size: 3.1rem;
+  z-index: 2;
 }
 
 
@@ -39,12 +43,13 @@
   flex-direction: row-reverse;
 }
 .art-section img {
-  width: 80%;
-  height: auto;
-  max-height: 500px;
+  width: 100%;
+  height: 420px; /* fixed height for equal-sized cards */
+  max-width: 620px; /* cap width for very large screens */
   border-radius: 20px;
   box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-  object-fit: cover;
+  object-fit: cover; /* keep aspect and crop uniformly */
+  display: block;
 }
 
 .art-section {
@@ -57,6 +62,9 @@
 
 .art-text {
   width: 55%;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px; /* match image height for visual balance */
 }
 
 .art-text h2 {
@@ -71,6 +79,32 @@
   color: #444;
 }
 
+.lead {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  background: #eef2ff;
+  color: #4338ca;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.excerpt {
+  color: #555;
+  margin-top: 8px;
+}
+
 /* Button */
 .art-text button {
   margin-top: 20px;
@@ -82,6 +116,15 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.read-more {
+  margin-top: 18px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#4a7c59,#5d8a6a);
+  border: none;
+  color: #fff;
 }
 
 .art-text button:hover {
@@ -116,13 +159,12 @@
 
 /* Modal Image */
 .art-modal img {
-  width: 100%;             /* full width of modal */
-  height: auto;            /* maintain aspect ratio */
-  max-height: 400px;       /* limits height but keeps proportions */
+  width: 100%;
+  height: 380px; /* fixed modal image height to match card proportions */
+  object-fit: cover; /* crop to fill modal consistently */
   display: block;
-  margin: 0 auto 25px;     /* centers and adds space below */
-  border-radius: 16px;
-  object-fit: contain;     /* fits entire image inside modal */
+  margin: 0 auto 20px;
+  border-radius: 12px;
 }
 
 /* Modal Text */
@@ -160,3 +202,10 @@
     max-height: 300px;
   }
 }
+
+@media (max-width: 600px) {
+  .art-hero { height: 28vh; }
+  .art-hero h1 { font-size: 1.4rem; bottom: 8%; }
+}
+
+

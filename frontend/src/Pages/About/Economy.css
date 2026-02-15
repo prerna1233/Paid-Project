@@ -78,6 +78,15 @@
     font-weight: 600;
 }
 
+/* Smaller subsection headings (h3) used for Key aspects / Policy */
+.section-text h3 {
+    font-size: 1rem;
+    color: #1f2937;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
 .section-text p {
     font-size: 0.95rem;
     line-height: 1.6;
@@ -115,6 +124,10 @@
 
     .section-text h2 {
         font-size: 1.2rem;
+    }
+
+    .section-text h3 {
+        font-size: 0.95rem;
     }
 
     .section-text p {

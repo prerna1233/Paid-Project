@@ -1,10 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { NavLink, Link, } from 'react-router-dom'
 import styles from './Navbar.module.css'
-import Home from '../../Pages/Home/Home.jsx'
-import About from '../../Pages/About/About.jsx'
-import Culture from '../../Pages/Culture/Culture.jsx'
+// ...existing code imports
 import logo from '../../assets/logo.png'
 import { MdLanguage } from "react-icons/md";
 import { BsSun, BsMoon } from "react-icons/bs";
@@ -12,6 +9,7 @@ import { FaUser } from "react-icons/fa";
 
 
 export default function Navbar() {
+    // const navigate = useNavigate();
     const [dark, light] = useState(false);
     const [showCulture, setShowCulture] = useState(false);
     const [showAbout, setShowAbout] = useState(false);
@@ -19,12 +17,36 @@ export default function Navbar() {
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
     const [authMode, setAuthMode] = useState('login'); // 'login', 'signup', 'profile'
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Set to false to show login/register by default
+    const [isAdmin, setIsAdmin] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [userDetails, setUserDetails] = useState({
         username: 'Rajesh Kumar',
         email: 'rajesh.kumar@kishanganj.gov.in',
         designation: 'Assistant Collector'
     });
+    const [updateLoading, setUpdateLoading] = useState(false);
+    // Auth loading states
+    const [loginLoading, setLoginLoading] = useState(false);
+    const [signupLoading, setSignupLoading] = useState(false);
+
+    // API base (Vite env override)
+    const API_BASE = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE) ? import.meta.env.VITE_API_BASE : 'https://paid-project.onrender.com';
+
+    const safeParseJSON = (text) => {
+        try { return JSON.parse(text); } catch { return null; }
+    };
+
+    const extractMessage = (value) => {
+        if (!value && value !== 0) return '';
+        if (typeof value === 'string') return value;
+        if (typeof value === 'object') {
+            if (value.message) return value.message;
+            if (value.error) return (typeof value.error === 'string') ? value.error : (value.error.message || JSON.stringify(value.error));
+            if (value.data && (value.data.message || value.data.error)) return value.data.message || value.data.error;
+            try { return JSON.stringify(value); } catch { return String(value); }
+        }
+        return String(value);
+    };
     
     // Form state management
     const [loginForm, setLoginForm] = useState({ email: '', password: '' });
@@ -41,52 +63,165 @@ export default function Navbar() {
     });
     
     // Authentication handlers
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (loginForm.email && loginForm.password) {
-            // Simulate successful login
-            setUserDetails({
-                username: loginForm.email.split('@')[0].replace('.', ' ').replace(/\b\w/g, l => l.toUpperCase()),
-                email: loginForm.email,
-                department: 'District Administration',
-                designation: 'Government Official'
-            });
-            setIsLoggedIn(true);
-            setLoginForm({ email: '', password: '' }); // Clear form
-            alert('Login successful!');
-        } else {
+        if (!loginForm.email || !loginForm.password) {
             alert('Please fill in all fields');
+            return;
         }
-    };
-    
-    const handleSignup = (e) => {
-        e.preventDefault();
-        if (signupForm.name && signupForm.email && signupForm.password && signupForm.confirmPassword) {
-            if (signupForm.password !== signupForm.confirmPassword) {
-                alert('Passwords do not match!');
-                return;
+        setLoginLoading(true);
+        try {
+            const res = await fetch(`${API_BASE}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: loginForm.email, password: loginForm.password })
+            });
+            if (!res.ok) {
+                const txt = await res.text();
+                const j = safeParseJSON(txt);
+                const parsed = j ? j : txt;
+                const parsedMsg = extractMessage(parsed);
+                const friendly = (res.status === 401 || /invalid/i.test(parsedMsg || '')) ? 'Invalid login details. Please check your email and password.' : (parsedMsg || `Login failed (HTTP ${res.status})`);
+                alert(friendly);
+                throw new Error(parsedMsg || `HTTP ${res.status}`);
             }
-            // Simulate successful signup
+            const data = await res.json();
+            // Expecting { token, user }
+            if (data.token) localStorage.setItem('token', data.token);
+            const user = data.user || {};
             setUserDetails({
-                username: signupForm.name,
-                email: signupForm.email,
-                department: 'District Administration',
-                designation: 'New User'
+                username: user.name || (loginForm.email.split('@')[0] || ''),
+                email: user.email || loginForm.email,
+                designation: user.role || ''
             });
             setIsLoggedIn(true);
-            setSignupForm({ name: '', email: '', password: '', confirmPassword: '' }); // Clear form
-            alert('Account created successfully!');
-        } else {
-            alert('Please fill in all fields');
+            setLoginForm({ email: '', password: '' });
+            setShowProfileDropdown(false);
+            alert('Login successful!');
+
+            // If backend returned user role and it's admin, mark user as admin (don't auto-navigate)
+            try {
+                const role = user.role || '';
+                if (role && /admin/i.test(String(role))) {
+                    setIsAdmin(true);
+                }
+
+                // If no user payload was returned but we have a token, try to fetch profile to detect role
+                if (!role && data.token) {
+                    try {
+                        const pr = await fetch(`${API_BASE}/auth/profile`, {
+                            headers: { 'Authorization': `Bearer ${data.token}` }
+                        });
+                        if (pr.ok) {
+                            const pjson = await pr.json();
+                            if (pjson && pjson.role && /admin/i.test(String(pjson.role))) {
+                                setIsAdmin(true);
+                            }
+                        }
+                    } catch (pfErr) {
+                        console.warn('Profile fetch after login failed', pfErr);
+                    }
+                }
+            } catch (redirErr) {
+                console.warn('Admin check after login failed', redirErr);
+            }
+        } catch (err) {
+            console.error('Login error', err);
+            // If we already alerted a friendly message above, avoid duplicating. For network errors, show a fallback.
+            if (!err || !err.message) {
+                alert('Login failed. Please check your connection and try again.');
+            }
+        } finally {
+            setLoginLoading(false);
         }
     };
     
-    const handleLogout = () => {
+    const handleSignup = async (e) => {
+        e.preventDefault();
+        if (!signupForm.name || !signupForm.email || !signupForm.password || !signupForm.confirmPassword) {
+            alert('Please fill in all fields');
+            return;
+        }
+        if (signupForm.password !== signupForm.confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+        setSignupLoading(true);
+        try {
+            const res = await fetch(`${API_BASE}/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: signupForm.name, email: signupForm.email, password: signupForm.password })
+            });
+            if (!res.ok) {
+                const txt = await res.text();
+                throw new Error(txt || `HTTP ${res.status}`);
+            }
+            const data = await res.json();
+            if (data.token) localStorage.setItem('token', data.token);
+            const user = data.user || {};
+            setUserDetails({ username: user.name || signupForm.name, email: user.email || signupForm.email, designation: user.role || '' });
+            if (user.role && /admin/i.test(String(user.role))) setIsAdmin(true);
+            setIsLoggedIn(true);
+            setSignupForm({ name: '', email: '', password: '', confirmPassword: '' });
+            setShowProfileDropdown(false);
+            alert('Account created successfully!');
+        } catch (err) {
+            console.error('Signup error', err);
+            alert('Registration failed: ' + extractMessage(err));
+        } finally {
+            setSignupLoading(false);
+        }
+    };
+    
+    const [logoutLoading] = useState(false);
+
+    const handleLogout = async () => {
+        // Confirm destructive action: deleting account from DB
+        const confirmed = window.confirm('Log out? This will end your session on this device.');
+        if (!confirmed) return;
+
+        try {
+            // remove auth tokens and related local session data
+            localStorage.removeItem('token');
+            localStorage.removeItem('backupToken');
+            localStorage.removeItem('userData');
+        } catch {
+          // ignore
+        }
+
         setIsLoggedIn(false);
+        setIsEditMode(false);
         setShowProfileDropdown(false);
         setAuthMode('login');
-        alert('Logged out successfully!');
+        setUserDetails({ username: '', email: '', designation: '' });
+        // reload so app resets auth-dependent UI
+        setTimeout(() => { window.location.reload(); }, 50);
     };
+
+    // On mount, check for token and fetch profile
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+        let mounted = true;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/auth/profile`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error('Failed to fetch profile');
+                const profile = await res.json();
+                if (!mounted) return;
+                setUserDetails({ username: profile.name || '', email: profile.email || '', designation: profile.role || '' });
+                if (profile && profile.role && /admin/i.test(String(profile.role))) setIsAdmin(true);
+                setIsLoggedIn(true);
+            } catch (err) {
+                console.warn('Profile fetch failed', err);
+                localStorage.removeItem('token');
+            }
+        })();
+        return () => { mounted = false; };
+    }, [API_BASE]);
 
 
 
@@ -108,7 +243,22 @@ export default function Navbar() {
                         className={styles.cultureWrapper}
                         onMouseEnter={() => setShowAbout(true)}
                         onMouseLeave={() => setShowAbout(false)}>
-                        <Link to="About">About</Link>
+                        {/* Non-clickable trigger for About — opens hover dropdown only */}
+                        <span
+                            role="button"
+                            tabIndex={0}
+                            aria-haspopup="true"
+                            aria-expanded={showAbout}
+                            onClick={(e) => e.preventDefault()}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    setShowAbout((s) => !s);
+                                }
+                            }}
+                        >
+                            About
+                        </span>
 
                         {showAbout && (
                             <div className={styles.cultureDropdown}>
@@ -137,7 +287,22 @@ export default function Navbar() {
                         className={styles.cultureWrapper}
                         onMouseEnter={() => setShowCulture(true)}
                         onMouseLeave={() => setShowCulture(false)}>
-                        <Link to="Culture">Culture</Link>
+                        {/* Non-clickable trigger for Culture — opens hover dropdown only */}
+                        <span
+                            role="button"
+                            tabIndex={0}
+                            aria-haspopup="true"
+                            aria-expanded={showCulture}
+                            onClick={(e) => e.preventDefault()}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    setShowCulture((s) => !s);
+                                }
+                            }}
+                        >
+                            Culture
+                        </span>
 
                         {showCulture && (
                             <div className={styles.cultureDropdown}>
@@ -149,6 +314,9 @@ export default function Navbar() {
                     </div>
 
                     <Link to="/Blogs">Blogs</Link>
+                    {isAdmin && (
+                        <Link to="/admin" style={{ color: '#b23b3b', fontWeight: 700 }}>Admin</Link>
+                    )}
                 </nav>
 
                 {/* ----- Right Section ----- */}
@@ -229,17 +397,21 @@ export default function Navbar() {
                                             color: '#ffffff'
                                         }}>
                                             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                                                <img 
-                                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-                                                    alt="Profile"
-                                                    style={{
-                                                        width: '50px',
-                                                        height: '50px',
-                                                        borderRadius: '50%',
-                                                        marginRight: '15px',
-                                                        border: '2px solid rgba(255,255,255,0.3)'
-                                                    }}
-                                                />
+                                                {/* Neutral avatar frame (initials if available) */}
+                                                <div style={{
+                                                    width: '50px',
+                                                    height: '50px',
+                                                    borderRadius: '50%',
+                                                    marginRight: '15px',
+                                                    border: '2px solid rgba(255,255,255,0.3)',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    fontWeight: 700,
+                                                    color: 'rgba(255,255,255,0.95)'
+                                                }}>
+                                                    {userDetails && userDetails.username ? userDetails.username.split(' ').map(n => n[0]).slice(0,2).join('') : ''}
+                                                </div>
                                                 <div>
                                                     <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: '600' }}>
                                                         {userDetails.username}
@@ -411,34 +583,59 @@ export default function Navbar() {
                                                     </button>
                                                 ) : (
                                                     <>
-                                                        <button 
-                                                            onClick={() => {
-                                                                // Save changes
-                                                                const updatedDetails = {
-                                                                    ...userDetails,
-                                                                    username: editForm.username || userDetails.username,
-                                                                    email: editForm.email || userDetails.email
-                                                                };
-                                                                setUserDetails(updatedDetails);
-                                                                setIsEditMode(false);
-                                                                setEditForm({ username: '', email: '', password: '' });
-                                                                alert('Profile updated successfully!');
-                                                            }}
-                                                            style={{
-                                                                flex: '1',
-                                                                padding: '10px 16px',
-                                                                background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
-                                                                border: 'none',
-                                                                borderRadius: '6px',
-                                                                color: '#ffffff',
-                                                                fontSize: '14px',
-                                                                fontWeight: '500',
-                                                                cursor: 'pointer',
-                                                                transition: 'all 0.2s'
-                                                            }}
-                                                        >
-                                                            Save
-                                                        </button>
+                                                            <button 
+                                                                onClick={async () => {
+                                                                    // Save changes to backend
+                                                                    const token = localStorage.getItem('token');
+                                                                    const nameToSave = editForm.username || userDetails.username;
+                                                                    const emailToSave = editForm.email || userDetails.email;
+                                                                    setUpdateLoading(true);
+                                                                    try {
+                                                                        const res = await fetch(`${API_BASE}/auth/profile`, {
+                                                                            method: 'PUT',
+                                                                            headers: {
+                                                                                'Content-Type': 'application/json',
+                                                                                ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+                                                                            },
+                                                                            body: JSON.stringify({ name: nameToSave, email: emailToSave })
+                                                                        });
+                                                                        if (!res.ok) {
+                                                                            const txt = await res.text();
+                                                                            throw new Error(txt || `HTTP ${res.status}`);
+                                                                        }
+                                                                        const data = await res.json();
+                                                                        // Update local state from server response if provided
+                                                                        if (data && data.user) {
+                                                                            setUserDetails({ username: data.user.name || nameToSave, email: data.user.email || emailToSave, designation: data.user.role || userDetails.designation });
+                                                                        } else {
+                                                                            setUserDetails({ username: nameToSave, email: emailToSave, designation: userDetails.designation });
+                                                                        }
+                                                                        setIsEditMode(false);
+                                                                        setEditForm({ username: '', email: '', password: '' });
+                                                                        alert('Profile updated successfully!');
+                                                                    } catch (err) {
+                                                                        console.error('Profile update failed', err);
+                                                                        alert('Profile update failed: ' + extractMessage(err));
+                                                                    } finally {
+                                                                        setUpdateLoading(false);
+                                                                    }
+                                                                }}
+                                                                disabled={updateLoading}
+                                                                style={{
+                                                                    flex: '1',
+                                                                    padding: '10px 16px',
+                                                                    background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
+                                                                    border: 'none',
+                                                                    borderRadius: '6px',
+                                                                    color: '#ffffff',
+                                                                    fontSize: '14px',
+                                                                    fontWeight: '500',
+                                                                    cursor: 'pointer',
+                                                                    transition: 'all 0.2s'
+                                                                }}
+                                                            >
+                                                                {updateLoading ? 'Saving...' : 'Save'}
+                                                            </button>
                                                         <button 
                                                             onClick={() => {
                                                                 setIsEditMode(false);
@@ -463,6 +660,7 @@ export default function Navbar() {
                                                 )}
                                                 <button 
                                                     onClick={handleLogout}
+                                                    disabled={logoutLoading}
                                                     style={{
                                                         flex: '1',
                                                         padding: '10px 16px',
@@ -476,7 +674,7 @@ export default function Navbar() {
                                                         transition: 'all 0.2s'
                                                     }}
                                                 >
-                                                    Logout
+                                                    {logoutLoading ? 'Processing...' : 'Logout'}
                                                 </button>
                                             </div>
                                         </div>
@@ -609,6 +807,7 @@ export default function Navbar() {
                                                     
                                                     <button 
                                                         onClick={handleLogin}
+                                                        disabled={loginLoading}
                                                         style={{
                                                             width: '100%',
                                                             padding: '14px',
@@ -624,7 +823,7 @@ export default function Navbar() {
                                                             letterSpacing: '0.5px'
                                                         }}
                                                     >
-                                                        SECURE LOGIN
+                                                        {loginLoading ? 'Logging in...' : 'SECURE LOGIN'}
                                                     </button>
                                                     
                                                     <div style={{ 
@@ -742,6 +941,7 @@ export default function Navbar() {
                                                     
                                                     <button 
                                                         onClick={handleSignup}
+                                                        disabled={signupLoading}
                                                         style={{
                                                             width: '100%',
                                                             padding: '14px',
@@ -756,7 +956,7 @@ export default function Navbar() {
                                                             textTransform: 'uppercase',
                                                             letterSpacing: '0.5px'
                                                         }}>
-                                                        CREATE ACCOUNT
+                                                        {signupLoading ? 'Creating...' : 'CREATE ACCOUNT'}
                                                     </button>
                                                     
                                                     <div style={{ 

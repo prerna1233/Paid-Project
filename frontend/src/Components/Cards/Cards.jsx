@@ -24,8 +24,9 @@ function Cards({ data }) {
               {/* Show rating if available (for hotels) */}
               {item.rating && (
                 <div className="card-rating">
-                  <span className="rating-score">⭐ {item.rating}</span>
-                  {item.reviews && <span className="review-count">({item.reviews} reviews)</span>}
+                  <span className="rating-score">
+                    {item.rating > 5 ? `Rating: ${Math.round(item.rating)}/10` : `⭐ ${item.rating}`}
+                  </span>
                 </div>
               )}
               

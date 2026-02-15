@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Hotel_Homepage.css";
-import HOTELS_DATABASE from "./Hotel";
-import { FaSearch, FaStar, FaWifi, FaCar, FaUtensils, FaConciergeBell, FaMapMarkerAlt } from "react-icons/fa";
+import { FaSearch, FaStar, FaWifi, FaCar, FaUtensils, FaMapMarkerAlt } from "react-icons/fa";
 import Footer from "../../Components/Footer/Footer";
-
+// Fetch hotels from backend (Vite env var VITE_HOTELS_API_BASE)
+const HOTELS_API_BASE = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_HOTELS_API_BASE) ? import.meta.env.VITE_HOTELS_API_BASE : "https://paid-project.onrender.com";
 export default function Hotel_Homepage() {
   const [search, setSearch] = useState("");
   const [priceRange, setPriceRange] = useState({ min: 0, max: 5000 });
   const [selectedRating, setSelectedRating] = useState([]);
   const [sortBy, setSortBy] = useState("popularity");
 
-  const filteredHotels = HOTELS_DATABASE.filter((hotel) => {
-    const matchesSearch = hotel.name.toLowerCase().includes(search.toLowerCase());
-    const matchesPrice = hotel.price >= priceRange.min && hotel.price <= priceRange.max;
-    const matchesRating = selectedRating.length === 0 || selectedRating.includes(Math.floor(hotel.rating));
+  const [hotels, setHotels] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const filteredHotels = hotels.filter((hotel) => {
+    const name = hotel && hotel.name ? String(hotel.name) : '';
+    const price = hotel && typeof hotel.price === 'number' ? hotel.price : 0;
+    const rating = hotel && typeof hotel.rating === 'number' ? hotel.rating : 0;
+
+    const matchesSearch = name.toLowerCase().includes(String(search || '').toLowerCase());
+    const matchesPrice = price >= priceRange.min && price <= priceRange.max;
+    const matchesRating = selectedRating.length === 0 || selectedRating.includes(Math.floor(rating));
     return matchesSearch && matchesPrice && matchesRating;
   });
 
@@ -29,6 +37,50 @@ export default function Hotel_Homepage() {
       prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]
     );
   };
+
+  // --- Derived stats from fetched hotels ---
+  const totalHotels = hotels.length;
+  const avgPrice = Math.round(hotels.reduce((s, h) => s + (h.price || 0), 0) / Math.max(1, totalHotels));
+  const hotelsWithWifi = hotels.filter(h => h.amenities && h.amenities.some(a => /wifi/i.test(a))).length;
+  const wifiPercent = Math.round((hotelsWithWifi / Math.max(1, totalHotels)) * 100);
+
+  useEffect(() => {
+    let mounted = true;
+    const controller = new AbortController();
+  // loading is initialized to true; reset error before fetch if needed
+
+    fetch(`${HOTELS_API_BASE}/hotels`, { signal: controller.signal })
+      .then(async (res) => {
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`Failed to fetch hotels: ${res.status} ${text}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (!mounted) return;
+        if (!Array.isArray(data)) {
+          // If backend returns object with data property
+          const arr = Array.isArray(data.data) ? data.data : [];
+          setHotels(arr);
+        } else {
+          setHotels(data);
+        }
+      })
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        console.error('Error fetching hotels', err);
+        setError(err.message || 'Unknown error');
+      })
+      .finally(() => {
+        if (mounted) setLoading(false);
+      });
+
+    return () => {
+      mounted = false;
+      controller.abort();
+    };
+  }, []);
 
   return (
     <>
@@ -57,20 +109,16 @@ export default function Hotel_Homepage() {
         {/* STATS SECTION */}
         <div className="stats-section">
           <div className="stat-card">
-            <h2>{HOTELS_DATABASE.length}+</h2>
+            <h2>{totalHotels}</h2>
             <p>Available Hotels</p>
           </div>
           <div className="stat-card">
-            <h2>7400+</h2>
-            <p>Happy Customers</p>
+            <h2>₹{avgPrice.toLocaleString()}</h2>
+            <p>Average Price</p>
           </div>
           <div className="stat-card">
-            <h2>12300+</h2>
-            <p>Rooms Booked</p>
-          </div>
-          <div className="stat-card">
-            <h2>95%</h2>
-            <p>Satisfaction Rate</p>
+            <h2>{wifiPercent}%</h2>
+            <p>Hotels with WiFi</p>
           </div>
         </div>
 
@@ -100,10 +148,10 @@ export default function Hotel_Homepage() {
             <div className="filter-section">
               <h4>Rating</h4>
               <div className="checkbox-group">
-                {[5, 4, 3, 2, 1].map(rating => (
+                {[5, 4, 3, 2, 1].map((rating) => (
                   <label key={rating} className="checkbox-label">
-                    <input 
-                      type="checkbox" 
+                    <input
+                      type="checkbox"
                       checked={selectedRating.includes(rating)}
                       onChange={() => toggleRating(rating)}
                     />
@@ -129,37 +177,38 @@ export default function Hotel_Homepage() {
             </div>
 
             <div className="hotel-cards-grid">
-              {sortedHotels.map((hotel) => (
-                <div key={hotel.id} className="hotel-property-card">
+              {loading && <div className="loading">Loading hotels...</div>}
+              {error && <div className="error">Error: {error}</div>}
+              {!loading && !error && sortedHotels.length === 0 && (
+                <div className="no-results">No hotels found</div>
+              )}
+
+              {!loading && !error && sortedHotels.map((hotel, idx) => (
+                <div key={hotel.id || `${hotel.name}-${idx}`} className="hotel-property-card">
                   <div className="property-image">
                     <img src={hotel.image} alt={hotel.name} />
                   </div>
                   
                   <div className="property-content">
                     <h3 className="property-title">{hotel.name}</h3>
-                    <div className="property-rating">
-                      <span className="rating-badge">Rating: {hotel.rating.toFixed(1)}/5</span>
-                      <span className="reviews-count">({hotel.reviews} reviews)</span>
-                    </div>
-                    
+
+                    <p className="property-description">
+                      {hotel.description && (hotel.description.length > 160 ? hotel.description.substring(0, 157) + '...' : hotel.description)}
+                    </p>
+
                     <div className="property-location">
                       <FaMapMarkerAlt /> {hotel.location}, Kishanganj
                     </div>
-                    
-                    <div className="property-features">
-                      <span><FaUtensils /> Restaurant</span>
-                      <span><FaWifi /> WiFi</span>
-                      <span><FaCar /> Parking</span>
-                    </div>
-                    
+
                     <div className="property-footer">
                       <div className="property-price">
                         <span className="price-label">₹{hotel.price}</span>
                         <span className="price-period">/Night</span>
                       </div>
-                      <button className="view-details-btn">
-                        <FaConciergeBell /> Book Now
-                      </button>
+
+                      <div className="property-rating">
+                        <span className="rating-badge">{Math.round((hotel.rating || 0) / 2)}</span>
+                      </div>
                     </div>
                   </div>
                 </div>

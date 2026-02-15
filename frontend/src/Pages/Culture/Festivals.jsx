@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Festivals.style.css";
 import FestivalData from "./FestivalData.js";
 import Footer from "../../Components/Footer/Footer";
+import topImage from "../../assets/festival/top.png";
 
 export default function Festivals() {
     const [selectedFestival, setSelectedFestival] = useState(null);
@@ -11,8 +12,8 @@ export default function Festivals() {
 
             {/* Hero Section */}
             <div className="festival-hero">
-                <img src="/src/assets/clipart_background.png" alt="Traditional festival" className='festival-img1' />
-                <h1>Festival & Handicrafts of Bihar</h1>
+                <img src={topImage} alt="Traditional festival" className='festival-img1' />
+                <h1>Festival of Bihar</h1>
             </div>
             {/* Zig-Zag Sections */}
             {FestivalData.map((item, index) => (

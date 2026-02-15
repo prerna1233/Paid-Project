@@ -39,7 +39,9 @@ export class BlogService {
       .populate("comments.user", "name email");
     
     if (!blog) {
-      throw new Error("Blog not found");
+      const err = new Error("Blog not found");
+      err.statusCode = 404;
+      throw err;
     }
     return blog;
   }
@@ -182,22 +184,40 @@ export class BlogService {
     const blog = await Blog.findById(blogId);
     
     if (!blog) {
-      throw new Error("Blog not found");
+      const err = new Error("Blog not found");
+      err.statusCode = 404;
+      throw err;
     }
 
     const comment = blog.comments.id(commentId);
     
     if (!comment) {
-      throw new Error("Comment not found");
+      const err = new Error("Comment not found");
+      err.statusCode = 404;
+      throw err;
     }
 
     // Check if user owns the comment
     if (comment.user.toString() !== userId.toString()) {
-      throw new Error("Unauthorized to delete this comment");
+      const err = new Error("Unauthorized to delete this comment");
+      err.statusCode = 403;
+      throw err;
     }
 
-    comment.remove();
+    console.debug(`[BlogService] deleteComment: blogId=${blogId} commentId=${commentId} originalCount=${blog.comments.length}`);
+    console.debug('[BlogService] comments ids:', blog.comments.map(c => String(c._id)).slice(0,10));
+
+    // remove comment (use filter to be robust in case subdoc methods are unavailable)
+    const originalCount = blog.comments.length;
+    blog.comments = blog.comments.filter(c => c._id.toString() !== commentId.toString());
+    if (blog.comments.length === originalCount) {
+      const err = new Error('Comment not found');
+      err.statusCode = 404;
+      throw err;
+    }
     await blog.save();
+
+    console.debug(`[BlogService] deleteComment: removed, newCount=${blog.comments.length}`);
 
     return {
       message: "Comment deleted successfully",
@@ -212,18 +232,33 @@ export class BlogService {
     const blog = await Blog.findById(blogId);
     
     if (!blog) {
-      throw new Error("Blog not found");
+      const err = new Error("Blog not found");
+      err.statusCode = 404;
+      throw err;
     }
 
     const comment = blog.comments.id(commentId);
     
     if (!comment) {
-      throw new Error("Comment not found");
+      const err = new Error("Comment not found");
+      err.statusCode = 404;
+      throw err;
     }
 
-    // Admin can delete any comment - no ownership check
-    comment.remove();
+    console.debug(`[BlogService] deleteCommentAdmin: blogId=${blogId} commentId=${commentId} originalCount=${blog.comments.length}`);
+    console.debug('[BlogService] comments ids:', blog.comments.map(c => String(c._id)).slice(0,10));
+
+    // Admin can delete any comment - remove by filtering to avoid subdoc method issues
+    const originalCount = blog.comments.length;
+    blog.comments = blog.comments.filter(c => c._id.toString() !== commentId.toString());
+    if (blog.comments.length === originalCount) {
+      const err = new Error('Comment not found');
+      err.statusCode = 404;
+      throw err;
+    }
     await blog.save();
+
+    console.debug(`[BlogService] deleteCommentAdmin: removed, newCount=${blog.comments.length}`);
 
     return {
       message: "Comment deleted successfully by admin",

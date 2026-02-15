@@ -7,11 +7,19 @@ import { FaMapMarkerAlt, FaCar, FaBus, FaMotorcycle, FaWalking, FaClock, FaRupee
 function Destination() {
   const [selectedDestination, setSelectedDestination] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
+  // Some setters are declared for future interactive controls (search/filters)
+  // and are currently unused; disable the unused-vars rule for these lines.
+  // eslint-disable-next-line no-unused-vars
   const [searchTerm, setSearchTerm] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [selectedCategory, setSelectedCategory] = useState('all');
+  // eslint-disable-next-line no-unused-vars
   const [selectedDistance, setSelectedDistance] = useState('all');
+  // eslint-disable-next-line no-unused-vars
   const [selectedSeason, setSelectedSeason] = useState('all');
+  // eslint-disable-next-line no-unused-vars
   const [showFamilyFriendly, setShowFamilyFriendly] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [showAccessible, setShowAccessible] = useState(false);
 
   const openModal = (destination) => {
@@ -35,6 +43,7 @@ function Destination() {
   };
 
   // Category icons for government tourism
+  // eslint-disable-next-line no-unused-vars
   const getCategoryIcon = (category) => {
     const lowerCategory = category.toLowerCase();
     if (lowerCategory.includes('nature') || lowerCategory.includes('eco')) return <FaTree />;
@@ -51,21 +60,28 @@ function Destination() {
   
   // Filter destinations based on search and filters
   const filteredDestinations = allDestinations.filter(destination => {
-    const matchesSearch = destination.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      destination.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      destination.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = selectedCategory === 'all' || 
-      destination.category.toLowerCase().includes(selectedCategory.toLowerCase());
-    
-    const distanceKm = parseInt(destination.distance);
+    // Defensive guards: ensure fields exist before calling string methods
+    const title = (destination && destination.title) ? String(destination.title) : '';
+    const category = (destination && destination.category) ? String(destination.category) : '';
+    const description = (destination && destination.description) ? String(destination.description) : '';
+    const bestTime = (destination && destination.bestTime) ? String(destination.bestTime) : '';
+
+    const q = String(searchTerm || '').toLowerCase();
+    const matchesSearch = title.toLowerCase().includes(q) ||
+      category.toLowerCase().includes(q) ||
+      description.toLowerCase().includes(q);
+
+    const matchesCategory = selectedCategory === 'all' ||
+      category.toLowerCase().includes(String(selectedCategory || '').toLowerCase());
+
+    const distanceKm = parseInt(destination && destination.distance, 10);
     const matchesDistance = selectedDistance === 'all' ||
-      (selectedDistance === '10' && distanceKm <= 10) ||
-      (selectedDistance === '50' && distanceKm <= 50) ||
-      (selectedDistance === '100' && distanceKm <= 100);
-    
-    const matchesSeason = selectedSeason === 'all' || 
-      destination.bestTime.toLowerCase().includes(selectedSeason.toLowerCase());
+      (selectedDistance === '10' && !isNaN(distanceKm) && distanceKm <= 10) ||
+      (selectedDistance === '50' && !isNaN(distanceKm) && distanceKm <= 50) ||
+      (selectedDistance === '100' && !isNaN(distanceKm) && distanceKm <= 100);
+
+    const matchesSeason = selectedSeason === 'all' ||
+      bestTime.toLowerCase().includes(String(selectedSeason || '').toLowerCase());
 
     return matchesSearch && matchesCategory && matchesDistance && matchesSeason;
   });
@@ -125,8 +141,8 @@ function Destination() {
             </div> 
             
             <div className="destinations-grid">
-              {filteredDestinations.map((destination, index) => (
-                <div key={destination.id} className="destination-card-compact">
+              {filteredDestinations.map((destination, idx) => (
+                <div key={`${destination && destination.id ? destination.id : 'dest'}-${idx}`} className="destination-card-compact">
                   <div className="card-image">
                     <img 
                       src={destination.img} 
@@ -139,7 +155,7 @@ function Destination() {
                   </div>
                   
                   <div className="card-content">
-                    <h3 className="card-title">{destination.title}</h3>
+                          <h3 className="card-title">{destination.title || 'Untitled'}</h3>
                     
                     <p className="card-description">
                       {destination.description.length > 100 
@@ -149,10 +165,10 @@ function Destination() {
                     
                     <div className="card-info">
                       <span className="info-item">
-                        <FaCalendarAlt /> {destination.bestTime}
+                        <FaCalendarAlt /> {destination.bestTime || 'N/A'}
                       </span>
                       <span className="info-item">
-                        <FaMapMarkerAlt /> {destination.distance}
+                        <FaMapMarkerAlt /> {destination.distance || 'N/A'}
                       </span>
                     </div>
                     
@@ -578,24 +594,7 @@ function Destination() {
           </div>
         </div>
 
-        {/* Disclaimer Section */}
-        <div className="disclaimer-section">
-          <div className="disclaimer-content">
-            <h4>Disclaimer</h4>
-            <p>
-              The information provided on this website is for general guidance purposes only. 
-              While we strive to keep the information accurate and up-to-date, we make no representations 
-              or warranties of any kind about the completeness, accuracy, reliability, or availability. 
-              Visitors are advised to verify information with official sources before making travel plans. 
-              Entry fees, timings, and accessibility may change without prior notice.
-            </p>
-            <p className="disclaimer-contact">
-              For latest updates, contact: <strong>District Tourism Office, Kishanganj</strong> | 
-              Email: <a href="mailto:dm-kishanganj-br@nic.in">dm-kishanganj-br@nic.in</a> | 
-              Phone: <a href="tel:06456222100">06456-222100</a>
-            </p>
-          </div>
-        </div>
+        {/* Disclaimer removed as requested */}
 
         {/* Footer Component */}
         <Footer />
@@ -674,9 +673,9 @@ function Destination() {
                           <FaStar className="title-icon" /> Highlights
                         </h4>
                         <ul className="feature-list">
-                          {selectedDestination.highlights.map((highlight, index) => (
+                          {(selectedDestination.highlights && Array.isArray(selectedDestination.highlights)) ? selectedDestination.highlights.map((highlight, index) => (
                             <li key={index}>{highlight}</li>
-                          ))}
+                          )) : <li>No highlights available</li>}
                         </ul>
                       </div>
 
@@ -686,9 +685,9 @@ function Destination() {
                           <FaInfoCircle className="title-icon" /> Facilities
                         </h4>
                         <ul className="feature-list">
-                          {selectedDestination.facilities.map((facility, index) => (
+                          {(selectedDestination.facilities && Array.isArray(selectedDestination.facilities)) ? selectedDestination.facilities.map((facility, index) => (
                             <li key={index}>{facility}</li>
-                          ))}
+                          )) : <li>No facilities listed</li>}
                         </ul>
                       </div>
                     </div>
@@ -709,23 +708,23 @@ function Destination() {
                     <h3 className="section-title">How to Reach {selectedDestination.title}</h3>
                     
                     <div className="travel-grid">
-                      {Object.entries(selectedDestination.travelModes).map(([mode, details]) => (
+                      {(selectedDestination.travelModes && typeof selectedDestination.travelModes === 'object') ? Object.entries(selectedDestination.travelModes).map(([mode, details]) => (
                         <div key={mode} className="travel-card-elegant">
                           <div className="travel-icon-wrapper">
                             {getTravelIcon(mode)}
                           </div>
-                          <h4 className="travel-mode-title">{mode.charAt(0).toUpperCase() + mode.slice(1)}</h4>
+                          <h4 className="travel-mode-title">{String(mode).charAt(0).toUpperCase() + String(mode).slice(1)}</h4>
                           <div className="travel-details">
                             <div className="detail-row">
-                              <FaClock /> <span>{details.time}</span>
+                              <FaClock /> <span>{(details && details.time) ? details.time : 'N/A'}</span>
                             </div>
                             <div className="detail-row">
-                              <FaRupeeSign /> <span>{details.cost}</span>
+                              <FaRupeeSign /> <span>{(details && details.cost) ? details.cost : 'N/A'}</span>
                             </div>
                           </div>
-                          <p className="travel-route"><strong>Route:</strong> {details.route}</p>
+                          <p className="travel-route"><strong>Route:</strong> {(details && details.route) ? details.route : 'N/A'}</p>
                         </div>
-                      ))}
+                      )) : <div>No travel information available</div>}
                     </div>
 
                     <div className="info-banner">
@@ -747,8 +746,8 @@ function Destination() {
                         <FaMapMarkerAlt className="map-marker-icon" />
                         <div>
                           <h4>{selectedDestination.title}</h4>
-                          <p><strong>Coordinates:</strong> {selectedDestination.coordinates.lat}°N, {selectedDestination.coordinates.lng}°E</p>
-                          <p><strong>Distance:</strong> {selectedDestination.distance} from Kishanganj</p>
+                          <p><strong>Coordinates:</strong> {selectedDestination.coordinates && selectedDestination.coordinates.lat ? `${selectedDestination.coordinates.lat}°N` : 'N/A'}, {selectedDestination.coordinates && selectedDestination.coordinates.lng ? `${selectedDestination.coordinates.lng}°E` : 'N/A'}</p>
+                          <p><strong>Distance:</strong> {selectedDestination.distance || 'N/A'} from Kishanganj</p>
                         </div>
                       </div>
 
@@ -757,7 +756,7 @@ function Destination() {
                           width="100%"
                           height="400"
                           frameBorder="0"
-                          src={`https://www.openstreetmap.org/export/embed.html?bbox=${selectedDestination.coordinates.lng-0.01},${selectedDestination.coordinates.lat-0.01},${selectedDestination.coordinates.lng+0.01},${selectedDestination.coordinates.lat+0.01}&layer=mapnik&marker=${selectedDestination.coordinates.lat},${selectedDestination.coordinates.lng}`}
+                          src={`https://www.openstreetmap.org/export/embed.html?bbox=${(selectedDestination.coordinates && selectedDestination.coordinates.lng) ? selectedDestination.coordinates.lng-0.01 : 0},${(selectedDestination.coordinates && selectedDestination.coordinates.lat) ? selectedDestination.coordinates.lat-0.01 : 0},${(selectedDestination.coordinates && selectedDestination.coordinates.lng) ? selectedDestination.coordinates.lng+0.01 : 0},${(selectedDestination.coordinates && selectedDestination.coordinates.lat) ? selectedDestination.coordinates.lat+0.01 : 0}&layer=mapnik&marker=${(selectedDestination.coordinates && selectedDestination.coordinates.lat) ? selectedDestination.coordinates.lat : 0},${(selectedDestination.coordinates && selectedDestination.coordinates.lng) ? selectedDestination.coordinates.lng : 0}`}
                           allowFullScreen
                           title={`Map of ${selectedDestination.title}`}
                         ></iframe>

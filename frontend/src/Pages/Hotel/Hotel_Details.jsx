@@ -244,8 +244,7 @@ const HotelCardWithDetails = ({ hotel }) => {
           <div className="hotel-distance">{hotel.distance}</div>
           
           <div className="hotel-rating">
-            <span className="rating-score">{hotel.rating}</span>
-            <span className="rating-text">({hotel.reviews} reviews)</span>
+            <span className="rating-score">Rating: {Math.round(hotel.rating)}/10</span>
           </div>
           
           {hotel.amenities && hotel.amenities.length > 0 && (
@@ -379,7 +378,9 @@ const HotelCardWithDetails = ({ hotel }) => {
           </div>
 
           <div className="book-section">
-            <button className="book-now-btn">Book Now</button>
+            <div className="hotel-short-description">
+              <p>{hotel.description}</p>
+            </div>
           </div>
         </div>
       )}

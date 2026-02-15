@@ -1,43 +1,150 @@
+import lakeImg from '../../assets/destination/lake.png';
+import churliImg from '../../assets/destination/churli.png';
+import nehruParkImg from '../../assets/destination/nehru-park.png';
+import mahanandaImg from '../../assets/destination/mahananda.png';
+import teaGardenImg from '../../assets/destination/tea-garden.png';
+import kankiImg from '../../assets/destination/kanki.png';
+import panitankiImg from '../../assets/destination/panitanki.png';
+
 const destinationData = {
   "Kishanganj District": [
     {
-      id: 1,
-      title: "Bahadurganj Tea Gardens",
-      category: "Nature & Agriculture",
-      description: "Sprawling tea plantations with lush green landscapes offering scenic beauty and insight into local tea production. Experience the serene environment and learn about traditional tea cultivation methods.",
-      img: "https://images.pexels.com/photos/4464078/pexels-photo-4464078.jpeg?auto=compress&cs=tinysrgb&w=600&h=400",
-      distance: "12 km",
-      duration: "25 minutes",
-      coordinates: { lat: 26.2547, lng: 87.8331 },
+      id: 7,
+      title: "Kachuudah Lake",
+      category: "Nature & Birdwatching",
+      description: "A large, scenic freshwater lake surrounded by greenery — a peaceful natural retreat. Migratory birds visit during winter, making it a great spot for birdwatchers and photography.",
+      img: lakeImg,
+      distance: "35-40 km",
+      duration: "~1 hour",
+      coordinates: { lat: null, lng: null },
       travelModes: {
-        car: { time: "25 min", route: "Via NH27 → Bahadurganj Road", cost: "₹150" },
-        bus: { time: "35 min", route: "Local bus from Kishanganj Bus Stand", cost: "₹25" },
-        bike: { time: "30 min", route: "NH27 → Tea Garden Road", cost: "₹50" },
-        walking: { time: "2.5 hours", route: "Pedestrian path through villages", cost: "Free" }
+        car: { time: "1 hour", route: "Kishanganj → Thakurganj/Belwa route", cost: "₹400-₹600 (approx)" },
+        bus: { time: "1.5 hours", route: "Local bus toward Thakurganj/Belwa then local transport", cost: "₹50-₹120" },
+        bike: { time: "1.5 hours", route: "District roads via Thakurganj", cost: "₹150-₹250" },
+        walking: { time: "Not recommended", route: "N/A", cost: "N/A" }
       },
-      highlights: ["Tea Plantation Tours", "Photography Spots", "Local Tea Tasting", "Nature Walks"],
-      bestTime: "October to March",
-      facilities: ["Parking", "Refreshments", "Guide Services", "Rest Areas"]
+      highlights: ["Birdwatching", "Boating (seasonal)", "Sunset views", "Picnic spots", "Photography"],
+      bestTime: "November to February",
+      facilities: ["Limited refreshments/tea stalls", "Basic parking (seasonal)", "Limited public washrooms"]
     },
     {
-      id: 2,
-      title: "Kishanganj Cultural Heritage Museum",
-      category: "Heritage & Education",
-      description: "Comprehensive museum showcasing the rich cultural heritage, history, and traditions of Kishanganj district. Features artifacts, photographs, and interactive displays about local culture and development.",
-      img: "https://images.pexels.com/photos/1467633/pexels-photo-1467633.jpeg?auto=compress&cs=tinysrgb&w=600&h=400",
-      distance: "2 km",
-      duration: "5 minutes",
-      coordinates: { lat: 26.1047, lng: 87.9431 },
+      id: 8,
+      title: "Ruins of Churli Estate",
+      category: "Historical Site",
+      description: "Remains of an old estate/haveli from the colonial era — partly in ruins but historically significant. Offers a rustic village ambiance and good photography opportunities.",
+      img: churliImg,
+      distance: "20-25 km",
+      duration: "~40-50 minutes",
+      coordinates: { lat: null, lng: null },
       travelModes: {
-        car: { time: "5 min", route: "City Center → Museum Road", cost: "₹30" },
-        bus: { time: "10 min", route: "City bus Route 1", cost: "₹8" },
-        bike: { time: "8 min", route: "Main Road → Heritage Street", cost: "₹15" },
-        walking: { time: "20 min", route: "Heritage walk route", cost: "Free" }
+        car: { time: "40 min", route: "Kishanganj → Thakurganj direction", cost: "₹300-₹450" },
+        bus: { time: "1 hour", route: "Bus to Thakurganj then short rickshaw", cost: "₹30-₹80" },
+        bike: { time: "45 min", route: "District roads via Thakurganj", cost: "₹120-₹200" },
+        walking: { time: "Not recommended", route: "N/A", cost: "N/A" }
       },
-      highlights: ["Historical Artifacts", "Cultural Displays", "Educational Tours", "Photography Gallery"],
-      bestTime: "Year-round",
-      facilities: ["Guided Tours", "Audio Guide", "Library", "Cafe", "Gift Shop", "Parking"]
-    }
+      highlights: ["Photography", "Local history exploration", "Rustic village ambiance"],
+      bestTime: "October to March",
+      facilities: ["No formal amenities", "Village shops nearby (limited)", "No official restrooms"]
+    },
+    {
+      id: 9,
+      title: "Nehru Shanti Park",
+      category: "Leisure & Family",
+      description: "A town park with lush lawns, walking paths, and shaded seating — ideal for family strolls, relaxed evenings, and casual photography.",
+      img: nehruParkImg,
+      distance: "2 km",
+      duration: "5-10 minutes",
+      coordinates: { lat: null, lng: null },
+      travelModes: {
+        car: { time: "5-10 min", route: "Within Kishanganj town", cost: "₹30" },
+        bus: { time: "10-15 min", route: "Local rickshaw/auto", cost: "₹10" },
+        bike: { time: "8 min", route: "Local streets", cost: "₹10" },
+        walking: { time: "20-30 min", route: "Town pedestrian routes", cost: "Free" }
+      },
+      highlights: ["Family strolls", "Evening relaxation", "Photography"],
+      bestTime: "Year-round (evenings preferred)",
+      facilities: ["Seating", "Shaded areas", "Nearby eateries and hotels"]
+    },
+    {
+      id: 10,
+      title: "Mahananda River (Udra / Bagalbari Ghats)",
+      category: "Riverfront & Picnic",
+      description: "Scenic riverbanks along the Mahananda River such as Udra Ghat and Bagalbari Ghat — popular local picnic and sunset spots where locals gather for outings.",
+      img: mahanandaImg,
+      distance: "6-15 km",
+      duration: "15-35 minutes",
+      coordinates: { lat: null, lng: null },
+      travelModes: {
+        car: { time: "15-35 min", route: "Local roads along riverfront", cost: "₹150-₹300" },
+        bus: { time: "20-45 min", route: "Local bus/auto routes", cost: "₹20-₹60" },
+        bike: { time: "20-40 min", route: "Local roads", cost: "₹50-₹150" },
+        walking: { time: "Depends on ghat location", route: "N/A", cost: "Free" }
+      },
+      highlights: ["River views", "Picnics", "Local culture", "Sunset photography"],
+      bestTime: "October to March",
+      facilities: ["Basic local stalls", "Limited seating areas", "No formal restrooms at all ghats"]
+    },
+    {
+      id: 12,
+      title: "Belwa Tea Gardens",
+      category: "Scenic Rural Drive",
+      description: "Rolling tea gardens and countryside views near Belwa — one of the few tea cultivation areas in Bihar, ideal for photography and leisurely drives.",
+      img: teaGardenImg,
+      distance: "10-15 km",
+      duration: "20-40 minutes",
+      coordinates: { lat: null, lng: null },
+      travelModes: {
+        car: { time: "20-40 min", route: "Kishanganj → Belwa Tea Garden Road", cost: "₹200-₹350" },
+        bus: { time: "30-50 min", route: "Local bus to Belwa area", cost: "₹20-₹60" },
+        bike: { time: "25-40 min", route: "Local roads", cost: "₹80-₹150" },
+        walking: { time: "Not recommended for long distances", route: "N/A", cost: "N/A" }
+      },
+      highlights: ["Photography", "Countryside drive", "Learning about local tea production"],
+      bestTime: "October to March",
+      facilities: ["No hotels on-site", "Basic local shops", "Return to Kishanganj for lodging"]
+    },
+    {
+      id: 14,
+      title: "Panitanki (India–Nepal Border)",
+      category: "Border Trade & Culture",
+      description: "A major India–Nepal border crossing point near Siliguri with a lively cross-border trade atmosphere.",
+  img: panitankiImg,
+      distance: "~50 km",
+      duration: "1.5 hours",
+      mapLink: "https://maps.google.com/?q=Panitanki",
+      coordinates: { lat: null, lng: null },
+      travelModes: {
+        car: { time: "1.5 hours", route: "NH27 toward Siliguri", cost: "₹800-₹1200 (approx)" },
+        bus: { time: "1.5-2 hours", route: "Intercity bus via NH27", cost: "₹150-₹300" },
+        bike: { time: "2+ hours", route: "Highway route", cost: "₹300-₹500" },
+        walking: { time: "Depends on border procedures", route: "N/A", cost: "N/A" }
+      },
+      highlights: ["Mechi River", "Border gate & security checkpost", "Nepal market (Kakarbhitta) across the border", "Lively cross-border trade"],
+      bestTime: "Year-round (check border timings)",
+      facilities: ["Hotels and restaurants", "Petrol pumps", "Washrooms in eateries", "Currency exchange & shops"],
+      bestFor: "Border tourism & short international experience (carry valid ID)"
+    },
+    {
+      id: 13,
+      title: "Kanki Kali Mandir (Kanki Temple)",
+      category: "Religious & Cultural",
+      description: "A very famous Kali temple in Kanki village, visited by devotees from Bihar, West Bengal, and Nepal.",
+      img: kankiImg,
+      distance: "~18–20 km",
+      duration: "30–35 minutes",
+      mapLink: "https://maps.google.com/?q=Kanki+Kali+Mandir+Bihar",
+      coordinates: { lat: null, lng: null },
+      travelModes: {
+        car: { time: "30-35 min", route: "Kishanganj → Kanki via local roads", cost: "₹250-₹400 (approx)" },
+        bus: { time: "40-50 min", route: "Local bus toward Kanki / shared jeep", cost: "₹30-₹80" },
+        bike: { time: "35-45 min", route: "Local roads", cost: "₹80-₹150" },
+        walking: { time: "Not recommended", route: "N/A", cost: "N/A" }
+      },
+      highlights: ["Beautiful idol of Goddess Kali", "Large temple campus", "Devotional atmosphere", "Major crowd during Navratri & Kali Puja"],
+      bestTime: "Navratri & Kali Puja; evenings year-round",
+      facilities: ["Shops selling prasad & flowers", "Basic washrooms (seasonal improvements during festivals)", "Small eateries nearby", "No luxury stay at temple — stay in Kishanganj town"],
+      bestFor: "Religious tourism & cultural experience"
+    },
   ],
   "Religious Heritage": [
     {
@@ -60,69 +167,7 @@ const destinationData = {
       facilities: ["Prayer Hall", "Parking", "Shoe Storage", "Prasad Counter"]
     }
   ],
-  "Natural Attractions": [
-    {
-      id: 4,
-      title: "Mahananda Wildlife Sanctuary",
-      category: "Wildlife & Nature",
-      description: "Protected forest area spanning diverse ecosystems with rich flora and fauna. Home to various species of birds, mammals, and rare plants. Offers nature trails and wildlife viewing opportunities.",
-      img: "https://images.pexels.com/photos/1172253/pexels-photo-1172253.jpeg?auto=compress&cs=tinysrgb&w=600&h=400",
-      distance: "35 km",
-      duration: "1 hour",
-      coordinates: { lat: 26.8247, lng: 88.3531 },
-      travelModes: {
-        car: { time: "1 hour", route: "NH27 → Sanctuary Road via Siliguri", cost: "₹350" },
-        bus: { time: "1.5 hours", route: "Interstate bus to Siliguri → Local transport", cost: "₹80" },
-        bike: { time: "1.2 hours", route: "Highway route through forest roads", cost: "₹150" },
-        walking: { time: "7 hours", route: "Not recommended - too far", cost: "Free" }
-      },
-      highlights: ["Wildlife Spotting", "Nature Trails", "Bird Watching", "Photography"],
-      bestTime: "November to April",
-      facilities: ["Entry Gate", "Guide Services", "Rest House", "Nature Interpretation Center"]
-    }
-  ],
-  "Hill Stations & Tourism": [
-    {
-      id: 5,
-      title: "Darjeeling Hills",
-      category: "Hill Station & Tourism",
-      description: "World-renowned hill station famous for its tea gardens, stunning mountain views, and pleasant climate. Experience the historic toy train, visit tea estates, and enjoy panoramic Himalayan vistas.",
-      img: "https://images.pexels.com/photos/1598073/pexels-photo-1598073.jpeg?auto=compress&cs=tinysrgb&w=600&h=400",
-      distance: "85 km",
-      duration: "2.5 hours",
-      coordinates: { lat: 27.0360, lng: 88.2627 },
-      travelModes: {
-        car: { time: "2.5 hours", route: "NH27 → Hill Cart Road via Siliguri", cost: "₹800" },
-        bus: { time: "3.5 hours", route: "Kishanganj → Siliguri → Darjeeling", cost: "₹200" },
-        bike: { time: "3 hours", route: "Scenic mountain roads", cost: "₹300" },
-        train: { time: "6 hours", route: "Toy Train from New Jalpaiguri", cost: "₹150" }
-      },
-      highlights: ["Tiger Hill Sunrise", "Tea Garden Tours", "Toy Train Ride", "Mall Road Shopping"],
-      bestTime: "March to May, September to November",
-      facilities: ["Hotels", "Restaurants", "Tourist Information", "Transport Hub"]
-    }
-  ],
-  "Border Trade & Culture": [
-    {
-      id: 6,
-      title: "Nepal Border Market",
-      category: "Shopping & Culture",
-      description: "Vibrant international border market offering unique cross-cultural shopping experience. Find traditional handicrafts, spices, textiles, and experience the blend of Indian and Nepalese cultures.",
-      img: "https://images.pexels.com/photos/3201921/pexels-photo-3201921.jpeg?auto=compress&cs=tinysrgb&w=600&h=400",
-      distance: "18 km",
-      duration: "35 minutes",
-      coordinates: { lat: 26.3547, lng: 87.7331 },
-      travelModes: {
-        car: { time: "35 min", route: "Border Road via Immigration Post", cost: "₹200" },
-        bus: { time: "50 min", route: "Local bus to border crossing", cost: "₹30" },
-        bike: { time: "40 min", route: "Direct border route", cost: "₹80" },
-        walking: { time: "3.5 hours", route: "Border walking path", cost: "Free" }
-      },
-      highlights: ["Cross-Border Shopping", "Cultural Exchange", "Traditional Crafts", "Local Cuisine"],
-      bestTime: "Year-round (check border timings)",
-      facilities: ["Immigration Office", "Currency Exchange", "Parking", "Food Courts"]
-    }
-  ]
+
 };
 
 export default destinationData;

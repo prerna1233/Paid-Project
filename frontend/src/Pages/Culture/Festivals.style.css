@@ -22,11 +22,25 @@
 
 .festival-hero h1 {
   position: absolute;
-  bottom: 20%;
+  top: 50%;
   left: 10%;
+  transform: translateY(-50%); /* vertical center while remaining left-aligned */
   color: #fffdfd;
   font-weight: bold;
   font-size: 4rem;
+  z-index: 2;
+  text-align: left;
+  padding: 0 12px;
+}
+
+/* Mobile fallback: center horizontally on very small screens */
+@media (max-width: 520px) {
+  .festival-hero h1 {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 2rem;
+  }
 }
 
 /* Zig-Zag Section */

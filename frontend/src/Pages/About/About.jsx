@@ -3,6 +3,7 @@ import "./About.style.css";
 import { aboutData, aboutImage } from "./AboutData";
 import Footer from "../../Components/Footer/Footer";
 import Button from "../../Components/Button/Readmore";
+import Culture from "../Culture/Culture";
 
 
 export default function About() {
@@ -37,7 +38,7 @@ export default function About() {
             is a beautiful destination in Bihar.
           </p>
 
-          <Button link="/Culture"/>
+          <Button link="Culture/Culture"/>
         </div>
 
       </div>
