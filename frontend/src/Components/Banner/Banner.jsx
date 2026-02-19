@@ -1,47 +1,14 @@
-// import React from "react";
-// import "./Banner.css";
-
-// const images = [
-//   "src/assets/1pic.png",
-//   "src/assets/2pic.png",
-//   "src/assets/3pic.png",
-//   "src/assets/4pic.webp",
-//   "src/assets/5pic.jpg",
-//   "src/assets/6pic.png",
-//   "src/assets/7pic.webp",
-//   "src/assets/8pic.webp",
-//   "src/assets/9pic.jpg",
-//   "src/assets/10pic.webp",
-// ];
-
-// const Banner = () => {
-//   return (
-//     <div className="banner">
-//       <div className="slider" style={{ "--quantity": images.length }}>
-//         {images.map((img, index) => (
-//           <div
-//             className="item" key={index} style={{ "--position": index + 1 }}>
-//             <img src={img} alt={`slide-${index}`} />
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Banner;
-
 
 
 import React, { useEffect, useState } from "react";
 import "./Banner.css";
 
-import img1 from "../../assets/1pic.png";
-import img2 from "../../assets/2pic.png";
-import img3 from "../../assets/3pic.png";
-import img4 from "../../assets/4pic.webp";
-import img5 from "../../assets/5pic.jpg";
-import img6 from "../../assets/6pic.png";
+
+import img1 from "../../assets/Banner/image1.png";
+import img2 from "../../assets/Banner/image2.png";
+import img3 from "../../assets/Banner/image3.png";
+import img4 from "../../assets/Banner/image4.png";
+import img5 from "../../assets/Banner/image5.png";
 
 const images = [
   { src: img1, title: "Kishanganj" },
@@ -49,7 +16,6 @@ const images = [
   { src: img3, title: "Kishanganj" },
   { src: img4, title: "Kishanganj" },
   { src: img5, title: "Kishanganj" },
-  { src: img6, title: "Kishanganj" },
 ];
 export default function Banner() {
   const [active, setActive] = useState(0);

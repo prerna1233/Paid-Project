@@ -127,7 +127,9 @@ export default function Home() {
               Kishanganj’s culture places great importance on traditional food, such as rice, lentils, fish, and local vegetables.
               In many households, food is still cooked on traditional clay stoves (chulha), which enhances the taste and aroma.
               The local art and handicrafts of Kishanganj reflect simplicity, rural life, and a close connection with nature.
-            </p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum ipsa fugit accusamus alias aspernatur eaque obcaecati id, perspiciatis totam asperiores, impedit necessitatibus enim adipisci? Ipsa nemo reprehenderit laborum odio illo.
+              Festivals like Eid, Durga Puja, Holi, and Chhath Puja are celebrated with enthusiasm, reflecting the district’s communal harmony and diversity.
+              Tea gardens are a unique feature, earning Kishanganj the title “Tea Town of Bihar.”
+            </p>
             {/* <button className="btn more">More<FaArrowRight /></button> */}
           </div>
           <div className="culture-images">

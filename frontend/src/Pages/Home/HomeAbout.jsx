@@ -32,7 +32,7 @@ const HomeAbout = () => {
                 alt="Profile" 
               />
             </div>
-            <h3 className="homeabout-about-title">DISTRICT MAGISTRATE</h3>
+            <h3 className="homeabout-about-title">District Administration</h3>
             <p className="homeabout-about-text">
               Shri Vishal Raj (IAS) serves as the District Magistrate and Collector of Kishanganj, Bihar. The District Magistrate ensures law and order, supervises government departments, and implements state and central welfare schemes through regular field visits for district development.
             </p>
@@ -42,7 +42,7 @@ const HomeAbout = () => {
           <div className="homeabout-right-section">
             {/* Main Heading */}
             <h2 className="homeabout-main-heading">
-              TIME TO TRAVEL
+            District Administration
             </h2>
 
             {/* Travel Cards Grid */}

@@ -447,34 +447,26 @@ function Destination() {
             <div className="safety-grid">
               <div className="emergency-contacts-card">
                 <h3>Emergency Helplines</h3>
-                <div className="contact-list">
-                  <div className="contact-item">
-                    <FaPhone className="contact-icon" />
-                    <div className="contact-details">
-                      <span className="contact-label">Police Emergency</span>
-                      <a href="tel:100" className="contact-number">100</a>
-                    </div>
+                <div className="helpline-list">
+                  <div className="helpline-item">
+                    <FaShieldAlt className="emergency-icon" />
+                    <span>Police Emergency</span>
+                    <strong>100</strong>
                   </div>
-                  <div className="contact-item">
-                    <FaAmbulance className="contact-icon" />
-                    <div className="contact-details">
-                      <span className="contact-label">Ambulance</span>
-                      <a href="tel:108" className="contact-number">108</a>
-                    </div>
+                  <div className="helpline-item">
+                    <FaAmbulance className="emergency-icon" />
+                    <span>Ambulance</span>
+                    <strong>108</strong>
                   </div>
-                  <div className="contact-item">
-                    <FaHospital className="contact-icon" />
-                    <div className="contact-details">
-                      <span className="contact-label">District Hospital</span>
-                      <a href="tel:06456222222" className="contact-number">06456-222222</a>
-                    </div>
+                  <div className="helpline-item">
+                    <FaHospital className="emergency-icon" />
+                    <span>District Hospital</span>
+                    <strong>06456-222222</strong>
                   </div>
-                  <div className="contact-item">
-                    <FaInfoCircle className="contact-icon" />
-                    <div className="contact-details">
-                      <span className="contact-label">Tourist Helpline</span>
-                      <a href="tel:1363" className="contact-number">1363</a>
-                    </div>
+                  <div className="helpline-item">
+                    <FaPhone className="emergency-icon" />
+                    <span>Tourist Helpline</span>
+                    <strong>1363</strong>
                   </div>
                 </div>
               </div>
