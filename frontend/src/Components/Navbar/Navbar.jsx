@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink, Link, } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import styles from './Navbar.module.css'
 // ...existing code imports
 import logo from '../../assets/logo.png'
 import { MdLanguage } from "react-icons/md";
-import { BsSun, BsMoon } from "react-icons/bs";
+// import { BsSun, BsMoon } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 
 
 export default function Navbar() {
-    // const navigate = useNavigate();
-    const [dark, light] = useState(false);
+    const navigate = useNavigate();
+    // Removed dark/light mode state
     const [showCulture, setShowCulture] = useState(false);
     const [showAbout, setShowAbout] = useState(false);
     const [showAccomodation, setShowAccomodation] = useState(false);
@@ -190,13 +190,13 @@ export default function Navbar() {
           // ignore
         }
 
-        setIsLoggedIn(false);
-        setIsEditMode(false);
-        setShowProfileDropdown(false);
-        setAuthMode('login');
-        setUserDetails({ username: '', email: '', designation: '' });
-        // reload so app resets auth-dependent UI
-        setTimeout(() => { window.location.reload(); }, 50);
+    setIsLoggedIn(false);
+    setIsEditMode(false);
+    setShowProfileDropdown(false);
+    setAuthMode('login');
+    setUserDetails({ username: '', email: '', designation: '' });
+    setIsAdmin(false); // Hide admin link after logout
+    navigate('/');
     };
 
     // On mount, check for token and fetch profile
@@ -323,9 +323,7 @@ export default function Navbar() {
                 <div className={styles.right}>
 
                     {/* Theme Icon */}
-                    <div className={styles.themeIcon} onClick={() => light(!dark)}>
-                        {dark ? <BsMoon /> : <BsSun />}
-                    </div>
+                    {/* Theme toggle removed */}
 
                     {/* Language Icon */}
                     <div className={styles.language}>

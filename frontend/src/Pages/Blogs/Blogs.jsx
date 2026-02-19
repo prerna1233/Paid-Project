@@ -10,6 +10,7 @@ const Blogs = () => {
   const [_editingBlog, setEditingBlog] = useState(null);
   // blogs will come from backend
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   // API base (Vite env override)
   const API_BASE = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE)
     ? import.meta.env.VITE_API_BASE
@@ -53,6 +54,7 @@ const Blogs = () => {
   // fetch published blogs from backend on mount
   React.useEffect(() => {
     const fetchBlogs = async () => {
+      setLoading(true);
       try {
         const res = await fetch(`${API_BASE}/blogs`);
         if (!res.ok) throw new Error(`Failed to fetch blogs: ${res.status}`);
@@ -65,6 +67,8 @@ const Blogs = () => {
         }));
       } catch (err) {
         console.error('Error loading blogs', err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchBlogs();
@@ -389,73 +393,79 @@ const Blogs = () => {
 
   {/* Blog List - One Blog Per Row (stacked) */}
   <div className="blogs-list" style={{ maxWidth: 1200, margin: '48px auto', display: 'flex', flexDirection: 'column', gap: 40 }}>
-        {blogs.map((blog, idx) => {
-          const liked = likedBlogs.includes(blog.id);
-          const dropdownOpen = showCommentsDropdown[blog.id];
-          return (
-            <div key={blog.id + '-' + idx} className="blog-card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch', padding: 22, gap: 20, background: '#fff', borderRadius: 14, boxShadow: '0 10px 40px rgba(34,51,107,0.08)', border: '1px solid #e6eef0', overflow: 'hidden' }}>
-              <div className="blog-content" style={{ flex: 1, padding: '6px 12px', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
-                  <h3 className="blog-title" onClick={() => handleOpenBlogDetail(blog)} style={{ fontSize: '1.4rem', margin: 0, cursor: 'pointer', color: '#22336b', lineHeight: 1.2 }}>
-                    {blog.title}
-                  </h3>
-                  <div style={{ textAlign: 'right', minWidth: 110 }}>
-                    <div style={{ fontSize: '0.9rem', color: '#6b7069', marginBottom: 6 }}><FaCalendarAlt /> {blog.date}</div>
-                  </div>
+    {loading ? (
+      <div style={{ textAlign: 'center', fontSize: '1.2rem', color: '#22336b', margin: '2rem 0' }}>
+        Loading blogs...
+      </div>
+    ) : (
+      blogs.map((blog, idx) => {
+        const liked = likedBlogs.includes(blog.id);
+        const dropdownOpen = showCommentsDropdown[blog.id];
+        return (
+          <div key={blog.id + '-' + idx} className="blog-card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch', padding: 22, gap: 20, background: '#fff', borderRadius: 14, boxShadow: '0 10px 40px rgba(34,51,107,0.08)', border: '1px solid #e6eef0', overflow: 'hidden' }}>
+            <div className="blog-content" style={{ flex: 1, padding: '6px 12px', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
+                <h3 className="blog-title" onClick={() => handleOpenBlogDetail(blog)} style={{ fontSize: '1.4rem', margin: 0, cursor: 'pointer', color: '#22336b', lineHeight: 1.2 }}>
+                  {blog.title}
+                </h3>
+                <div style={{ textAlign: 'right', minWidth: 110 }}>
+                  <div style={{ fontSize: '0.9rem', color: '#6b7069', marginBottom: 6 }}><FaCalendarAlt /> {blog.date}</div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 8, marginBottom: 10 }}>
-                  <div style={{ width: 40, height: 40, borderRadius: 6, background: '#f1f4f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2e7d32', fontWeight: 700 }}>{(blog.author || 'A').charAt(0)}</div>
-                  <div style={{ color: '#2e7d32', fontWeight: 700, fontSize: 15 }}>By {blog.author}</div>
-                </div>
-                <p className="blog-description" style={{ margin: '6px 0 14px 0', color: '#444', fontSize: '1rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.6 }}>{blog.description}</p>
-                <div style={{ marginTop: 'auto', display: 'flex', gap: 14, alignItems: 'center' }}>
-                  <button className={`action-btn like-btn ${liked ? 'liked' : ''}`} onClick={() => handleLikeBlog(blog.id)} style={{ padding: '8px 12px', fontSize: 14 }}>
-                    <FaHeart /> <span style={{ marginLeft: 8 }}>{blog.likes || 0}</span>
-                  </button>
-                  <button className="action-btn comment-btn" onClick={() => setShowCommentsDropdown(prev => ({ ...prev, [blog.id]: !dropdownOpen }))} style={{ padding: '8px 12px', fontSize: 14 }}>
-                    <FaComment /> <span style={{ marginLeft: 8 }}>{Array.isArray(blog.comments) ? blog.comments.length : 0}</span>
-                  </button>
-                  <button className="read-more-btn" onClick={() => handleOpenBlogDetail(blog)} style={{ padding: '8px 14px', fontSize: 14 }}>
-                    READ MORE
-                  </button>
-                </div>
-                {/* Comments dropdown for main page only */}
-                {dropdownOpen && (
-                  <div className="blog-comments-dropdown">
-                    <div style={{ fontWeight: 700, color: '#22336b', marginBottom: 8 }}>Comments</div>
-                    {Array.isArray(blog.comments) && blog.comments.length > 0 ? (
-                      blog.comments.map((comment, cidx) => (
-                        <div key={blog.id + '-comment-' + cidx} style={{ borderBottom: '1px solid #e0e7ef', padding: '8px 0', color: '#22336b' }}>
-                          <div style={{ fontWeight: 600, color: '#2e7d32', fontSize: 14 }}>By {comment.author || 'Anonymous'}</div>
-                          <div style={{ fontSize: 15 }}>{comment.text}</div>
-                        </div>
-                      ))
-                    ) : (
-                      <div style={{ color: '#888', fontSize: 14 }}>No comments yet.</div>
-                    )}
-                    <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-                      <input
-                        type="text"
-                        value={commentInputs[blog.id] || ''}
-                        onChange={e => handleCommentInputChange(blog.id, e.target.value)}
-                        placeholder="Write a comment..."
-                        style={{ flex: 1, padding: '8px', borderRadius: 6, border: '1.5px solid #e0e7ef', fontSize: 14 }}
-                      />
-                      <button style={{ background: '#22336b', color: '#fff', fontWeight: 600, borderRadius: 6, border: 'none', padding: '8px 18px', fontSize: 14, cursor: 'pointer' }} onClick={() => handleAddComment(blog.id)}>
-                        Submit
-                      </button>
-                    </div>
-                  </div>
-                )}
               </div>
-              {blog.image && (
-                <div className="blog-image-preview" style={{ minWidth: 180, maxWidth: 180, height: 120, overflow: 'hidden', borderRadius: 8, flexShrink: 0, background: '#f4f6fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 8, marginBottom: 10 }}>
+                <div style={{ width: 40, height: 40, borderRadius: 6, background: '#f1f4f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2e7d32', fontWeight: 700 }}>{(blog.author || 'A').charAt(0)}</div>
+                <div style={{ color: '#2e7d32', fontWeight: 700, fontSize: 15 }}>By {blog.author}</div>
+              </div>
+              <p className="blog-description" style={{ margin: '6px 0 14px 0', color: '#444', fontSize: '1rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.6 }}>{blog.description}</p>
+              <div style={{ marginTop: 'auto', display: 'flex', gap: 14, alignItems: 'center' }}>
+                <button className={`action-btn like-btn ${liked ? 'liked' : ''}`} onClick={() => handleLikeBlog(blog.id)} style={{ padding: '8px 12px', fontSize: 14 }}>
+                  <FaHeart /> <span style={{ marginLeft: 8 }}>{blog.likes || 0}</span>
+                </button>
+                <button className="action-btn comment-btn" onClick={() => setShowCommentsDropdown(prev => ({ ...prev, [blog.id]: !dropdownOpen }))} style={{ padding: '8px 12px', fontSize: 14 }}>
+                  <FaComment /> <span style={{ marginLeft: 8 }}>{Array.isArray(blog.comments) ? blog.comments.length : 0}</span>
+                </button>
+                <button className="read-more-btn" onClick={() => handleOpenBlogDetail(blog)} style={{ padding: '8px 14px', fontSize: 14 }}>
+                  READ MORE
+                </button>
+              </div>
+              {/* Comments dropdown for main page only */}
+              {dropdownOpen && (
+                <div className="blog-comments-dropdown">
+                  <div style={{ fontWeight: 700, color: '#22336b', marginBottom: 8 }}>Comments</div>
+                  {Array.isArray(blog.comments) && blog.comments.length > 0 ? (
+                    blog.comments.map((comment, cidx) => (
+                      <div key={blog.id + '-comment-' + cidx} style={{ borderBottom: '1px solid #e0e7ef', padding: '8px 0', color: '#22336b' }}>
+                        <div style={{ fontWeight: 600, color: '#2e7d32', fontSize: 14 }}>By {comment.author || 'Anonymous'}</div>
+                        <div style={{ fontSize: 15 }}>{comment.text}</div>
+                      </div>
+                    ))
+                  ) : (
+                    <div style={{ color: '#888', fontSize: 14 }}>No comments yet.</div>
+                  )}
+                  <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+                    <input
+                      type="text"
+                      value={commentInputs[blog.id] || ''}
+                      onChange={e => handleCommentInputChange(blog.id, e.target.value)}
+                      placeholder="Write a comment..."
+                      style={{ flex: 1, padding: '8px', borderRadius: 6, border: '1.5px solid #e0e7ef', fontSize: 14 }}
+                    />
+                    <button style={{ background: '#22336b', color: '#fff', fontWeight: 600, borderRadius: 6, border: 'none', padding: '8px 18px', fontSize: 14, cursor: 'pointer' }} onClick={() => handleAddComment(blog.id)}>
+                      Submit
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
-          );
-        })}
+            {blog.image && (
+              <div className="blog-image-preview" style={{ minWidth: 180, maxWidth: 180, height: 120, overflow: 'hidden', borderRadius: 8, flexShrink: 0, background: '#f4f6fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+            )}
+          </div>
+        );
+      })
+    )}
   </div>
 
       {/* Add Blog Modal (conditionally rendered) */}
@@ -474,25 +484,7 @@ const Blogs = () => {
               className="modal-input"
               style={{ width: '100%', padding: '12px', borderRadius: 8, border: '1.5px solid #b7d7c9', fontSize: 16, marginBottom: 18 }}
             />
-            <div style={{ width: '100%', marginBottom: 18 }}>
-              <label style={{ color: '#4a7c59', fontWeight: 600, fontSize: 15 }}>Upload Image (optional)</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                      setNewBlog({ ...newBlog, image: reader.result, imageFile: file });
-                    };
-                    reader.readAsDataURL(file);
-                  }
-                }}
-                className="modal-input-file"
-                style={{ width: '100%', marginTop: 6, padding: '10px', borderRadius: 8, border: '1.5px solid #b7d7c9', fontSize: 15 }}
-              />
-            </div>
+            {/* Image upload removed as per requirements */}
             <textarea
               placeholder="Write your blog description/content here..."
               value={newBlog.description}
