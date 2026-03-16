@@ -421,3 +421,218 @@
         padding: 3rem;
     }
 }
+
+@media (max-width: 1200px) {
+    .homeabout-main-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .homeabout-about-card {
+        transform: none;
+        width: min(100%, 560px);
+        height: auto;
+        min-height: 460px;
+        padding: 2.2rem;
+    }
+
+    .homeabout-about-card:hover {
+        transform: translateY(-6px);
+    }
+
+    .homeabout-right-section {
+        max-width: 100%;
+    }
+
+    .homeabout-cards-grid {
+        flex-wrap: wrap;
+    }
+
+    .homeabout-travel-item {
+        width: min(100%, 420px);
+    }
+}
+
+@media (max-width: 992px) {
+    .homeabout-container {
+        padding: 1.4rem;
+    }
+
+    .homeabout-main-heading {
+        margin-bottom: 1.6rem;
+        font-size: 1.7rem;
+    }
+
+    .homeabout-travel-item:hover {
+        transform: translateY(-6px) scale(1.01);
+    }
+}
+
+@media (max-width: 768px) {
+    .homeabout-about-card {
+        min-height: auto;
+        border-radius: 30px;
+        padding: 1.6rem;
+    }
+
+    .homeabout-about-title {
+        font-size: 1.45rem;
+    }
+
+    .homeabout-about-text {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .homeabout-travel-item {
+        max-width: 340px;
+        padding: 1rem;
+    }
+
+    .homeabout-border-frame,
+    .homeabout-img-card {
+        width: min(100%, 250px);
+        height: 175px;
+        left: 0;
+    }
+
+    .homeabout-border-frame {
+        top: -8px;
+    }
+
+    .homeabout-card-content {
+        max-width: 100%;
+    }
+
+    .homeabout-card-text {
+        max-width: 100%;
+    }
+
+    .homeabout-btn {
+        padding: 0.62rem 1.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 374px) {
+    .homeabout-container {
+        padding: 1rem;
+    }
+
+    .homeabout-main-flex {
+        gap: 1.2rem !important;
+    }
+
+    .homeabout-main-heading {
+        font-size: 1.35rem;
+        margin-bottom: 1.1rem;
+    }
+
+    .homeabout-about-card {
+        padding: 1.1rem;
+        border-radius: 22px;
+    }
+
+    .homeabout-about-title {
+        font-size: 1.22rem;
+    }
+
+    .homeabout-about-text {
+        font-size: 0.88rem;
+        line-height: 1.45;
+    }
+
+    .homeabout-travel-item {
+        max-width: 100%;
+        padding: 0.9rem;
+        border-radius: 15px;
+    }
+
+    .homeabout-border-frame,
+    .homeabout-img-card {
+        width: min(100%, 228px);
+        height: 156px;
+    }
+
+    .homeabout-card-title {
+        font-size: 1.08rem;
+    }
+
+    .homeabout-card-text {
+        font-size: 0.8rem;
+        line-height: 1.42;
+        margin-bottom: 1.05rem;
+    }
+
+    .homeabout-btn {
+        min-width: 102px;
+        padding: 0.54rem 1.1rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .homeabout-container {
+        padding: 0.8rem;
+    }
+
+    .homeabout-main-flex {
+        gap: 1rem !important;
+    }
+
+    .homeabout-main-heading {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .homeabout-about-card {
+        padding: 1rem;
+        border-radius: 20px;
+        max-width: 100%;
+    }
+
+    .homeabout-profile-img {
+        width: 6.5rem;
+        height: 6.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .homeabout-about-title {
+        font-size: 1.15rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .homeabout-about-text {
+        font-size: 0.84rem;
+        line-height: 1.4;
+    }
+
+    .homeabout-travel-item {
+        max-width: 100%;
+        padding: 0.8rem;
+        border-radius: 14px;
+    }
+
+    .homeabout-border-frame,
+    .homeabout-img-card {
+        width: min(100%, 220px);
+        height: 150px;
+    }
+
+    .homeabout-card-title {
+        font-size: 1rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .homeabout-card-text {
+        font-size: 0.78rem;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+    }
+
+    .homeabout-btn {
+        min-width: 96px;
+        padding: 0.5rem 1rem;
+        font-size: 0.72rem;
+    }
+}

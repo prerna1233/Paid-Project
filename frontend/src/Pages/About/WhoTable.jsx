@@ -39,27 +39,31 @@ function WhoTable({ title, data }) {
 
   return (
     <div className="table-section">
-      <div className="section-title">{title}</div>
+      <div className="who-section-header">
+        <h2 className="who-section-title">{title}</h2>
+      </div>
 
-      <table className="who-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Designation</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{item.name}</td>
-              <td>{item.designation}</td>
-              <td>{item.email || "-"}</td>
+      <div className="who-table-wrap">
+        <table className="who-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Designation</th>
+              <th>Email</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.name}</td>
+                <td>{item.designation}</td>
+                <td>{item.email || "-"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

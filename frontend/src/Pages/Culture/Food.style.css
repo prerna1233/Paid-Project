@@ -7,14 +7,16 @@
 
 
 .food-lifestyle-hero {
+    min-height: 300px;
     height: 45vh;
+    max-height: 460px;
     position: relative;
     overflow: hidden;
 }
 
 .food-lifestyle-hero img {
     width: 100%;
-    height: 400px;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
@@ -26,10 +28,12 @@
     left: 10%;
     transform: translateY(-50%);
     color: #fff;
-    font-weight: bold;
-    font-size: 3.1rem;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4.4vw, 3.1rem);
     text-align: left;
     padding: 0 12px;
+    line-height: 1.12;
+    max-width: 90%;
 }
 
 
@@ -38,35 +42,42 @@
 .food-lifestyle-section {
     display: flex;
     align-items: center;
-    gap: 60px;
-    padding: 90px 10%;
+    gap: clamp(18px, 4vw, 56px);
+    padding: clamp(30px, 7vw, 86px) clamp(12px, 7vw, 10%);
 }
 
 .food-lifestyle-section.right {
     flex-direction: row-reverse;
 }
 
+.food-image-wrapper {
+    width: min(45%, 620px);
+    flex-shrink: 0;
+}
+
 .food-image-wrapper img {
-    width: 500px;
-    height: 400px;
+    width: 100%;
+    height: clamp(220px, 30vw, 400px);
     border-radius: 20px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
     object-fit: cover;
+    display: block;
 }
 
 
 .food-lifestyle-text {
     width: 55%;
+    min-width: 0;
 }
 
 .food-lifestyle-text h2 {
-    font-size: 2.2rem;
+    font-size: clamp(1.3rem, 2.4vw, 2.2rem);
     margin-bottom: 15px;
     color: #111;
 }
 
 .food-lifestyle-text p {
-    font-size: 1.05rem;
+    font-size: clamp(0.92rem, 1.1vw, 1.05rem);
     line-height: 1.7;
     color: #444;
 }
@@ -84,7 +95,7 @@
     transition: all 0.3s ease;
 }
 
-.art-text button:hover {
+.food-lifestyle-text button:hover {
     background: #333;
 }
 
@@ -104,7 +115,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background: #fff;
-    width: 70%;
+    width: min(92%, 900px);
     /* wider for better display */
     max-width: 900px;
     /* caps width */
@@ -123,12 +134,12 @@
     /* full width of modal */
     height: auto;
     /* maintain aspect ratio */
-    max-height: 400px;
+    max-height: min(48vh, 400px);
     display: block;
     margin: 0 auto 25px;
     /* centers and adds space below */
     border-radius: 16px;
-    object-fit: contain;
+    object-fit: cover;
     /* fits entire image inside modal */
 }
 
@@ -156,15 +167,68 @@
 }
 
 /* Responsive for smaller screens */
+@media (max-width: 1200px) {
+    .food-lifestyle-section {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .food-image-wrapper {
+        width: min(48%, 560px);
+    }
+
+    .food-lifestyle-text {
+        width: 52%;
+    }
+}
+
 @media (max-width: 900px) {
+    .food-lifestyle-hero {
+        min-height: 250px;
+        height: 38vh;
+    }
+
+    /* Force image above description on small devices */
+    .food-lifestyle-section,
+    .food-lifestyle-section.right {
+        flex-direction: column !important;
+        align-items: stretch;
+        padding: 42px 5%;
+        gap: 16px;
+    }
+
+    .food-image-wrapper,
+    .food-lifestyle-text {
+        width: 100%;
+    }
+
+    .food-image-wrapper img {
+        height: clamp(220px, 44vw, 320px);
+        border-radius: 16px;
+    }
+
+    .food-lifestyle-text h2 {
+        font-size: 1.45rem;
+    }
+
+    .food-lifestyle-text p {
+        font-size: 0.95rem;
+        line-height: 1.58;
+    }
+
+    .food-lifestyle-text button {
+        margin-top: 12px;
+        padding: 10px 18px;
+    }
+
     .food-lifestyle-modal {
-        width: 90%;
+        width: calc(100% - 18px);
         max-height: 90vh;
-        padding: 20px;
+        padding: 16px;
     }
 
     .food-lifestyle-modal img {
-        max-height: 300px;
+        max-height: 280px;
     }
 }
 
@@ -278,7 +342,7 @@
 .food-slider-section .slick-next {
     width: 45px;
     height: 45px;
-    background: #111;
+    background: rgba(17, 17, 17, 0.9);
     border-radius: 50%;
     z-index: 1;
 }
@@ -299,6 +363,7 @@
 .food-slider-section .slick-prev:before,
 .food-slider-section .slick-next:before {
     font-size: 20px;
+    color: #fff;
 }
 
 /* Responsive Slider */
@@ -352,18 +417,130 @@
         right: -15px;
     }
 
-    .food-lifestyle-section {
-        flex-direction: column !important;
-        padding: 50px 5%;
-        gap: 30px;
+    .food-lifestyle-hero {
+        min-height: 220px;
+        height: 34vh;
+    }
+
+    .food-lifestyle-hero h1 {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        max-width: 94%;
+        font-size: 1.52rem;
+    }
+
+    .food-lifestyle-section,
+    .food-lifestyle-section.right {
+        padding: 34px 4%;
+        gap: 12px;
     }
 
     .food-image-wrapper img {
-        width: 100%;
-        height: 300px;
+        height: 220px;
     }
 
-    .food-lifestyle-text {
+    .food-lifestyle-text h2 {
+        font-size: 1.22rem;
+    }
+
+    .food-lifestyle-text p {
+        font-size: 0.88rem;
+    }
+
+    .food-lifestyle-text button {
+        font-size: 0.86rem;
+    }
+
+    .food-slider-section .slick-prev,
+    .food-slider-section .slick-next {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        top: 40%;
+        background: rgba(17, 17, 17, 0.88);
+    }
+
+    .food-slider-section .slick-prev {
+        left: 4px;
+    }
+
+    .food-slider-section .slick-next {
+        right: 4px;
+    }
+
+    .food-slider-section .slick-prev:before,
+    .food-slider-section .slick-next:before {
+        font-size: 16px;
+        color: #fff;
+    }
+}
+
+@media (max-width: 375px) {
+    .food-lifestyle-hero {
+        min-height: 198px;
+        height: 30vh;
+    }
+
+    .food-lifestyle-hero h1 {
+        font-size: 1.22rem;
+        padding: 0 6px;
+    }
+
+    .food-lifestyle-section,
+    .food-lifestyle-section.right {
+        padding: 24px 3%;
+        gap: 10px;
+    }
+
+    .food-image-wrapper img {
+        height: 186px;
+        border-radius: 12px;
+    }
+
+    .food-lifestyle-text h2 {
+        font-size: 1.02rem;
+        margin-bottom: 8px;
+    }
+
+    .food-lifestyle-text p {
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+
+    .food-lifestyle-text button {
         width: 100%;
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+
+    .food-lifestyle-modal {
+        width: calc(100% - 12px);
+        padding: 11px;
+        border-radius: 12px;
+    }
+
+    .food-lifestyle-modal img {
+        max-height: 180px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .food-lifestyle-modal h2 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .food-lifestyle-modal p {
+        font-size: 0.8rem;
+        line-height: 1.42;
+    }
+
+    .food-lifestyle-modal button {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.8rem;
     }
 }

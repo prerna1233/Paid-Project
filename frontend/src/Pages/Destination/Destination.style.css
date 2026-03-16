@@ -5569,3 +5569,395 @@ html {
     text-align: left;
   }
 }
+
+/* ===== FINAL RESPONSIVE OVERRIDES (ALL DEVICES TO 375PX) ===== */
+.destination-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.hero-content,
+.destinations-container,
+.tour-container,
+.best-time-container,
+.guidelines-container,
+.safety-container,
+.accessibility-container,
+.resources-container {
+  width: min(100%, 1280px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.destinations-grid,
+.nearby-grid,
+.guidelines-grid,
+.safety-grid,
+.facilities-grid,
+.govt-resources-grid {
+  gap: clamp(12px, 2.2vw, 24px);
+}
+
+.destinations-grid {
+  align-items: stretch;
+}
+
+.destination-card-compact,
+.nearby-card,
+.guideline-card,
+.facility-card,
+.resource-card,
+.emergency-contacts-card,
+.seasonal-alerts-card {
+  min-width: 0;
+}
+
+.destination-card-compact {
+  height: 100%;
+}
+
+.destination-card-compact .card-image {
+  height: 190px;
+}
+
+.destination-card-compact .card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.destination-card-compact .card-title {
+  min-height: 2.5em;
+}
+
+.destination-card-compact .card-description {
+  min-height: 4.5em;
+}
+
+.destination-card-compact .card-info {
+  min-height: 64px;
+}
+
+.destination-card-compact .view-btn {
+  margin-top: auto;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.modal-overlay {
+  padding: 12px;
+}
+
+.modal-elegant {
+  width: min(94vw, 1040px);
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.modal-body-elegant {
+  max-height: calc(90vh - 170px);
+  overflow-y: auto;
+}
+
+@media (max-width: 1200px) {
+  .hero-title {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .destinations-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-section {
+    min-height: 68vh;
+  }
+
+  .hero-content {
+    padding: 88px 18px 44px;
+  }
+
+  .hero-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .hero-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .destinations-container,
+  .tour-container,
+  .best-time-container,
+  .guidelines-container,
+  .safety-container,
+  .accessibility-container,
+  .resources-container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .destinations-grid,
+  .nearby-grid,
+  .guidelines-grid,
+  .safety-grid,
+  .facilities-grid,
+  .govt-resources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-elegant {
+    width: min(96vw, 900px);
+  }
+
+  .modal-nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .nav-tab {
+    flex: 1 1 140px;
+  }
+
+  .travel-grid,
+  .two-column-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 62vh;
+  }
+
+  .hero-content {
+    padding: 76px 12px 34px;
+  }
+
+  .hero-label {
+    font-size: 0.76rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.45rem, 7.5vw, 2.2rem);
+    line-height: 1.15;
+  }
+
+  .hero-description {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .destinations-title,
+  .section-header h2 {
+    font-size: clamp(1.2rem, 5.2vw, 1.7rem);
+    line-height: 1.2;
+  }
+
+  .destinations-subtitle,
+  .section-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .destination-card-compact .card-content {
+    padding: 12px;
+  }
+
+  .destination-card-compact .card-image {
+    height: 175px;
+  }
+
+  .destination-card-compact .card-title {
+    min-height: 2.4em;
+  }
+
+  .destination-card-compact .card-description {
+    min-height: 4.3em;
+  }
+
+  .destination-card-compact .card-info {
+    min-height: 58px;
+  }
+
+  .card-title,
+  .destination-name-govt {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .card-description,
+  .nearby-content p,
+  .guideline-card li,
+  .facility-card p,
+  .best-time-content p,
+  .nearby-footer-note p {
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+
+  .modal-elegant {
+    width: calc(100vw - 12px);
+    border-radius: 12px;
+  }
+
+  .modal-header-elegant {
+    padding: 12px;
+  }
+
+  .modal-title-elegant {
+    font-size: 1.1rem;
+  }
+
+  .modal-close-elegant {
+    width: 34px;
+    height: 34px;
+  }
+
+  .hero-image-container img,
+  .map-embed iframe {
+    height: 220px;
+  }
+
+  .info-banner {
+    padding: 10px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-section {
+    min-height: 58vh;
+  }
+
+  .hero-content {
+    padding: 68px 8px 26px;
+  }
+
+  .hero-label {
+    font-size: 0.7rem;
+  }
+
+  .hero-title {
+    font-size: 1.28rem;
+  }
+
+  .hero-description {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .hero-btn {
+    font-size: 0.82rem;
+    padding: 9px 10px;
+  }
+
+  .destinations-container,
+  .tour-container,
+  .best-time-container,
+  .guidelines-container,
+  .safety-container,
+  .accessibility-container,
+  .resources-container {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .destinations-title,
+  .section-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .card-content,
+  .nearby-content,
+  .guideline-card,
+  .facility-card,
+  .resource-card,
+  .emergency-contacts-card,
+  .seasonal-alerts-card {
+    padding: 10px;
+  }
+
+  .destination-card-compact .card-image {
+    height: 160px;
+  }
+
+  .destination-card-compact .card-title {
+    min-height: 2.2em;
+  }
+
+  .destination-card-compact .card-description {
+    min-height: 4em;
+  }
+
+  .destination-card-compact .card-info {
+    min-height: 52px;
+  }
+
+  .card-title,
+  .destination-name-govt,
+  .nearby-content h4,
+  .guideline-card h3,
+  .facility-card h3 {
+    font-size: 0.96rem;
+  }
+
+  .card-description,
+  .nearby-content p,
+  .guideline-card li,
+  .facility-card p,
+  .best-time-content p,
+  .nearby-footer-note p,
+  .helpline-item span,
+  .alert-content p {
+    font-size: 0.8rem;
+    line-height: 1.42;
+  }
+
+  .view-btn,
+  .action-btn-govt,
+  .resource-card {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-overlay {
+    padding: 6px;
+  }
+
+  .modal-elegant {
+    width: calc(100vw - 6px);
+    border-radius: 10px;
+  }
+
+  .modal-header-elegant,
+  .modal-nav,
+  .modal-body-elegant {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .modal-title-elegant {
+    font-size: 0.96rem;
+  }
+
+  .nav-tab {
+    font-size: 0.76rem;
+    padding: 8px 6px;
+  }
+
+  .hero-image-container img,
+  .map-embed iframe {
+    height: 180px;
+  }
+}

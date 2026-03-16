@@ -1,5 +1,4 @@
-import React, { Suspense } from 'react'
-import LazyVideo from '../../Components/LazyVideo/LazyVideo'
+import React from 'react'
 import chulhaImg from '../../assets/chulha.jpg'
 import tikuliArt from '../../assets/tikuli_art.png'
 import littiImg from '../../assets/litti.jpg'
@@ -16,21 +15,33 @@ import HomeAbout from './HomeAbout';
 
 export default function Home() {
   const title = "Explore Kishanganj"
+  const heroVideoSrc = "/videos/homepage.mp4?v=20260316"
 
   return (
     <>
       <div className="hero-section">
-        <LazyVideo 
-          src="/videos/home-hero-original.mp4"
-          poster="/assets/home-poster.jpg"
+        <video
+          className="hero-video"
           autoPlay
           muted
           loop
           playsInline
-          preload="none"
-          className="hero-video"
+          preload="metadata"
+          poster="/assets/home-poster.jpg"
           aria-label="Kishanganj tourism hero background video"
-        />
+          key={heroVideoSrc}
+          onLoadedData={(e) => {
+            // Force playback attempt after refresh/navigation.
+            e.currentTarget.play().catch(() => {});
+          }}
+          onError={(e) => {
+            // Retry same source once if browser served stale/partial cache.
+            const video = e.currentTarget;
+            video.load();
+          }}
+        >
+          <source src={heroVideoSrc} type="video/mp4" />
+        </video>
 
         {/* LEFT SIDE TEXT */}
         <div className="home-hero-text">

@@ -1,1 +1,107 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';\n\nconst AuthContext = createContext();\n\nexport const useAuth = () => {\n  const context = useContext(AuthContext);\n  if (!context) {\n    throw new Error('useAuth must be used within an AuthProvider');\n  }\n  return context;\n};\n\nexport const AuthProvider = ({ children }) => {\n  const [user, setUser] = useState(null);\n  const [isLoading, setIsLoading] = useState(true);\n\n  useEffect(() => {\n    const savedUser = localStorage.getItem('userData');\n    if (savedUser) {\n      try {\n        const userData = JSON.parse(savedUser);\n        setUser(userData);\n      } catch (error) {\n        console.error('Error parsing user data:', error);\n        localStorage.removeItem('userData');\n      }\n    }\n    setIsLoading(false);\n  }, []);\n\n  const login = (email, password) => {\n    const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');\n    const foundUser = savedUsers.find(u => u.email === email && u.password === password);\n    \n    if (foundUser) {\n      const { password: _, ...userWithoutPassword } = foundUser;\n      setUser(userWithoutPassword);\n      localStorage.setItem('userData', JSON.stringify(userWithoutPassword));\n      return { success: true };\n    } else {\n      return { success: false, error: 'Invalid email or password' };\n    }\n  };\n\n  const register = (username, email, password, confirmPassword) => {\n    if (password !== confirmPassword) {\n      return { success: false, error: 'Passwords do not match' };\n    }\n\n    const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');\n    \n    const existingUser = savedUsers.find(u => u.email === email);\n    if (existingUser) {\n      return { success: false, error: 'User already exists with this email' };\n    }\n\n    const newUser = {\n      id: Date.now(),\n      username,\n      email,\n      password,\n      createdAt: new Date().toISOString()\n    };\n\n    savedUsers.push(newUser);\n    localStorage.setItem('registeredUsers', JSON.stringify(savedUsers));\n\n    const { password: _, ...userWithoutPassword } = newUser;\n    setUser(userWithoutPassword);\n    localStorage.setItem('userData', JSON.stringify(userWithoutPassword));\n\n    return { success: true };\n  };\n\n  const logout = () => {\n    setUser(null);\n    localStorage.removeItem('userData');\n  };\n\n  const updateProfile = (updatedData) => {\n    const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');\n    const userIndex = savedUsers.findIndex(u => u.id === user.id);\n    \n    if (userIndex !== -1) {\n      savedUsers[userIndex] = { ...savedUsers[userIndex], ...updatedData };\n      localStorage.setItem('registeredUsers', JSON.stringify(savedUsers));\n      \n      const updatedUser = { ...user, ...updatedData };\n      setUser(updatedUser);\n      localStorage.setItem('userData', JSON.stringify(updatedUser));\n      \n      return { success: true };\n    }\n    \n    return { success: false, error: 'User not found' };\n  };\n\n  const value = {\n    user,\n    isLoading,\n    login,\n    register,\n    logout,\n    updateProfile,\n    isAuthenticated: !!user\n  };\n\n  return (\n    <AuthContext.Provider value={value}>\n      {children}\n    </AuthContext.Provider>\n  );\n};
+/* eslint-disable react-refresh/only-export-components */
+import React, { createContext, useContext, useState } from 'react';
+
+const AuthContext = createContext();
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('userData');
+    if (!savedUser) return null;
+
+    try {
+      return JSON.parse(savedUser);
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      localStorage.removeItem('userData');
+      return null;
+    }
+  });
+  const isLoading = false;
+
+  const login = (email, password) => {
+    const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    const foundUser = savedUsers.find((u) => u.email === email && u.password === password);
+
+    if (foundUser) {
+      const { password: _password, ...userWithoutPassword } = foundUser;
+      setUser(userWithoutPassword);
+      localStorage.setItem('userData', JSON.stringify(userWithoutPassword));
+      return { success: true };
+    }
+
+    return { success: false, error: 'Invalid email or password' };
+  };
+
+  const register = (username, email, password, confirmPassword) => {
+    if (password !== confirmPassword) {
+      return { success: false, error: 'Passwords do not match' };
+    }
+
+    const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    const existingUser = savedUsers.find((u) => u.email === email);
+
+    if (existingUser) {
+      return { success: false, error: 'User already exists with this email' };
+    }
+
+    const newUser = {
+      id: Date.now(),
+      username,
+      email,
+      password,
+      createdAt: new Date().toISOString(),
+    };
+
+    savedUsers.push(newUser);
+    localStorage.setItem('registeredUsers', JSON.stringify(savedUsers));
+
+    const { password: _password, ...userWithoutPassword } = newUser;
+    setUser(userWithoutPassword);
+    localStorage.setItem('userData', JSON.stringify(userWithoutPassword));
+
+    return { success: true };
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('userData');
+  };
+
+  const updateProfile = (updatedData) => {
+    const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    const userIndex = savedUsers.findIndex((u) => u.id === user.id);
+
+    if (userIndex !== -1) {
+      savedUsers[userIndex] = { ...savedUsers[userIndex], ...updatedData };
+      localStorage.setItem('registeredUsers', JSON.stringify(savedUsers));
+
+      const updatedUser = { ...user, ...updatedData };
+      setUser(updatedUser);
+      localStorage.setItem('userData', JSON.stringify(updatedUser));
+
+      return { success: true };
+    }
+
+    return { success: false, error: 'User not found' };
+  };
+
+  const value = {
+    user,
+    isLoading,
+    login,
+    register,
+    logout,
+    updateProfile,
+    isAuthenticated: !!user,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};

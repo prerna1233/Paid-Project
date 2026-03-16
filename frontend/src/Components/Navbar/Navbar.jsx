@@ -3,9 +3,8 @@ import { NavLink, Link, useNavigate } from 'react-router-dom'
 import styles from './Navbar.module.css'
 // ...existing code imports
 import logo from '../../assets/logo.png'
-import { MdLanguage } from "react-icons/md";
 // import { BsSun, BsMoon } from "react-icons/bs";
-import { FaUser } from "react-icons/fa";
+import { FaBars, FaTimes, FaUser } from "react-icons/fa";
 
 
 export default function Navbar() {
@@ -28,6 +27,13 @@ export default function Navbar() {
     // Auth loading states
     const [loginLoading, setLoginLoading] = useState(false);
     const [signupLoading, setSignupLoading] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isCompactAuthCard, setIsCompactAuthCard] = useState(
+        () => (typeof window !== 'undefined' ? window.innerWidth <= 600 : false)
+    );
+    const [isTinyAuthCard, setIsTinyAuthCard] = useState(
+        () => (typeof window !== 'undefined' ? window.innerWidth <= 430 : false)
+    );
 
     // API base (Vite env override)
     const API_BASE = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE) ? import.meta.env.VITE_API_BASE : 'https://paid-project.onrender.com';
@@ -223,6 +229,26 @@ export default function Navbar() {
         return () => { mounted = false; };
     }, [API_BASE]);
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsCompactAuthCard(window.innerWidth <= 600);
+            setIsTinyAuthCard(window.innerWidth <= 430);
+            if (window.innerWidth > 992) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+        setShowCulture(false);
+        setShowAbout(false);
+        setShowAccomodation(false);
+    };
+
 
 
     return (
@@ -235,9 +261,20 @@ export default function Navbar() {
 
                 </div>
 
+                <button
+                    className={styles.mobileMenuBtn}
+                    type="button"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded={isMobileMenuOpen}
+                    aria-controls="main-navbar-links"
+                    onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                >
+                    {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+                </button>
+
                 {/* ----- NavLinks ----- */}
-                <nav className={styles.navbar}>
-                    <Link to="/">Home</Link>
+                <nav id="main-navbar-links" className={`${styles.navbar} ${isMobileMenuOpen ? styles.navbarOpen : ''}`}>
+                    <Link to="/" onClick={closeMobileMenu}>Home</Link>
                     
                     <div
                         className={styles.cultureWrapper}
@@ -262,9 +299,9 @@ export default function Navbar() {
 
                         {showAbout && (
                             <div className={styles.cultureDropdown}>
-                                <Link to="/About/Historykishanganj">History</Link>
-                                <Link to="/About/WhoIsWho">Who's Who</Link>
-                                <Link to="/About/Economy">Economy</Link>
+                                <Link to="/About/Historykishanganj" onClick={closeMobileMenu}>History</Link>
+                                <Link to="/About/WhoIsWho" onClick={closeMobileMenu}>Who's Who</Link>
+                                <Link to="/About/Economy" onClick={closeMobileMenu}>Economy</Link>
                             </div>
                         )}
                     </div>
@@ -273,12 +310,29 @@ export default function Navbar() {
                         className={styles.cultureWrapper}
                         onMouseEnter={() => setShowAccomodation(true)}
                         onMouseLeave={() => setShowAccomodation(false)}>
-                        <Link to="Destination">Explore</Link>
+                        <span
+                            role="button"
+                            tabIndex={0}
+                            aria-haspopup="true"
+                            aria-expanded={showAccomodation}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setShowAccomodation((s) => !s);
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    setShowAccomodation((s) => !s);
+                                }
+                            }}
+                        >
+                            Explore
+                        </span>
 
                         {showAccomodation && (
                             <div className={styles.cultureDropdown}>
-                                <Link to="/Destination">Find Destinations</Link>
-                                <Link to="/Destination/Hotel_Homepage">Hotel</Link>
+                                <Link to="/Destination" onClick={closeMobileMenu}>Find Destinations</Link>
+                                <Link to="/Destination/Hotel_Homepage" onClick={closeMobileMenu}>Hotel</Link>
                             </div>
                         )}
                     </div>
@@ -306,16 +360,16 @@ export default function Navbar() {
 
                         {showCulture && (
                             <div className={styles.cultureDropdown}>
-                                <Link to="/Culture/festivals">Festivals & Traditions</Link>
-                                <Link to="/Culture/art">Art & Handicrafts</Link>
-                                <Link to="/Culture/food">Food & Lifestyle</Link>
+                                <Link to="/Culture/festivals" onClick={closeMobileMenu}>Festivals & Traditions</Link>
+                                <Link to="/Culture/art" onClick={closeMobileMenu}>Art & Handicrafts</Link>
+                                <Link to="/Culture/food" onClick={closeMobileMenu}>Food & Lifestyle</Link>
                             </div>
                         )}
                     </div>
 
-                    <Link to="/Blogs">Blogs</Link>
+                    <Link to="/Blogs" onClick={closeMobileMenu}>Blogs</Link>
                     {isAdmin && (
-                        <Link to="/admin" style={{ color: '#b23b3b', fontWeight: 700 }}>Admin</Link>
+                        <Link to="/admin" style={{ color: '#b23b3b', fontWeight: 700 }} onClick={closeMobileMenu}>Admin</Link>
                     )}
                 </nav>
 
@@ -325,19 +379,11 @@ export default function Navbar() {
                     {/* Theme Icon */}
                     {/* Theme toggle removed */}
 
-                    {/* Language Icon */}
-                    <div className={styles.language}>
-                        <MdLanguage className={styles.languageIcon} />
-                        <select>
-                            <option>English</option>
-                            <option>Hindi</option>
-                        </select>
-                    </div>
                     {/* ----- Profile Icon / Auth ----- */}
                     <div 
                         className={styles.ProfileIcon} 
                         onClick={() => setShowProfileDropdown(!showProfileDropdown)} 
-                        style={{ position: 'relative', cursor: 'pointer', marginRight: '50px' }}
+                        style={{ position: 'relative', cursor: 'pointer', marginRight: 0 }}
                     >
                         <div style={{
                             width: '40px',
@@ -370,18 +416,25 @@ export default function Navbar() {
                                 
                                 <div 
                                     style={{
-                                        position: 'absolute',
-                                        top: '100%',
-                                        right: '0',
-                                        marginTop: '12px',
+                                        position: isCompactAuthCard ? 'fixed' : 'absolute',
+                                        top: isCompactAuthCard ? '76px' : '100%',
+                                        right: isCompactAuthCard ? (isTinyAuthCard ? 'auto' : '8px') : '0',
+                                        left: isCompactAuthCard ? (isTinyAuthCard ? '50%' : '8px') : 'auto',
+                                        transform: isCompactAuthCard ? (isTinyAuthCard ? 'translateX(-50%)' : 'none') : 'none',
+                                        marginTop: isCompactAuthCard ? '0' : '12px',
                                         background: '#ffffff',
                                         border: '1px solid #e1e5e9',
-                                        borderRadius: '12px',
+                                        borderRadius: isTinyAuthCard ? '10px' : '12px',
                                         boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
                                         padding: '0',
-                                        width: '380px',
+                                        width: isCompactAuthCard ? (isTinyAuthCard ? 'calc(100vw - 32px)' : 'auto') : 'min(380px, calc(100vw - 16px))',
+                                        maxWidth: isCompactAuthCard ? (isTinyAuthCard ? '320px' : 'none') : 'calc(100vw - 16px)',
+                                        maxHeight: isCompactAuthCard ? (isTinyAuthCard ? 'calc(100vh - 88px)' : 'calc(100vh - 84px)') : 'calc(100vh - 92px)',
                                         zIndex: '1000',
-                                        overflow: 'hidden'
+                                        overflowX: 'hidden',
+                                        overflowY: 'auto',
+                                        WebkitOverflowScrolling: 'touch',
+                                        overscrollBehavior: 'contain'
                                     }}
                                     onClick={(e) => e.stopPropagation()}
                                 >
@@ -683,27 +736,27 @@ export default function Navbar() {
                                         {/* Header */}
                                         <div style={{
                                             background: 'linear-gradient(135deg, #4a7c59 0%, #5d8a6a 50%, #629f4fff 100%)',
-                                            padding: '25px',
+                                            padding: isTinyAuthCard ? '16px' : '25px',
                                             color: '#ffffff',
                                             textAlign: 'center'
                                         }}>
                                             <div style={{
-                                                width: '60px',
-                                                height: '60px',
+                                                width: isTinyAuthCard ? '46px' : '60px',
+                                                height: isTinyAuthCard ? '46px' : '60px',
                                                 background: 'rgba(255,255,255,0.2)',
                                                 borderRadius: '50%',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
                                                 margin: '0 auto 12px auto',
-                                                fontSize: '24px'
+                                                fontSize: isTinyAuthCard ? '19px' : '24px'
                                             }}>
                                                 🏛️
                                             </div>
-                                            <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: '600' }}>
+                                            <h3 style={{ margin: '0 0 4px 0', fontSize: isTinyAuthCard ? '16px' : '18px', fontWeight: '600' }}>
                                                 District Portal Access
                                             </h3>
-                                            <p style={{ margin: '0', fontSize: '13px', opacity: '0.9' }}>
+                                            <p style={{ margin: '0', fontSize: isTinyAuthCard ? '12px' : '13px', opacity: '0.9' }}>
                                                 Kishanganj Administration
                                             </p>
                                         </div>
@@ -717,11 +770,11 @@ export default function Navbar() {
                                                 onClick={() => setAuthMode('login')}
                                                 style={{
                                                     flex: 1,
-                                                    padding: '12px',
+                                                    padding: isTinyAuthCard ? '10px' : '12px',
                                                     border: 'none',
                                                     background: authMode === 'login' ? '#f8fafc' : 'transparent',
                                                     color: authMode === 'login' ? '#4a7c59' : '#6b7280',
-                                                    fontSize: '14px',
+                                                    fontSize: isTinyAuthCard ? '13px' : '14px',
                                                     fontWeight: '600',
                                                     cursor: 'pointer',
                                                     borderBottom: authMode === 'login' ? '2px solid #5d8a6a' : '2px solid transparent'
@@ -733,11 +786,11 @@ export default function Navbar() {
                                                 onClick={() => setAuthMode('signup')}
                                                 style={{
                                                     flex: 1,
-                                                    padding: '12px',
+                                                    padding: isTinyAuthCard ? '10px' : '12px',
                                                     border: 'none',
                                                     background: authMode === 'signup' ? '#f8fafc' : 'transparent',
                                                     color: authMode === 'signup' ? '#4a7c59' : '#6b7280',
-                                                    fontSize: '14px',
+                                                    fontSize: isTinyAuthCard ? '13px' : '14px',
                                                     fontWeight: '600',
                                                     cursor: 'pointer',
                                                     borderBottom: authMode === 'signup' ? '2px solid #5d8a6a' : '2px solid transparent'
@@ -748,7 +801,7 @@ export default function Navbar() {
                                         </div>
                                         
                                         {/* Auth Forms */}
-                                        <div style={{ padding: '20px' }}>
+                                        <div style={{ padding: isTinyAuthCard ? '14px' : '20px' }}>
                                             {authMode === 'login' && (
                                                 <div>
                                                     <div style={{ marginBottom: '16px' }}>
@@ -765,10 +818,10 @@ export default function Navbar() {
                                                             onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
                                                             style={{
                                                                 width: '100%',
-                                                                padding: '12px',
+                                                                padding: isTinyAuthCard ? '10px' : '12px',
                                                                 border: '1px solid #d1d5db',
                                                                 borderRadius: '6px',
-                                                                fontSize: '14px',
+                                                                fontSize: isTinyAuthCard ? '13px' : '14px',
                                                                 boxSizing: 'border-box',
                                                                 transition: 'border-color 0.2s',
                                                                 color: '#000000'
@@ -791,10 +844,10 @@ export default function Navbar() {
                                                             onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
                                                             style={{
                                                                 width: '100%',
-                                                                padding: '12px',
+                                                                padding: isTinyAuthCard ? '10px' : '12px',
                                                                 border: '1px solid #d1d5db',
                                                                 borderRadius: '6px',
-                                                                fontSize: '14px',
+                                                                fontSize: isTinyAuthCard ? '13px' : '14px',
                                                                 boxSizing: 'border-box',
                                                                 transition: 'border-color 0.2s',
                                                                 color: '#000000'
@@ -808,12 +861,12 @@ export default function Navbar() {
                                                         disabled={loginLoading}
                                                         style={{
                                                             width: '100%',
-                                                            padding: '14px',
+                                                            padding: isTinyAuthCard ? '12px' : '14px',
                                                             background: 'linear-gradient(135deg, #4a7c59 0%, #5d8a6a 50%, #629f4fff 100%)',
                                                             color: '#ffffff',
                                                             border: 'none',
                                                             borderRadius: '8px',
-                                                            fontSize: '15px',
+                                                            fontSize: isTinyAuthCard ? '13px' : '15px',
                                                             fontWeight: '600',
                                                             cursor: 'pointer',
                                                             transition: 'all 0.3s',
@@ -827,7 +880,7 @@ export default function Navbar() {
                                                     <div style={{ 
                                                         textAlign: 'center', 
                                                         marginTop: '12px',
-                                                        fontSize: '12px',
+                                                        fontSize: isTinyAuthCard ? '11px' : '12px',
                                                         color: '#6b7280'
                                                     }}>
                                                         Forgot password? Contact IT Support
@@ -851,10 +904,10 @@ export default function Navbar() {
                                                             onChange={(e) => setSignupForm({...signupForm, name: e.target.value})} 
                                                             style={{
                                                                 width: '100%',
-                                                                padding: '12px',
+                                                                padding: isTinyAuthCard ? '10px' : '12px',
                                                                 border: '1px solid #d1d5db',
                                                                 borderRadius: '6px',
-                                                                fontSize: '14px',
+                                                                fontSize: isTinyAuthCard ? '13px' : '14px',
                                                                 boxSizing: 'border-box',
                                                                 color: '#000000'
                                                             }}
@@ -876,10 +929,10 @@ export default function Navbar() {
                                                             onChange={(e) => setSignupForm({...signupForm, email: e.target.value})}
                                                             style={{
                                                                 width: '100%',
-                                                                padding: '12px',
+                                                                padding: isTinyAuthCard ? '10px' : '12px',
                                                                 border: '1px solid #d1d5db',
                                                                 borderRadius: '6px',
-                                                                fontSize: '14px',
+                                                                fontSize: isTinyAuthCard ? '13px' : '14px',
                                                                 boxSizing: 'border-box',
                                                                 color: '#000000'
                                                             }}
@@ -901,10 +954,10 @@ export default function Navbar() {
                                                             onChange={(e) => setSignupForm({...signupForm, password: e.target.value})}
                                                             style={{
                                                                 width: '100%',
-                                                                padding: '12px',
+                                                                padding: isTinyAuthCard ? '10px' : '12px',
                                                                 border: '1px solid #d1d5db',
                                                                 borderRadius: '6px',
-                                                                fontSize: '14px',
+                                                                fontSize: isTinyAuthCard ? '13px' : '14px',
                                                                 boxSizing: 'border-box',
                                                                 color: '#000000'
                                                             }}
@@ -926,10 +979,10 @@ export default function Navbar() {
                                                             onChange={(e) => setSignupForm({...signupForm, confirmPassword: e.target.value})}
                                                             style={{
                                                                 width: '100%',
-                                                                padding: '12px',
+                                                                padding: isTinyAuthCard ? '10px' : '12px',
                                                                 border: '1px solid #d1d5db',
                                                                 borderRadius: '6px',
-                                                                fontSize: '14px',
+                                                                fontSize: isTinyAuthCard ? '13px' : '14px',
                                                                 boxSizing: 'border-box',
                                                                 color: '#000000'
                                                             }}
@@ -942,12 +995,12 @@ export default function Navbar() {
                                                         disabled={signupLoading}
                                                         style={{
                                                             width: '100%',
-                                                            padding: '14px',
+                                                            padding: isTinyAuthCard ? '12px' : '14px',
                                                             background: 'linear-gradient(135deg, #4a7c59 0%, #5d8a6a 50%, #629f4fff 100%)',
                                                             color: '#ffffff',
                                                             border: 'none',
                                                             borderRadius: '8px',
-                                                            fontSize: '15px',
+                                                            fontSize: isTinyAuthCard ? '13px' : '15px',
                                                             fontWeight: '600',
                                                             cursor: 'pointer',
                                                             transition: 'all 0.3s',
@@ -960,7 +1013,7 @@ export default function Navbar() {
                                                     <div style={{ 
                                                         textAlign: 'center', 
                                                         marginTop: '12px',
-                                                        fontSize: '12px',
+                                                        fontSize: isTinyAuthCard ? '11px' : '12px',
                                                         color: '#6b7280'
                                                     }}>
                                                         Account approval required by Admin

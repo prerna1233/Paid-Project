@@ -364,13 +364,13 @@ const Blogs = () => {
   return (
   <div className="blogs-container">
       {/* Professional Government-Style Header */}
-      <header className="blogs-header blogs-govt-header" style={{ background: '#eaf3e6', padding: '48px 0 32px 0', borderBottom: '2px solid #d1e0d7' }}>
-  <div className="header-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, paddingTop: 32, minHeight: 180 }}>
-          <h1 className="blogs-govt-title" style={{ fontSize: '2.6rem', fontWeight: 800, color: '#22336b', margin: 0, textAlign: 'center', letterSpacing: 1, lineHeight: 1.2, textShadow: '0 2px 8px #eaf3e6, 0 1px 0 #fff' }}>KISHANGANJ DISTRICT BLOGS</h1>
-          <p className="blogs-govt-desc" style={{ fontSize: '1.18rem', color: '#4a7c59', margin: '12px 0 0 0', textAlign: 'center', maxWidth: 700 }}>
+      <header className="blogs-header blogs-govt-header">
+  <div className="header-content blogs-govt-header-content">
+          <h1 className="blogs-govt-title">KISHANGANJ DISTRICT BLOGS</h1>
+          <p className="blogs-govt-desc">
             Share your experiences, insights, and stories from the heart of Bihar. Connect with the community and celebrate our district's rich heritage and vibrant culture.
           </p>
-          <div className="header-buttons blogs-govt-header-buttons" style={{ display: 'flex', gap: 18, marginTop: 24 }}>
+          <div className="header-buttons blogs-govt-header-buttons">
             <button
               className="add-blog-btn blogs-govt-btn"
               style={{ background: '#f47c4c', color: '#fff', fontWeight: 700, borderRadius: 8, padding: '12px 32px', fontSize: 18, border: 'none', boxShadow: '0 2px 8px rgba(244,124,76,0.08)' }}
@@ -471,7 +471,7 @@ const Blogs = () => {
       {/* Add Blog Modal (conditionally rendered) */}
       {showAddBlog && (
         <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(34,51,107,0.12)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div className="modal-content blogs-govt-modal" style={{ width: 380, maxWidth: '95vw', background: '#eaf3e6', borderRadius: 16, boxShadow: '0 6px 32px rgba(34,51,107,0.13)', padding: '36px 32px 28px 32px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="modal-content blogs-govt-modal write-blog-modal" style={{ width: 380, maxWidth: '95vw', background: '#eaf3e6', borderRadius: 16, boxShadow: '0 6px 32px rgba(34,51,107,0.13)', padding: '36px 32px 28px 32px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <button className="close-modal-btn" style={{ position: 'absolute', top: 18, right: 18, background: 'none', border: 'none', fontSize: 22, color: '#22336b', cursor: 'pointer' }} onClick={() => setShowAddBlog(false)} title="Close">
               <FaTimes />
             </button>
@@ -492,7 +492,7 @@ const Blogs = () => {
               className="modal-textarea"
               style={{ width: '100%', minHeight: 110, padding: '12px', borderRadius: 8, border: '1.5px solid #b7d7c9', fontSize: 16, marginBottom: 22 }}
             />
-            <div style={{ display: 'flex', gap: 18, width: '100%', justifyContent: 'center' }}>
+            <div className="write-blog-actions" style={{ display: 'flex', gap: 18, width: '100%', justifyContent: 'center' }}>
               <button
                 className="publish-btn blogs-govt-btn"
                 style={{ background: '#4a7c59', color: '#fff', fontWeight: 700, borderRadius: 8, padding: '12px 32px', fontSize: 17, border: 'none', boxShadow: '0 2px 8px rgba(74,124,89,0.08)' }}
@@ -518,19 +518,19 @@ const Blogs = () => {
       {/* Blog Detail Modal */}
       {showBlogDetail && modalBlog && (
         <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(34,51,107,0.12)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div className="modal-content blogs-govt-modal" style={{ width: 520, maxWidth: '95vw', background: '#fff', borderRadius: 16, boxShadow: '0 6px 32px rgba(34,51,107,0.13)', padding: '36px 32px 28px 32px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="modal-content blogs-govt-modal read-more-modal" style={{ width: 520, maxWidth: '95vw', background: '#fff', borderRadius: 16, boxShadow: '0 6px 32px rgba(34,51,107,0.13)', padding: '36px 32px 28px 32px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <button className="close-modal-btn" style={{ position: 'absolute', top: 18, right: 18, background: 'none', border: 'none', fontSize: 22, color: '#22336b', cursor: 'pointer' }} onClick={() => setShowBlogDetail(false)} title="Close">
               <FaTimes />
             </button>
             <h2 className="modal-title" style={{ fontWeight: 800, fontSize: '2rem', color: '#22336b', marginBottom: 24, textAlign: 'center' }}>Blog Details</h2>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
               <div style={{ fontWeight: 700, fontSize: '1.5rem', color: '#22336b', marginBottom: 8, textAlign: 'center' }}>{modalBlog.title}</div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+              <div className="read-more-meta" style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                 <span style={{ color: '#2e7d32', fontWeight: 600, fontSize: 15 }}>By {modalBlog.author}</span>
                 <span style={{ color: '#6b7069', fontSize: '1.1rem', fontWeight: 600 }}><FaCalendarAlt /> {modalBlog.date}</span>
               </div>
               <div style={{ background: '#f4f6fa', borderRadius: 8, padding: '18px 16px', marginBottom: 18, color: '#444', fontSize: 15, textAlign: 'center', width: '100%' }}>{modalBlog.description}</div>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginBottom: 16 }}>
+              <div className="read-more-actions" style={{ display: 'flex', justifyContent: 'center', gap: 16, marginBottom: 16 }}>
                 <button style={{ background: likedBlogs.includes(modalBlog.id) ? '#e57373' : '#f4f6fa', color: likedBlogs.includes(modalBlog.id) ? '#fff' : '#e57373', fontWeight: 600, borderRadius: 6, border: 'none', padding: '8px 18px', fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }} onClick={handleModalLike}>
                   <FaHeart /> {modalBlog.likes || 0} {modalBlog.likes === 1 ? 'Like' : 'Likes'}
                 </button>
@@ -553,7 +553,7 @@ const Blogs = () => {
                 </div>
               )}
               {/* Comment input */}
-              <div style={{ width: '100%', marginTop: 16, display: 'flex', gap: 8 }}>
+              <div className="read-more-comment-input" style={{ width: '100%', marginTop: 16, display: 'flex', gap: 8 }}>
                 <input
                   type="text"
                   value={modalComment}
@@ -573,7 +573,7 @@ const Blogs = () => {
       {/* My Blogs Modal */}
       {showMyBlogs && (
         <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(34,51,107,0.12)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div className="modal-content blogs-govt-modal" style={{ width: '420px', maxWidth: '90vw', background: '#fff', borderRadius: 16, boxShadow: '0 6px 32px rgba(34,51,107,0.13)', padding: '28px 24px 20px 24px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="modal-content blogs-govt-modal view-my-blogs-modal" style={{ width: '420px', maxWidth: '90vw', background: '#fff', borderRadius: 16, boxShadow: '0 6px 32px rgba(34,51,107,0.13)', padding: '28px 24px 20px 24px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <button className="close-modal-btn" style={{ position: 'absolute', top: 18, right: 18, background: 'none', border: 'none', fontSize: 22, color: '#22336b', cursor: 'pointer' }} onClick={() => setShowMyBlogs(false)} title="Close">
               <FaTimes />
             </button>
@@ -581,9 +581,9 @@ const Blogs = () => {
             {myBlogs.length === 0 ? (
               <div style={{ color: '#888', fontSize: 16, marginTop: 24 }}>No blogs added from this device.</div>
             ) : (
-              <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 18 }}>
+              <div className="view-my-blogs-list" style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 18 }}>
                 {myBlogs.map((blog, idx) => (
-                  <div key={blog.id + '-my-' + idx} style={{ display: 'flex', gap: 14, alignItems: 'stretch', background: '#f7faf7', padding: 12, borderRadius: 10, border: '1px solid #e6eef0' }}>
+                  <div key={blog.id + '-my-' + idx} className="view-my-blogs-item" style={{ display: 'flex', gap: 14, alignItems: 'stretch', background: '#f7faf7', padding: 12, borderRadius: 10, border: '1px solid #e6eef0' }}>
                     <div style={{ width: 110, height: 82, borderRadius: 8, overflow: 'hidden', background: '#fff', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {blog.image ? (
                         <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -597,7 +597,7 @@ const Blogs = () => {
                         <div style={{ color: '#2e7d32', fontWeight: 600, fontSize: 13, marginTop: 6 }}>By {blog.author} • {blog.date}</div>
                         <div style={{ marginTop: 8, color: '#444', fontSize: 14, maxHeight: 44, overflow: 'hidden', textOverflow: 'ellipsis' }}>{blog.description}</div>
                       </div>
-                      <div style={{ display: 'flex', gap: 10, marginTop: 10 }}>
+                      <div className="view-my-blogs-item-actions" style={{ display: 'flex', gap: 10, marginTop: 10 }}>
                         <button onClick={() => { _handleEditBlog(blog); }} style={{ background: '#fff', border: '1px solid #d1e0d7', color: '#22336b', padding: '8px 12px', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>Edit</button>
                         <button onClick={() => { if (window.confirm('Delete this blog?')) handleDeleteBlog(blog.id); }} style={{ background: '#e74c3c', border: 'none', color: '#fff', padding: '8px 12px', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>Delete</button>
                         <button onClick={() => { setShowMyBlogs(false); setTimeout(() => handleOpenBlogDetail(blog), 50); }} style={{ marginLeft: 'auto', background: '#4a7c59', border: 'none', color: '#fff', padding: '8px 12px', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>View</button>

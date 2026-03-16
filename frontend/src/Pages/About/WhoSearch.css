@@ -2,21 +2,24 @@
 .who_search-wrapper {
   display: flex;
   align-items: center;
-  background-color: #eae9f1;
-  padding: 15px;
+  background: linear-gradient(120deg, #edf3e7 0%, #e3eddd 100%);
+  border: 1px solid #d3dfcb;
+  border-radius: 12px;
+  padding: 14px;
   justify-content: space-between;
-  /* margin: 20px 0; */
-  /* gap: 300px; */
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
 /* Left red label */
 .who_search-label {
-  background-color: #d32f2f;
-  color: #fff;
-  padding: 15px 20px;
-  font-weight: 600;
+  background: #7a1f32;
+  color: #ffffff;
+  padding: 12px 16px;
+  font-weight: 500;
   position: relative;
   white-space: nowrap;
+  border-radius: 8px 0 0 8px;
 }
 
 
@@ -28,73 +31,116 @@
   top: 0;
   width: 0;
   height: 0;
-  border-top: 27px solid transparent;
-  border-bottom: 27px solid transparent;
-  border-left: 20px solid #d32f2f;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-left: 16px solid #7a1f32;
 }
 
 /* Right side search box */ 
 .who_search-box {
   display: flex;
   align-items: center;
-  width: 500px;
+  width: min(100%, 560px);
   justify-content: flex-end;
-  margin-left: 50px;
+  margin-left: auto;
   gap: 10px;
 }
 /* /*  */
 
 /* Input field */
 .who_search-box input {
-  width: 350px;
+  width: 100%;
+  min-width: 0;
   padding: 10px 12px;
-  font-size: 14px;
+  font-size: 0.92rem;
   background: white;
-  border: 2px solid rgb(199, 16, 25);
+  color: #2f4336;
+  border: 1px solid #b9ceb1;
+  border-radius: 8px;
   outline: none;
+}
+
+.who_search-box input::placeholder {
+  color: #738373;
+}
+
+.who_search-box input:focus {
+  border-color: #6b8f61;
+  box-shadow: 0 0 0 2px rgba(107, 143, 97, 0.16);
 }
 
 /* Filter button */
 .filter-btn {
-  background-color: #e25716;
+  background-color: #7a1f32;
   color: #fff;
   border: none;
   padding: 10px 12px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.88rem;
   height: 40px;
+  min-width: 92px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  font-weight: 600;
+  border-radius: 8px;
+  font-weight: 400;
 }
 
 /* Hover effect */
 .filter-btn:hover {
-  background-color: #b71c1c;
+  background-color: #621828;
 }
 
 /* Responsive (mobile) */
 @media (max-width: 768px) {
-  .search-wrapper {
+  .who_search-wrapper {
     flex-direction: column;
     align-items: stretch;
+    padding: 12px;
   }
 
-  .search-label {
-    margin-bottom: 10px;
+  .who_search-label {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    white-space: normal;
   }
 
-  .search-label::after {
+  .who_search-label::after {
     display: none;
   }
 
-  .search-box {
+  .who_search-box {
     margin-left: 0;
+    width: 100%;
   }
 
-  .search-box input {
+  .who_search-box input {
     width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .who_search-wrapper {
+    padding: 10px;
+    border-radius: 10px;
+    gap: 10px;
+  }
+
+  .who_search-label {
+    padding: 10px 12px;
+    font-size: 0.84rem;
+  }
+
+  .who_search-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .filter-btn {
+    width: 100%;
+    height: 36px;
+    font-size: 0.84rem;
   }
 }

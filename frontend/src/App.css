@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+:root {
+  --navbar-height: 80px;
+}
+
 /* Comprehensive CSS Reset */
 html, body, #root {
   margin: 0 !important;
@@ -13,7 +17,7 @@ html, body, #root {
 body {
   margin: 0;
   padding: 0;
-  padding-top: 79px; /* Account for navbar height + 1px overlap */
+  padding-top: var(--navbar-height);
 }
 
 * {
@@ -25,4 +29,16 @@ html {
   padding: 0;
   border: none;
   outline: none;
+}
+
+@media (max-width: 992px) {
+  :root {
+    --navbar-height: 72px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --navbar-height: 68px;
+  }
 }

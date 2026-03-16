@@ -53,27 +53,12 @@ const LazyVideo = ({
     };
   }, [shouldLoad]);
 
-  // Detect mobile and connection speed
-  const [videoSrc, setVideoSrc] = useState(src);
-  const [canAutoplay, setCanAutoplay] = useState(autoPlay);
-
-  useEffect(() => {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const isSlowConnection = connection?.effectiveType === '2g' || connection?.effectiveType === '3g';
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Disable autoplay on slow connections or reduced motion
-    if (isSlowConnection || prefersReducedMotion) {
-      setCanAutoplay(false);
-    }
-
-    // Use mobile-optimized version if available
-    if (isMobile && src.includes('home-hero')) {
-      // For now, keep same source, but structure is ready for mobile versions
-      setVideoSrc(src);
-    }
-  }, [src, autoPlay]);
+  // Derive behavior without setState in effects (lint-safe).
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const isSlowConnection = connection?.effectiveType === '2g' || connection?.effectiveType === '3g';
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canAutoplay = autoPlay && !isSlowConnection && !prefersReducedMotion;
+  const videoSrc = src;
 
   if (!shouldLoad) {
     return (

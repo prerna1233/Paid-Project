@@ -1448,8 +1448,517 @@ nav, .nav, .navbar, [class*="nav"] {
   z-index: 9999 !important;
 }
 
+/* ====================================
+   BLOGS PAGE RESPONSIVE (INLINE STYLE OVERRIDES)
+   ==================================== */
+
+.blogs-govt-header {
+  background: #eaf3e6 !important;
+  border-bottom: 2px solid #d1e0d7 !important;
+  padding: 84px 0 32px 0 !important;
+  position: relative;
+  z-index: 3 !important;
+}
+
+.blogs-govt-header-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 24px !important;
+  padding-top: 32px !important;
+  min-height: 180px;
+}
+
+.blogs-govt-title {
+  margin: 0;
+  text-align: center;
+  color: #22336b;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px #eaf3e6, 0 1px 0 #fff;
+  text-wrap: balance;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+.blogs-govt-desc {
+  margin: 12px 0 0 0;
+  text-align: center;
+  color: #4a7c59;
+  font-size: clamp(0.95rem, 1.5vw, 1.18rem);
+  max-width: 700px;
+  line-height: 1.6;
+  text-wrap: pretty;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+.blogs-govt-header-buttons {
+  display: flex;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+@media (max-width: 1200px) {
+  .blogs-header {
+    padding: 64px 24px 24px !important;
+  }
+
+  .blogs-list {
+    max-width: 96% !important;
+    margin: 32px auto !important;
+    gap: 24px !important;
+  }
+
+  .blogs-list .blog-card {
+    padding: 16px !important;
+    gap: 14px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .blogs-govt-title {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .blogs-govt-desc {
+    font-size: 1rem !important;
+    max-width: 92vw !important;
+  }
+
+  .blogs-govt-header-buttons {
+    width: 100% !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+
+  .blogs-govt-header-buttons .blogs-govt-btn,
+  .blogs-govt-header-buttons .blogs-govt-btn-outline {
+    font-size: 15px !important;
+    padding: 10px 18px !important;
+  }
+
+  .blogs-list .blog-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .blogs-list .blog-image-preview {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 220px !important;
+    order: -1 !important;
+  }
+
+  .blogs-list .blog-content {
+    padding: 0 !important;
+  }
+
+  .blogs-list .blog-title {
+    font-size: 1.2rem !important;
+  }
+
+  .blogs-list .blog-description {
+    font-size: 0.95rem !important;
+  }
+
+  .modal-content.blogs-govt-modal {
+    width: min(92vw, 520px) !important;
+    padding: 24px 18px 18px 18px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .blogs-header {
+    padding: 72px 12px 18px !important;
+  }
+
+  .blogs-govt-header {
+    padding: 76px 12px 18px !important;
+  }
+
+  .header-content {
+    gap: 14px !important;
+    padding-top: 14px !important;
+    min-height: auto !important;
+  }
+
+  .blogs-govt-title {
+    font-size: 1.45rem !important;
+    letter-spacing: 0.3px !important;
+  }
+
+  .blogs-govt-desc {
+    font-size: 0.9rem !important;
+    margin-top: 4px !important;
+  }
+
+  .blogs-govt-header-buttons {
+    margin-top: 10px !important;
+    gap: 8px !important;
+  }
+
+  .blogs-govt-header-buttons .blogs-govt-btn,
+  .blogs-govt-header-buttons .blogs-govt-btn-outline {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .blogs-list {
+    margin: 18px auto !important;
+    gap: 16px !important;
+    max-width: calc(100% - 16px) !important;
+  }
+
+  .blogs-list .blog-card {
+    border-radius: 10px !important;
+    padding: 12px !important;
+    gap: 10px !important;
+  }
+
+  .blogs-list .blog-image-preview {
+    height: 190px !important;
+    border-radius: 8px !important;
+  }
+
+  .blogs-list .blog-title {
+    font-size: 1.05rem !important;
+  }
+
+  .blogs-list .blog-description {
+    font-size: 0.9rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .blogs-list .blog-content button {
+    font-size: 13px !important;
+  }
+
+  .modal-content.blogs-govt-modal {
+    width: calc(100vw - 16px) !important;
+    max-width: calc(100vw - 16px) !important;
+    padding: 16px 12px 14px 12px !important;
+    border-radius: 10px !important;
+  }
+
+  .modal-content.blogs-govt-modal .modal-title {
+    font-size: 1.25rem !important;
+    margin-bottom: 14px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .blogs-header {
+    padding: 70px 8px 14px !important;
+  }
+
+  .blogs-govt-header {
+    padding: 72px 6px 12px 6px !important;
+  }
+
+  .blogs-govt-header-content {
+    gap: 8px !important;
+    padding-top: 8px !important;
+    min-height: auto !important;
+  }
+
+  .blogs-govt-title {
+    font-size: clamp(1.02rem, 5.3vw, 1.2rem) !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.2px !important;
+    padding: 0 4px;
+  }
+
+  .blogs-govt-desc {
+    font-size: clamp(0.76rem, 3.7vw, 0.86rem) !important;
+    line-height: 1.4 !important;
+    max-width: 98% !important;
+    margin-top: 2px !important;
+  }
+
+  .blogs-govt-header-buttons .blogs-govt-btn,
+  .blogs-govt-header-buttons .blogs-govt-btn-outline {
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+    border-radius: 6px !important;
+  }
+
+  .blogs-list {
+    max-width: calc(100% - 10px) !important;
+    margin: 12px auto !important;
+    gap: 12px !important;
+  }
+
+  .blogs-list .blog-card {
+    padding: 10px !important;
+    border-radius: 8px !important;
+  }
+
+  .blogs-list .blog-image-preview {
+    height: 160px !important;
+    border-radius: 6px !important;
+  }
+
+  .blogs-list .blog-title {
+    font-size: 0.95rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .blogs-list .blog-description {
+    font-size: 0.82rem !important;
+    margin: 4px 0 10px 0 !important;
+  }
+
+  .blogs-list .action-btn,
+  .blogs-list .read-more-btn {
+    padding: 7px 9px !important;
+    font-size: 12px !important;
+  }
+
+  .blog-comments-dropdown {
+    padding: 10px !important;
+    max-width: 100% !important;
+  }
+
+  .modal-content.blogs-govt-modal {
+    width: calc(100vw - 10px) !important;
+    max-width: calc(100vw - 10px) !important;
+    padding: 12px 9px 10px 9px !important;
+    border-radius: 8px !important;
+  }
+
+  .modal-content.blogs-govt-modal .modal-title {
+    font-size: 1.05rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .modal-content.blogs-govt-modal .close-modal-btn {
+    top: 8px !important;
+    right: 8px !important;
+    font-size: 18px !important;
+  }
+}
+
 nav * , .nav *, .navbar *, [class*="nav"] * {
   z-index: inherit !important;
+}
+
+/* ====================================
+   SECTION-SPECIFIC RESPONSIVE RULES
+   Write Blog | Read More | View My Blogs
+   ==================================== */
+
+@media (max-width: 900px) {
+  .write-blog-modal {
+    width: min(94vw, 420px) !important;
+  }
+
+  .write-blog-modal .modal-title {
+    font-size: 1.4rem !important;
+  }
+
+  .read-more-modal {
+    width: min(94vw, 560px) !important;
+  }
+
+  .read-more-modal .modal-title {
+    font-size: 1.5rem !important;
+  }
+
+  .read-more-actions {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center !important;
+  }
+
+  .view-my-blogs-modal {
+    width: min(94vw, 460px) !important;
+  }
+
+  .view-my-blogs-item {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .write-blog-modal {
+    width: calc(100vw - 16px) !important;
+    padding: 18px 14px 14px 14px !important;
+  }
+
+  .write-blog-modal .modal-input,
+  .write-blog-modal .modal-textarea {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+
+  .write-blog-actions {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+
+  .write-blog-actions .blogs-govt-btn,
+  .write-blog-actions .blogs-govt-btn-outline {
+    width: 100% !important;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .read-more-modal {
+    width: calc(100vw - 16px) !important;
+    padding: 18px 14px 14px 14px !important;
+  }
+
+  .read-more-modal .modal-title {
+    font-size: 1.25rem !important;
+  }
+
+  .read-more-meta {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .read-more-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px !important;
+  }
+
+  .read-more-actions button {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .read-more-comment-input {
+    flex-direction: column;
+    gap: 8px !important;
+  }
+
+  .read-more-comment-input input,
+  .read-more-comment-input button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .view-my-blogs-modal {
+    width: calc(100vw - 16px) !important;
+    padding: 16px 12px 12px 12px !important;
+  }
+
+  .view-my-blogs-list {
+    gap: 12px !important;
+  }
+
+  .view-my-blogs-item {
+    padding: 10px !important;
+    border-radius: 8px !important;
+  }
+
+  .view-my-blogs-item-actions {
+    flex-wrap: wrap;
+    gap: 8px !important;
+  }
+
+  .view-my-blogs-item-actions button {
+    flex: 1 1 46%;
+    min-width: 120px;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 375px) {
+  .write-blog-modal {
+    width: calc(100vw - 10px) !important;
+    padding: 14px 10px 10px 10px !important;
+    border-radius: 10px !important;
+  }
+
+  .write-blog-modal .modal-title {
+    font-size: 1.05rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .write-blog-modal .modal-input,
+  .write-blog-modal .modal-textarea {
+    font-size: 13px !important;
+    padding: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .write-blog-actions .blogs-govt-btn,
+  .write-blog-actions .blogs-govt-btn-outline {
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+
+  .read-more-modal {
+    width: calc(100vw - 10px) !important;
+    padding: 14px 10px 10px 10px !important;
+    border-radius: 10px !important;
+  }
+
+  .read-more-modal .modal-title {
+    font-size: 1.05rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .read-more-modal .blog-comments-dropdown {
+    max-width: 100% !important;
+    padding: 9px !important;
+  }
+
+  .read-more-actions button,
+  .read-more-comment-input button {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+  }
+
+  .read-more-comment-input input {
+    font-size: 13px !important;
+    padding: 8px !important;
+  }
+
+  .view-my-blogs-modal {
+    width: calc(100vw - 10px) !important;
+    padding: 12px 9px 10px 9px !important;
+    border-radius: 10px !important;
+  }
+
+  .view-my-blogs-modal .modal-title {
+    font-size: 1.05rem !important;
+  }
+
+  .view-my-blogs-item {
+    padding: 8px !important;
+    gap: 8px !important;
+  }
+
+  .view-my-blogs-item-actions {
+    margin-top: 8px !important;
+  }
+
+  .view-my-blogs-item-actions button {
+    font-size: 12px !important;
+    padding: 7px 8px !important;
+    min-width: 90px;
+    flex: 1 1 100%;
+  }
 }
 
 /* ====================================

@@ -57,7 +57,7 @@ export default function Art() {
                                                                                                     )}
                                                                                                 </div>
 
-                                                <div style={{ marginTop: 'auto' }}>
+                                                <div style={{ marginTop: '10px' }}>
                                                     <button className="read-more" onClick={() => setSelectedArt(item)}>
                                                             Read More
                                                     </button>

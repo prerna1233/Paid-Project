@@ -1,95 +1,104 @@
-
-.whocontainer{
+.whocontainer {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 100%;
-  background: #f5f5f5;
   min-height: 100vh;
+  background: linear-gradient(180deg, #f4f8f1 0%, #edf4ea 100%);
+  color: #2a3b31;
 }
 
 .who-container {
-  padding: 100px 60px 60px 60px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 1400px;
-  margin: auto;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 96px 22px 52px;
+  max-width: 1220px;
+  margin: 0 auto;
 }
 
-.search-bar {
-  background: linear-gradient(135deg, #3a5f4a 0%, #4d7a5d 100%);
-  padding: 25px;
-  margin-bottom: 30px;
-  border-radius: 0;
-  border-bottom: 3px solid #2d4a38;
-  box-shadow: 0 2px 8px rgba(58, 95, 74, 0.2);
+.who-page-header {
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #dbe7d7;
 }
 
-.search-bar input {
-  width: 100%;
-  max-width: 600px;
-  padding: 12px 20px;
-  font-size: 14px;
-  border: 1px solid #d0d0d0;
-  border-radius: 2px;
-  outline: none;
-  transition: border-color 0.3s;
+.who-page-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #2f5e44;
+  letter-spacing: 0.1px;
+  line-height: 1.25;
 }
 
-.search-bar input:focus {
-  border-color: #5a7865;
-  background: #fafafa;
-}
-
-.search-bar input::placeholder {
-  color: #757575;
+.who-page-header p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #4f6558;
 }
 
 .table-section {
-  margin-bottom: 40px;
-  border: 1px solid #d0d0d0;
-  border-radius: 0;
+  margin-bottom: 24px;
+  border: 1px solid #d7e4d5;
+  border-radius: 12px;
+  background: #ffffff;
   overflow: hidden;
+  box-shadow: 0 6px 20px rgba(45, 82, 53, 0.08);
 }
 
-.section-title {
-  background: linear-gradient(135deg, #3a5f4a 0%, #4d7a5d 100%);
-  color: #e8f5e9;
-  padding: 16px 20px;
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 2px solid #2d4a38;
+.who-section-header {
+  background: #709266;
+  color: #f4f8f3;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.who-section-title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.02rem;
+  letter-spacing: 0.15px;
+  text-transform: none;
+  line-height: 1.1;
+  color: #f6fbf5;
+}
+
+
+.who-table-wrap {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .who-table {
   width: 100%;
+  min-width: 640px;
   border-collapse: collapse;
-  background: white;
+  background: #ffffff;
 }
 
 .who-table th {
-  background: #5a7865;
-  color: white;
-  padding: 14px 16px;
+  background: #e9f1e7;
+  color: #2f4b38;
+  padding: 12px 14px;
   text-align: left;
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 2px solid #4c6658;
+  font-weight: 500;
+  font-size: 0.86rem;
+  letter-spacing: 0.2px;
+  border-bottom: 1px solid #d4e0d1;
 }
 
 .who-table td {
-  padding: 14px 16px;
-  border-bottom: 1px solid #e5e5e5;
-  color: #333;
-  font-size: 14px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #ebf0ef;
+  color: #394e40;
+  font-size: 0.93rem;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .who-table tr:hover {
-  background: #f8f8f8;
-  transition: background 0.2s;
+  background: #f7fbfb;
+  transition: background-color 0.2s ease;
 }
 
 .who-table tr:last-child td {
@@ -97,17 +106,87 @@
 }
 
 .who-table td:first-child {
-  font-weight: 500;
-  color: #2d3e35;
+  font-weight: 400;
+  color: #2f4437;
 }
 
 .who-table a {
-  color: #5a7865;
+  color: #4e7a52;
   text-decoration: none;
-  transition: color 0.2s;
 }
 
 .who-table a:hover {
-  color: #3a5f4a;
+  color: #3d6240;
   text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .who-container {
+    padding: 90px 16px 42px;
+  }
+
+  .who-page-header h1 {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .who-container {
+    padding: 84px 12px 34px;
+  }
+
+  .who-page-header h1 {
+    font-size: 1.28rem;
+  }
+
+  .who-page-header p {
+    font-size: 0.84rem;
+  }
+
+  .table-section {
+    margin-bottom: 18px;
+    border-radius: 10px;
+  }
+
+  .who-section-title {
+    font-size: 0.9rem;
+  }
+
+  .who-section-header {
+    padding: 4px 8px;
+  }
+
+}
+
+@media (max-width: 375px) {
+  .who-container {
+    padding: 78px 8px 24px;
+  }
+
+  .who-page-header h1 {
+    font-size: 1.12rem;
+  }
+
+  .who-page-header p {
+    font-size: 0.78rem;
+  }
+
+  .who-section-title {
+    font-size: 0.84rem;
+  }
+
+  .who-section-header {
+    padding: 3px 7px;
+  }
+
+
+  .who-table {
+    min-width: 560px;
+  }
+
+  .who-table th,
+  .who-table td {
+    padding: 10px 10px;
+    font-size: 0.84rem;
+  }
 }

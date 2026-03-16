@@ -13,6 +13,7 @@ export default function Food() {
     // Slider settings
     const sliderSettings = {
         dots: true,
+        arrows: true,
         infinite: true,
         speed: 500,
         slidesToShow: 3,

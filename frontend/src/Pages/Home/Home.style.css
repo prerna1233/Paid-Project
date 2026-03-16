@@ -58,14 +58,14 @@ body {
     color: #ffffff;
     text-align: left;
     max-width: 900px;
-    width: auto;
+    width: min(90%, 900px);
 }
 
 /* heading */
 .home-hero-text h1 {
     font-size: 3rem;
     font-weight: 700;
-    white-space: nowrap;
+    white-space: normal;
     line-height: 1.1;
 }
 
@@ -82,7 +82,7 @@ body {
 .fall-letter {
     display: inline-block;
     opacity: 0;
-    transform: translateY(-60px);
+    transform: translateY(-36px);
     animation: fall 0.6s ease forwards;
 }
 
@@ -212,8 +212,11 @@ h3 {
     /* flex: 1; */
     display: flex;
     /* gap: 20px; */
-    height: 260px;
-    width: 521px;
+    height: auto;
+    width: min(100%, 521px);
+    align-items: flex-end;
+    justify-content: center;
+    gap: 8px;
     /* justify-content: center; */
     /* border: 20px solid rgb(233, 12, 93); */
 }
@@ -312,7 +315,7 @@ h3 {
 }
 
 .reach-option:hover {
-    transform: translateY(-10px);
+    transform: translateY(-6px);
     box-shadow: 0 20px 50px rgba(255, 107, 107, 0.2);
 }
 
@@ -374,5 +377,343 @@ h3 {
     
     .reach-option {
         padding: 30px 20px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .hero-section,
+    .hero-video,
+    .video-placeholder {
+        height: 58vh;
+        max-height: 58vh;
+    }
+
+    .home-hero-text h1 {
+        font-size: 2.6rem;
+    }
+
+    .section-para {
+        gap: 2rem;
+        padding: 20px 24px;
+    }
+
+    .para1 {
+        margin: 8px 10px;
+        width: 52vw;
+        font-size: 1.25rem;
+    }
+
+    .culture-text h2 {
+        font-size: 2.2rem;
+    }
+
+    .culture-text p {
+        font-size: 1.08rem;
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-section,
+    .hero-video,
+    .video-placeholder {
+        height: 52vh;
+        max-height: 52vh;
+    }
+
+    .home-hero-text {
+        left: 6%;
+    }
+
+    .home-hero-text h1 {
+        font-size: 2.2rem;
+        line-height: 1.15;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .section-para {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        min-height: auto;
+    }
+
+    .para1 {
+        width: min(100%, 760px);
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    .culture-section {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 34px 22px;
+        min-height: auto;
+        background-attachment: scroll !important;
+    }
+
+    .culture-text {
+        width: 100%;
+    }
+
+    .culture-img1,
+    .culture-img2,
+    .culture-img3 {
+        top: 0;
+        width: 30%;
+        min-width: 95px;
+        max-width: 170px;
+        height: auto;
+        aspect-ratio: 3/4;
+        border-width: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section,
+    .hero-video,
+    .video-placeholder {
+        height: 46vh;
+        max-height: 46vh;
+    }
+
+    .home-hero-text {
+        left: 5%;
+        width: 90%;
+    }
+
+    .home-hero-text h1 {
+        font-size: 1.85rem;
+    }
+
+    .btn {
+        margin-top: 14px;
+        padding: 10px 16px;
+        font-size: 0.92rem;
+        gap: 8px;
+    }
+
+    h3 {
+        font-size: 2.1rem;
+    }
+
+    .para1 p {
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    hr {
+        width: calc(100% - 24px);
+        margin: 10px 12px;
+    }
+
+    .reach-header {
+        margin-bottom: 36px;
+    }
+
+    .reach-option:hover {
+        transform: translateY(-3px);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section,
+    .hero-video,
+    .video-placeholder {
+        height: 42vh;
+        max-height: 42vh;
+    }
+
+    .home-hero-text h1 {
+        font-size: 1.55rem;
+    }
+
+    .subtitle {
+        font-size: 0.86rem;
+        margin-top: 6px;
+    }
+
+    .section-para {
+        padding: 14px 12px;
+    }
+
+    .culture-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .culture-text p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .reach-header h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 374px) {
+    .hero-section,
+    .hero-video,
+    .video-placeholder {
+        height: 40vh;
+        max-height: 40vh;
+    }
+
+    .home-hero-text {
+        left: 4.5%;
+        width: 91%;
+    }
+
+    .home-hero-text h1 {
+        font-size: 1.4rem;
+    }
+
+    .subtitle {
+        font-size: 0.82rem;
+    }
+
+    .btn {
+        margin-top: 11px;
+        padding: 9px 13px;
+        font-size: 0.84rem;
+    }
+
+    .section-para {
+        padding: 12px 9px;
+    }
+
+    .para1 {
+        font-size: 1rem;
+    }
+
+    .culture-section {
+        padding: 24px 12px;
+    }
+
+    .culture-text h2 {
+        font-size: 1.32rem;
+    }
+
+    .culture-text p {
+        font-size: 0.89rem;
+        line-height: 1.52;
+    }
+
+    .culture-img1,
+    .culture-img2,
+    .culture-img3 {
+        min-width: 80px;
+        border-width: 4px;
+    }
+
+    .reach-container {
+        padding: 0 12px;
+    }
+
+    .reach-header h2 {
+        font-size: 1.45rem;
+    }
+
+    .reach-option {
+        padding: 22px 14px;
+        border-radius: 16px;
+    }
+
+    .reach-option h3 {
+        font-size: 1.28rem;
+    }
+
+    .reach-option p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .hero-section,
+    .hero-video,
+    .video-placeholder {
+        height: 38vh;
+        max-height: 38vh;
+    }
+
+    .home-hero-text {
+        left: 4%;
+        width: 92%;
+    }
+
+    .home-hero-text h1 {
+        font-size: 1.3rem;
+        line-height: 1.15;
+    }
+
+    .subtitle {
+        font-size: 0.78rem;
+    }
+
+    .btn {
+        margin-top: 10px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+
+    .section-para {
+        padding: 10px 8px;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    .para1 {
+        font-size: 0.95rem;
+    }
+
+    .culture-section {
+        padding: 22px 10px;
+    }
+
+    .culture-text h2 {
+        font-size: 1.22rem;
+    }
+
+    .culture-text p {
+        font-size: 0.84rem;
+        line-height: 1.5;
+    }
+
+    .culture-images {
+        gap: 4px;
+    }
+
+    .culture-img1,
+    .culture-img2,
+    .culture-img3 {
+        min-width: 72px;
+        border-width: 3px;
+    }
+
+    .reach-container {
+        padding: 0 10px;
+    }
+
+    .reach-header h2 {
+        font-size: 1.35rem;
+    }
+
+    .reach-option {
+        padding: 20px 12px;
+        border-radius: 14px;
+    }
+
+    .reach-option h3 {
+        font-size: 1.2rem;
+    }
+
+    .reach-option p {
+        font-size: 0.88rem;
     }
 }

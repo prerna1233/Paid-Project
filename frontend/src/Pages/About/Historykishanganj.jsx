@@ -1,19 +1,20 @@
 import React from "react";
+import "./Historykishanganj.css";
 
 import Footer from "../../Components/Footer/Footer";
 import kishanFallback from "../../assets/kishan.jpg";
 
 function Historykishanganj() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f5f5f5' }}>
-      <div style={{ flex: 1 }}>
+    <div className="history-page-root" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f5f5f5' }}>
+      <div className="history-page-body" style={{ flex: 1 }}>
         {/* (Map moved below into left column as a small card) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '420px 1fr', gap: 32, maxWidth: 1200, margin: '0 auto', paddingTop: 96, alignItems: 'start' }}>
+        <div className="history-page-grid" style={{ maxWidth: 1200, margin: '0 auto', alignItems: 'start' }}>
           {/* Left Column: Cards */}
-          <div style={{ gridColumn: '1 / 2', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="history-left-column" style={{ gridColumn: '1 / 2', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {/* Map Card (small) */}
             <div style={{ width: '100%', marginBottom: 16 }}>
-              <div style={{ borderRadius: 8, overflow: 'hidden', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', border: '1px solid #e0e0e0', background: '#fff' }}>
+              <div className="history-map-card" style={{ borderRadius: 8, overflow: 'hidden', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', border: '1px solid #e0e0e0', background: '#fff' }}>
                 <img
                   className="district-map-img"
                   src="/assets/map.png"
@@ -25,9 +26,9 @@ function Historykishanganj() {
               </div>
             </div>
             {/* Cards Under Map */}
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
+            <div className="history-cards-stack" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
               {/* District Info Card */}
-              <div style={{ border: '1px solid #1976d2', borderRadius: 8, background: '#fff', padding: 16, marginBottom: 0, width: '100%' }}>
+              <div className="history-card-base" style={{ border: '1px solid #1976d2', borderRadius: 8, background: '#fff', padding: 16, marginBottom: 0, width: '100%' }}>
                 <h2 style={{ color: '#b71c1c', fontWeight: 700, fontSize: '2.2rem', textAlign: 'center', margin: 0 }}>Kishanganj District</h2>
                 <div style={{ fontSize: '1.05rem', marginTop: 16 }}>
                   <p><strong>Location:</strong> Northeastern Bihar, India</p>
@@ -39,7 +40,7 @@ function Historykishanganj() {
                 </div>
               </div>
               {/* Info Card */}
-              <div style={{ background: '#e3f2fd', borderRadius: 12, boxShadow: '0 2px 8px #90caf9', padding: 24, width: '100%', maxWidth: 420 }}>
+              <div className="history-card-base history-card-compact" style={{ background: '#e3f2fd', borderRadius: 12, boxShadow: '0 2px 8px #90caf9', padding: 24, width: '100%', maxWidth: 420 }}>
                 <table style={{ width: '100%', background: '#fff', borderCollapse: 'collapse', borderRadius: 8, overflow: 'hidden', boxShadow: '0 1px 4px #90caf9', fontSize: '1rem' }}>
                   <tbody>
                     <tr><td style={{ fontWeight: 600, color: '#222', padding: '6px 8px' }}>Time zone</td><td style={{ color: '#1976d2', padding: '6px 8px' }}>UTC+5:30 (IST)</td></tr>
@@ -50,7 +51,7 @@ function Historykishanganj() {
                 </table>
               </div>
               {/* Language Card */}
-              <div style={{ background: '#f6fff6', borderRadius: 12, boxShadow: '0 2px 8px #eaf3e6', padding: 24, width: '100%', maxWidth: 420 }}>
+              <div className="history-card-base history-card-compact" style={{ background: '#f6fff6', borderRadius: 12, boxShadow: '0 2px 8px #eaf3e6', padding: 24, width: '100%', maxWidth: 420 }}>
                 <div style={{ color: '#1b5e20', marginBottom: 16, fontSize: '1.05rem', fontWeight: 600 }}>Languages Spoken in Kishanganj (2011)</div>
                 <table style={{ width: '100%', background: '#fff', borderCollapse: 'collapse', borderRadius: 8, overflow: 'hidden', boxShadow: '0 1px 4px #eaf3e6' }}>
                   <thead>
@@ -75,7 +76,7 @@ function Historykishanganj() {
                 </div>
               </div>
               {/* Religion Card */}
-              <div style={{ background: '#fffde7', borderRadius: 12, boxShadow: '0 2px 8px #ffe082', padding: 24, width: '100%', maxWidth: 420 }}>
+              <div className="history-card-base history-card-compact" style={{ background: '#fffde7', borderRadius: 12, boxShadow: '0 2px 8px #ffe082', padding: 24, width: '100%', maxWidth: 420 }}>
                 <div style={{ background: '#ffe082', color: '#222', fontWeight: 700, fontSize: '1.05rem', padding: '4px 12px', borderRadius: 4, marginBottom: 10, width: '100%' }}>Religion in Kishanganj town (2011)</div>
                 <table style={{ width: '100%', background: '#fff', borderCollapse: 'collapse', borderRadius: 8, overflow: 'hidden', boxShadow: '0 1px 4px #ffe082' }}>
                   <thead>
@@ -95,7 +96,7 @@ function Historykishanganj() {
                 </table>
               </div>
               {/* Agriculture Card */}
-              <div style={{ background: '#e8f5e9', borderRadius: 12, boxShadow: '0 2px 8px #a5d6a7', padding: 24, width: '100%', maxWidth: 420 }}>
+              <div className="history-card-base history-card-compact" style={{ background: '#e8f5e9', borderRadius: 12, boxShadow: '0 2px 8px #a5d6a7', padding: 24, width: '100%', maxWidth: 420 }}>
                 <div style={{ background: '#a5d6a7', color: '#222', fontWeight: 700, fontSize: '1.05rem', padding: '4px 12px', borderRadius: 4, marginBottom: 10, width: '100%' }}>Agriculture</div>
                 <div style={{ color: '#222', fontSize: '1rem', width: '100%' }}>
                   <span style={{ fontWeight: 600, color: '#388e3c' }}>Main crops:</span> Rice, wheat, arhar, masoor, and jute.<br/>
@@ -105,8 +106,8 @@ function Historykishanganj() {
             </div>
           </div>
           {/* Right Column: History Content */}
-          <div style={{ flex: 1, background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px #eaf3e6', padding: '32px 32px 0 32px', marginTop: 0, minHeight: '100%' }}>
-            <h2 style={{ color: '#1976d2', fontWeight: 700, fontSize: '2rem', marginBottom: 32, letterSpacing: 1 }}>Historical Overview</h2>
+          <div className="history-right-column" style={{ flex: 1, background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px #eaf3e6', padding: '32px 32px 0 32px', marginTop: 0, minHeight: '100%' }}>
+            <h2 className="history-page-title" style={{ color: '#1976d2', fontWeight: 700, fontSize: '2rem', marginBottom: 32, letterSpacing: 1 }}>Historical Overview</h2>
             <div className="history-content-full" style={{ lineHeight: 1.8, fontSize: '1.08rem', color: '#222' }}>
               {/* Section: Formation of the District */}
               <section style={{ marginBottom: 32 }}>

@@ -29,7 +29,10 @@ function WhoIsWho() {
   return (
     <div className="whocontainer">
       <div className="who-container">
-        {/* <h1>Who’s Who</h1> */}
+        <header className="who-page-header">
+          <h1>Who Is Who</h1>
+          <p>District contacts and administrative directory.</p>
+        </header>
 
         <WhoSearch search={search} setSearch={setSearch} />
 

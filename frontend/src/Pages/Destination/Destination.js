@@ -16,7 +16,7 @@ const destinationData = {
       img: lakeImg,
       distance: "35-40 km",
       duration: "~1 hour",
-      coordinates: { lat: null, lng: null },
+  coordinates: { lat: 26.37707, lng: 88.11280 },
       travelModes: {
         car: { time: "1 hour", route: "Kishanganj → Thakurganj/Belwa route", cost: "₹400-₹600 (approx)" },
         bus: { time: "1.5 hours", route: "Local bus toward Thakurganj/Belwa then local transport", cost: "₹50-₹120" },
@@ -35,7 +35,7 @@ const destinationData = {
       img: churliImg,
       distance: "20-25 km",
       duration: "~40-50 minutes",
-      coordinates: { lat: null, lng: null },
+  coordinates: { lat: 26.340, lng: 88.070 },
       travelModes: {
         car: { time: "40 min", route: "Kishanganj → Thakurganj direction", cost: "₹300-₹450" },
         bus: { time: "1 hour", route: "Bus to Thakurganj then short rickshaw", cost: "₹30-₹80" },
@@ -54,7 +54,7 @@ const destinationData = {
       img: nehruParkImg,
       distance: "2 km",
       duration: "5-10 minutes",
-      coordinates: { lat: null, lng: null },
+  coordinates: { lat: 26.0995, lng: 87.9383 },
       travelModes: {
         car: { time: "5-10 min", route: "Within Kishanganj town", cost: "₹30" },
         bus: { time: "10-15 min", route: "Local rickshaw/auto", cost: "₹10" },
@@ -73,7 +73,7 @@ const destinationData = {
       img: mahanandaImg,
       distance: "6-15 km",
       duration: "15-35 minutes",
-      coordinates: { lat: null, lng: null },
+  coordinates: { lat: 26.4371, lng: 88.2175 },
       travelModes: {
         car: { time: "15-35 min", route: "Local roads along riverfront", cost: "₹150-₹300" },
         bus: { time: "20-45 min", route: "Local bus/auto routes", cost: "₹20-₹60" },
@@ -92,7 +92,7 @@ const destinationData = {
       img: teaGardenImg,
       distance: "10-15 km",
       duration: "20-40 minutes",
-      coordinates: { lat: null, lng: null },
+  coordinates: { lat: 26.4190, lng: 88.1700 },
       travelModes: {
         car: { time: "20-40 min", route: "Kishanganj → Belwa Tea Garden Road", cost: "₹200-₹350" },
         bus: { time: "30-50 min", route: "Local bus to Belwa area", cost: "₹20-₹60" },
@@ -112,7 +112,7 @@ const destinationData = {
       distance: "~50 km",
       duration: "1.5 hours",
       mapLink: "https://maps.google.com/?q=Panitanki",
-      coordinates: { lat: null, lng: null },
+  coordinates: { lat: 26.64, lng: 88.17 },
       travelModes: {
         car: { time: "1.5 hours", route: "NH27 toward Siliguri", cost: "₹800-₹1200 (approx)" },
         bus: { time: "1.5-2 hours", route: "Intercity bus via NH27", cost: "₹150-₹300" },
@@ -133,7 +133,7 @@ const destinationData = {
       distance: "~18–20 km",
       duration: "30–35 minutes",
       mapLink: "https://maps.google.com/?q=Kanki+Kali+Mandir+Bihar",
-      coordinates: { lat: null, lng: null },
+  coordinates: { lat: 25.58, lng: 86.48 },
       travelModes: {
         car: { time: "30-35 min", route: "Kishanganj → Kanki via local roads", cost: "₹250-₹400 (approx)" },
         bus: { time: "40-50 min", route: "Local bus toward Kanki / shared jeep", cost: "₹30-₹80" },
@@ -155,7 +155,7 @@ const destinationData = {
       img: "https://images.pexels.com/photos/3581364/pexels-photo-3581364.jpeg?auto=compress&cs=tinysrgb&w=600&h=400",
       distance: "3 km",
       duration: "8 minutes",
-      coordinates: { lat: 26.1247, lng: 87.9531 },
+  coordinates: { lat: 26.7167, lng: 88.4167 },
       travelModes: {
         car: { time: "8 min", route: "Temple Road via City Center", cost: "₹50" },
         bus: { time: "15 min", route: "City bus Route 2", cost: "₹10" },
