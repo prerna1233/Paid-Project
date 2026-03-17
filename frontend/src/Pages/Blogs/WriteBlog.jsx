@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Blogs.style.css";
+import biharLogo from "../../assets/bihar-housing-board.webp";
 
 export default function WriteBlog() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function WriteBlog() {
     <div className="write-blog-page-govt">
       <div className="write-blog-container-govt" style={{boxShadow: '0 4px 24px rgba(74,124,89,0.10)', border: '1.5px solid #e0e0e0'}}>
         <header style={{marginBottom: 32, borderBottom: '2px solid #e8825f', paddingBottom: 18, display: 'flex', alignItems: 'center', gap: 16}}>
-          <img src="/src/assets/bihar-housing-board.webp" alt="District Logo" style={{height: 48, width: 48, borderRadius: 8, background: '#f4f6fa', border: '1px solid #e0e0e0'}} />
+          <img src={biharLogo} alt="District Logo" style={{height: 48, width: 48, borderRadius: 8, background: '#f4f6fa', border: '1px solid #e0e0e0'}} />
           <div>
             <h1 className="write-blog-heading-govt" style={{marginBottom: 2}}>Write a New Blog</h1>
             <p style={{fontSize: '1.02rem', color: '#4a7c59', margin: 0, fontWeight: 500}}>Share your story, experience, or insight for the Kishanganj District Portal.</p>

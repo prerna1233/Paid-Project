@@ -61,6 +61,9 @@
 import React, { useEffect, useState } from "react";
 import "./ImageStack.style.css";
 import "animate.css";
+import pic1 from "../../assets/1pic.png";
+import pic2 from "../../assets/2pic.png";
+import pic3 from "../../assets/3pic.png";
 
 const ImageStack = () => {
   const [showPositions, setShowPositions] = useState(false);
@@ -78,17 +81,17 @@ const ImageStack = () => {
   return (
     <div className="image-stack">
       <img
-        src="src/assets/1pic.png"
+        src={pic1}
         className={`img ${!removeAnim ? "animate__animated animate__fadeInTopLeft" : ""} ${showPositions ? "image1" : ""}`}
       />
 
       <img
-        src="src/assets/2pic.png"
+        src={pic2}
         className={`img ${!removeAnim ? "animate__animated animate__fadeInTopRight animate__delay-1s" : ""} ${showPositions ? "image2" : ""}`}
       />
 
       <img
-        src="src/assets/3pic.png"
+        src={pic3}
         className={`img ${!removeAnim ? "animate__animated animate__fadeInBottomRight animate__delay-2s" : ""} ${showPositions ? "image3" : ""}`}
       />
     </div>

@@ -2,12 +2,16 @@ import React from 'react'
 import './Culture.style.css'
 import 'animate.css';
 import Footer from '../../Components/Footer/Footer';
+import heroImg from '../../assets/festival/duragapuja.png';
+import jhijhiyaImg from '../../assets/jhijhiya.jpeg';
+import chatpujaImg from '../../assets/festival/chatth.png';
+import pineappleImg from '../../assets/pineapple.jpeg';
 
 function Culture() {
   return (
     <div className="culture-hero">
 
-      <img src="/src/assets/puja1.jpg" alt="Culture" className="hero-image" />
+      <img src={heroImg} alt="Culture" className="hero-image" />
 
       <div className="culture-page-text">
         {/* <h1>Culture of Kishanganj</h1> */}
@@ -32,7 +36,7 @@ function Culture() {
       <hr className='her'></hr>
 
       <div className='jhijiya main-info'>
-        <img src='src/assets/jhijhiya.jpeg' alt='Jhijhiya-dance' className='culture-page-img' />
+        <img src={jhijhiyaImg} alt='Jhijhiya-dance' className='culture-page-img' />
 
         <div className='content'>
           <h2 className='headings'>Iconic Folk Dances of Bihar</h2>
@@ -47,7 +51,7 @@ function Culture() {
       </div>
 
       <div className='chatpuja  main-info'>
-        <img src='src/assets/chatpuja.jpeg' alt='chatpuja-dance' className='culture-page-img' />
+        <img src={chatpujaImg} alt='chatpuja-dance' className='culture-page-img' />
 
         <div className='chatpuja-text content'>
           <h2 className='headings'>The Sacred Festival of Bihar</h2>
@@ -63,7 +67,7 @@ function Culture() {
         </div>
       </div>
       <div className='jhijhiya main-info'>
-        <img src='src/assets/pineapple.jpeg' alt='pineapple' className='culture-page-img' />
+        <img src={pineappleImg} alt='pineapple' className='culture-page-img' />
 
         <div className='Nature-text'>
           <h2 className='headings'>Golden Pineapple of Nature</h2>

@@ -4,6 +4,7 @@ import { aboutData, aboutImage } from "./AboutData";
 import Footer from "../../Components/Footer/Footer";
 import Button from "../../Components/Button/Readmore";
 import Culture from "../Culture/Culture";
+import teaImg from "../../assets/tea.jpeg";
 
 
 export default function About() {
@@ -11,7 +12,7 @@ export default function About() {
     <>
      
       <div className="first">
-        <img src="/src/assets/tea.jpeg" alt="Tea Garden" />
+        <img src={teaImg} alt="Tea Garden" />
       </div>
       <hr />
 

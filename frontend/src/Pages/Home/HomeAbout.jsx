@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './HomeAbout.css';
+import dmImg from '../../assets/DM.jpeg';
+import pic5 from '../../assets/5pic.jpg';
+import postImg from '../../assets/post.png';
 
 const HomeAbout = () => {
   const [expandedCard1, setExpandedCard1] = useState(false);
@@ -28,7 +31,7 @@ const HomeAbout = () => {
           <div className="homeabout-about-card">
             <div className="homeabout-profile-img">
               <img 
-                src="src/assets/DM.jpeg" 
+                src={dmImg} 
                 alt="Profile" 
               />
             </div>
@@ -57,7 +60,7 @@ const HomeAbout = () => {
                   {/* Image Card Container */}
                   <div className="homeabout-img-card">
                     <img 
-                      src="/src/assets/5pic.jpg" 
+                      src={pic5} 
                       alt="District Planning Officer" 
                     />
                   </div>
@@ -88,7 +91,7 @@ const HomeAbout = () => {
                   {/* Image Card Container */}
                   <div className="homeabout-img-card">
                     <img 
-                      src="/src/assets/post.png" 
+                      src={postImg} 
                       alt="General Manager DIC" 
                     />
                   </div>
