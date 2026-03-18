@@ -357,12 +357,10 @@ const AdminPage = () => {
         </div>
         <div className={styles.topButtons}>
           {isAdminLoggedIn ? (
-            <>
-              <button className={styles.button} onClick={fetchAdminBlogs}>Refresh Blogs</button>
-              <button className={styles.button} onClick={fetchAdminHotels}>Refresh Hotels</button>
-              
-              <button className={`${styles.button} ${styles.btnDanger}`} onClick={adminLogout}>Logout</button>
-            </>
+            <div className={styles.topRefreshActions}>
+              <button className={`${styles.button} ${styles.topActionButton}`} onClick={fetchAdminBlogs}>Refresh Blogs</button>
+              <button className={`${styles.button} ${styles.topActionButton}`} onClick={fetchAdminHotels}>Refresh Hotels</button>
+            </div>
           ) : (
             <div className={styles.muted}>Not logged in</div>
           )}
@@ -398,15 +396,19 @@ const AdminPage = () => {
               {/* Status card removed */}
             </div>
             <div className={styles.row}>
-              <div className={styles.panel}>
+              <div className={`${styles.panel} ${styles.panelBlog}`}>
                 <div className={styles.panelHeader}>
-                  <h4>Blogs</h4>
+                  <h4 className={styles.sectionTitle}>
+                    <span>Blogs</span>
+                    <span className={`${styles.sectionTag} ${styles.blogTag}`}>Content</span>
+                  </h4>
                   <div className={styles.panelActions}>
                     <button className={styles.smallBtn} onClick={fetchAdminBlogs}>Refresh</button>
                   </div>
                 </div>
                 <div className={styles.panelBody}>
                   {Array.isArray(blogsResult) && blogsResult.length ? (
+                    <div className={styles.tableWrap}>
                     <table className={styles.table}>
                       <thead>
                         <tr>
@@ -414,18 +416,19 @@ const AdminPage = () => {
                           <th className={styles.th}>Author</th>
                           <th className={styles.th}>Published</th>
                           <th className={styles.th}>Created</th>
+                          <th className={styles.th}>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
                         {blogsResult.map(b => (
                           <tr key={b._id}>
-                            <td className={styles.td}>
+                            <td className={styles.td} data-label="Title">
                               {editingBlogId === b._id ? (
                                 <input className={styles.input} value={editForm.title} onChange={(e) => setEditForm({...editForm, title: e.target.value})} />
                               ) : (b.title || '(no title)')}
                             </td>
-                            <td className={styles.td}>{b.author && b.author.name ? b.author.name : (b.author || '-')}</td>
-                            <td className={styles.td}>
+                            <td className={styles.td} data-label="Author">{b.author && b.author.name ? b.author.name : (b.author || '-')}</td>
+                            <td className={styles.td} data-label="Published">
                               {editingBlogId === b._id ? (
                                 <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                                   <input type="checkbox" checked={!!editForm.published} onChange={(e) => setEditForm({...editForm, published: e.target.checked})} />
@@ -433,15 +436,15 @@ const AdminPage = () => {
                                 </label>
                               ) : (b.published ? 'Yes' : 'No')}
                             </td>
-                            <td className={styles.td}>{b.createdAt ? new Date(b.createdAt).toLocaleString() : '-'}</td>
-                            <td className={styles.td}>
+                            <td className={styles.td} data-label="Created">{b.createdAt ? new Date(b.createdAt).toLocaleString() : '-'}</td>
+                            <td className={styles.td} data-label="Actions">
                               {editingBlogId === b._id ? (
-                                <div style={{ display: 'flex', gap: 8 }}>
+                                <div className={styles.actionGroup}>
                                   <button className={styles.smallBtn} onClick={() => handleEditSave(b._id)}>Save</button>
                                   <button className={styles.smallBtn} onClick={handleEditCancel}>Cancel</button>
                                 </div>
                               ) : (
-                                <div style={{ display: 'flex', gap: 8 }}>
+                                <div className={styles.actionGroup}>
                                   <button className={styles.smallBtn} onClick={() => handleEditStart(b)}>Edit</button>
                                   <button className={styles.smallBtn} onClick={() => handleDeleteBlog(b._id)} style={{ background: '#fff1f0', border: '1px solid #fde2e0' }}>Delete</button>
                                   <button className={styles.smallBtn} onClick={() => openCommentsPanel(b)}>Comments</button>
@@ -452,6 +455,7 @@ const AdminPage = () => {
                         ))}
                       </tbody>
                     </table>
+                    </div>
                   ) : (
                     <div className={styles.empty}>No blog data. Click Refresh to query backend.</div>
                   )}
@@ -472,7 +476,7 @@ const AdminPage = () => {
                                   <li key={c._id} className={styles.commentItem}>
                                     <div className={styles.commentAvatar}>{getInitials(c.name || c.author)}</div>
                                     <div className={styles.commentMeta}>
-                                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                      <div className={styles.nameCell}>
                                         <strong className={styles.commentAuthor}>{c.name || c.author || 'Anonymous'}</strong>
                                         <div className={styles.commentTime}>{new Date(c.createdAt || c.date || Date.now()).toLocaleString()}</div>
                                       </div>
@@ -491,9 +495,12 @@ const AdminPage = () => {
                 </div>
               )}
 
-              <div className={styles.panel}>
+              <div className={`${styles.panel} ${styles.panelHotel}`}>
                 <div className={styles.panelHeader}>
-                  <h4>Hotels</h4>
+                  <h4 className={styles.sectionTitle}>
+                    <span>Hotels</span>
+                    <span className={`${styles.sectionTag} ${styles.hotelTag}`}>Stay</span>
+                  </h4>
                   <div className={styles.panelActions}>
                       <button className={styles.smallBtn} onClick={fetchAdminHotels}>Refresh</button>
                       <button className={styles.smallBtn} onClick={() => setShowAddHotelForm(s => !s)}>{showAddHotelForm ? 'Close' : 'Add Hotel'}</button>
@@ -508,7 +515,7 @@ const AdminPage = () => {
                         <input className={styles.input} placeholder="Rating" type="number" min="1" max="5" value={addHotelForm.rating} onChange={(e) => setAddHotelForm({...addHotelForm, rating: e.target.value})} />
                         <input className={styles.input} placeholder="Image URL" value={addHotelForm.image} onChange={(e) => setAddHotelForm({...addHotelForm, image: e.target.value})} />
                         <textarea className={styles.input} placeholder="Description" value={addHotelForm.description} onChange={(e) => setAddHotelForm({...addHotelForm, description: e.target.value})} />
-                        <div style={{ display: 'flex', gap: 8 }}>
+                        <div className={styles.actionGroup}>
                           <button className={styles.smallBtn} type="submit">Create</button>
                           <button className={styles.smallBtn} type="button" onClick={() => setShowAddHotelForm(false)}>Cancel</button>
                         </div>
@@ -516,6 +523,7 @@ const AdminPage = () => {
                     )}
 
                     {Array.isArray(hotelsResult) && hotelsResult.length ? (
+                      <div className={styles.tableWrap}>
                       <table className={styles.table}>
                         <thead>
                           <tr>
@@ -529,27 +537,27 @@ const AdminPage = () => {
                         <tbody>
                           {hotelsResult.map(h => (
                             <tr key={h._id}>
-                              <td className={styles.td}>
+                              <td className={styles.td} data-label="Name">
                                 {editingHotelId === h._id ? (
                                   <input className={styles.input} value={hotelEditForm.name} onChange={(e) => setHotelEditForm({...hotelEditForm, name: e.target.value})} />
                                 ) : (
-                                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                  <div className={styles.nameCell}>
                                     {h.image ? <img src={h.image} alt={h.name} className={styles.thumb} /> : null}
-                                    <div>{h.name}</div>
+                                    <div className={styles.cellText}>{h.name}</div>
                                   </div>
                                 )}
                               </td>
-                              <td className={styles.td}>{editingHotelId === h._id ? <input className={styles.input} value={hotelEditForm.location} onChange={(e) => setHotelEditForm({...hotelEditForm, location: e.target.value})} /> : h.location}</td>
-                              <td className={styles.td}>{editingHotelId === h._id ? <input className={styles.input} type="number" value={hotelEditForm.price} onChange={(e) => setHotelEditForm({...hotelEditForm, price: e.target.value})} /> : `₹${h.price}`}</td>
-                              <td className={styles.td}>{editingHotelId === h._id ? <input className={styles.input} type="number" min="1" max="5" value={hotelEditForm.rating} onChange={(e) => setHotelEditForm({...hotelEditForm, rating: e.target.value})} /> : (h.rating || '-')}</td>
-                              <td className={styles.td}>
+                              <td className={styles.td} data-label="Location">{editingHotelId === h._id ? <input className={styles.input} value={hotelEditForm.location} onChange={(e) => setHotelEditForm({...hotelEditForm, location: e.target.value})} /> : h.location}</td>
+                              <td className={styles.td} data-label="Price">{editingHotelId === h._id ? <input className={styles.input} type="number" value={hotelEditForm.price} onChange={(e) => setHotelEditForm({...hotelEditForm, price: e.target.value})} /> : `₹${h.price}`}</td>
+                              <td className={styles.td} data-label="Rating">{editingHotelId === h._id ? <input className={styles.input} type="number" min="1" max="5" value={hotelEditForm.rating} onChange={(e) => setHotelEditForm({...hotelEditForm, rating: e.target.value})} /> : (h.rating || '-')}</td>
+                              <td className={styles.td} data-label="Actions">
                                 {editingHotelId === h._id ? (
-                                  <div style={{ display: 'flex', gap: 8 }}>
+                                  <div className={styles.actionGroup}>
                                     <button className={styles.smallBtn} onClick={() => handleHotelEditSave(h._id)}>Save</button>
                                     <button className={styles.smallBtn} onClick={handleHotelEditCancel}>Cancel</button>
                                   </div>
                                 ) : (
-                                  <div style={{ display: 'flex', gap: 8 }}>
+                                  <div className={styles.actionGroup}>
                                     <button className={styles.smallBtn} onClick={() => handleHotelEditStart(h)}>Edit</button>
                                     <button className={styles.smallBtn} onClick={() => handleDeleteHotel(h._id)} style={{ background: '#fff1f0', border: '1px solid #fde2e0' }}>Delete</button>
                                   </div>
@@ -559,6 +567,7 @@ const AdminPage = () => {
                           ))}
                         </tbody>
                       </table>
+                      </div>
                     ) : (
                       <div className={styles.empty}>No hotel data. Click Refresh to query backend.</div>
                     )}
